@@ -70,16 +70,17 @@ public final class ShoppingDatabaseContract {
     }
 
     public final class OrderEntry implements BaseColumns {
-        public static final String TABLE_NAME = "order";
-        public static final String COLUMN_COSTUMER_ID = "customerId";
-        public static final String COLUMN_PRODUCT_ID = "productId";
-        public static final String COLUMN_EMPLOYEE_ID = "employeeId";
+        public static final String TABLE_NAME = "customerorder";
+        public static final String COLUMN_CUSTOMER_ID = "customerid";
+        public static final String COLUMN_PRODUCT_ID = "productid";
+        public static final String COLUMN_EMPLOYEE_ID = "employeeid";
         public static final String COLUMN_QUANTITY = "quantity";
         public static final String COLUMN_SHIPPING_ADDRESS = "shippingaddress";
         public static final String COLUMN_CARD_TYPE = "cardtype";
         public static final String COLUMN_CARD_NUMBER = "cardnumber";
         public static final String COLUMN_CARD_OWNER = "cardowner";
-        public static final String COLUMN_CARD_EXPIRATION_DATE = "cardexpirationdate";
+        public static final String COLUMN_CARD_EXPIRATION_MONTH = "cardexpirationmonth";
+        public static final String COLUMN_CARD_EXPIRATION_YEAR = "cardexpirationyear";
         public static final String COLUMN_CARD_SECURITY_CODE = "cardsecuritycode";
         public static final String COLUMN_ORDER_DATE = "orderdate";
         public static final String COLUMN_STATUS = "status";
@@ -87,7 +88,7 @@ public final class ShoppingDatabaseContract {
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_COSTUMER_ID + " INTEGER NOT NULL, " +
+                        COLUMN_CUSTOMER_ID + " INTEGER NOT NULL, " +
                         COLUMN_PRODUCT_ID + " INTEGER NOT NULL, " +
                         COLUMN_EMPLOYEE_ID + " INTEGER NOT NULL, " +
                         COLUMN_QUANTITY + " INT NOT NULL, " +
@@ -95,14 +96,17 @@ public final class ShoppingDatabaseContract {
                         COLUMN_CARD_TYPE + " TEXT NOT NULL, " +
                         COLUMN_CARD_NUMBER + " TEXT NOT NULL, " +
                         COLUMN_CARD_OWNER + " TEXT NOT NULL, " +
-                        COLUMN_CARD_EXPIRATION_DATE + " TEXT NOT NULL, " +
+                        COLUMN_CARD_EXPIRATION_MONTH + " TEXT NOT NULL, " +
+                        COLUMN_CARD_EXPIRATION_YEAR + " TEXT NOT NULL, " +
                         COLUMN_CARD_SECURITY_CODE + " TEXT NOT NULL, " +
                         COLUMN_ORDER_DATE + " TEXT NOT NULL, " +
-                        COLUMN_STATUS + " TEXT NOT NULL)";
+                        COLUMN_STATUS + " TEXT NOT NULL, " +
+                        "FOREIGN KEY(" + COLUMN_CUSTOMER_ID + ") REFERENCES customer(_ID), " +
+                        "FOREIGN KEY(" + COLUMN_PRODUCT_ID + ") REFERENCES product(_ID), " +
+                        "FOREIGN KEY(" + COLUMN_EMPLOYEE_ID + ") REFERENCES clerk(_ID))";
     }
 
 }
-
 
 
 
