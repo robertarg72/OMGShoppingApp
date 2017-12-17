@@ -134,7 +134,4 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 new String[] { id });
         db.close();
     }
-
-
-
 }
