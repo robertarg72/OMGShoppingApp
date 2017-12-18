@@ -2,10 +2,16 @@ package com.ling_argume.omgshoppingapp;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import java.io.ByteArrayOutputStream;
+import java.util.Map;
+import static com.ling_argume.omgshoppingapp.utils.Utils.BALL;
+import static com.ling_argume.omgshoppingapp.utils.Utils.BOOTS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CHAIR;
+import static com.ling_argume.omgshoppingapp.utils.Utils.GUITAR;
+import static com.ling_argume.omgshoppingapp.utils.Utils.PENCIL;
+import static com.ling_argume.omgshoppingapp.utils.Utils.PHONE;
 
-/**
- * Created by Jim.
- */
 
 public class DatabaseDataWorker {
     private SQLiteDatabase mDb;
@@ -15,22 +21,22 @@ public class DatabaseDataWorker {
     }
 
     public void insertCustomers() {
-        insertCustomer("rob", "123", "robert", "argume", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("ling", "123", "john", "doe", "24 sheppard avenue", "scarborough", "m1s5t1");
-        insertCustomer("tim", "123", "Thomas", "Green", "2627 mccowan", "scarborough", "m1s5t1");
+        insertCustomer("rob", "123", "Robert", "Argume", "2627 mccowan", "scarborough", "m1s5t1");
+        insertCustomer("ling", "123", "Ling", "Bao", "24 sheppard avenue", "scarborough", "m1s5t1");
+        insertCustomer("joe", "123", "Joe", "Doe", "2627 mccowan", "scarborough", "m1s5t1");
     }
 
      private void insertCustomer(String username, String password, String firstName, String lastName, String address, String city, String postalCode) {
         ContentValues values = new ContentValues();
-        values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_USERNAME, username);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_PASSWORD, password);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_FIRSTNAME, firstName);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_LASTNAME, lastName);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_ADDRESS , address);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_CITY, city);
-         values.put(ShoppingDatabaseContract.CustomerEntry.COLUMN_POSTALCODE, postalCode);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_USERNAME, username);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_PASSWORD, password);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_FIRSTNAME, firstName);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_LASTNAME, lastName);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_ADDRESS , address);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_CITY, city);
+         values.put(DatabaseContract.CustomerEntry.COLUMN_POSTALCODE, postalCode);
 
-        long newRowId = mDb.insert(ShoppingDatabaseContract.CustomerEntry.TABLE_NAME, null, values);
+        long newRowId = mDb.insert(DatabaseContract.CustomerEntry.TABLE_NAME, null, values);
     }
 
     public void insertClerks() {
@@ -40,31 +46,35 @@ public class DatabaseDataWorker {
 
     private void insertClerk(String username, String password, String firstName, String lastName) {
         ContentValues values = new ContentValues();
-        values.put(ShoppingDatabaseContract.ClerkEntry.COLUMN_USERNAME, username);
-        values.put(ShoppingDatabaseContract.ClerkEntry.COLUMN_PASSWORD, password);
-        values.put(ShoppingDatabaseContract.ClerkEntry.COLUMN_FIRSTNAME, firstName);
-        values.put(ShoppingDatabaseContract.ClerkEntry.COLUMN_LASTNAME, lastName);
+        values.put(DatabaseContract.ClerkEntry.COLUMN_USERNAME, username);
+        values.put(DatabaseContract.ClerkEntry.COLUMN_PASSWORD, password);
+        values.put(DatabaseContract.ClerkEntry.COLUMN_FIRSTNAME, firstName);
+        values.put(DatabaseContract.ClerkEntry.COLUMN_LASTNAME, lastName);
 
-
-        long newRowId = mDb.insert(ShoppingDatabaseContract.ClerkEntry.TABLE_NAME, null, values);
+        long newRowId = mDb.insert(DatabaseContract.ClerkEntry.TABLE_NAME, null, values);
     }
 
-    public void insertProducts() {
-        insertProduct("Boots", "winter boots", "220.50", 20, "men shoes");
-        insertProduct("Pencil", "color red pencil", "10.75", 85, "library");
+    public void insertProducts(Map initialImages) {
+        insertProduct(BOOTS, "Fine winter boots", "220.50", 20, "Men shoes", (Bitmap)initialImages.get(BOOTS));
+        insertProduct(PENCIL, "4B pencil for art drawing", "10.75", 85, "Library", (Bitmap)initialImages.get(PENCIL));
+        insertProduct(BALL, "FIFA approved soccer ball", "31.40", 15, "Sports", (Bitmap)initialImages.get(BALL));
+        insertProduct(PHONE, "Unlocked S8 smart phone", "120.00", 10, "Electronics", (Bitmap)initialImages.get(PHONE));
+        //insertProduct(GUITAR, "Legendary hard rock model", "383.50", 5, "Music", (Bitmap)initialImages.get(GUITAR));
+        insertProduct(CHAIR, "Basic but durable chair", "22.00", 42, "Home", (Bitmap)initialImages.get(CHAIR));
+
 
     }
 
-    private void insertProduct(String productName, String description, String price, int quantity, String category) {
+    private void insertProduct(String productName, String description, String price, int quantity, String category, Bitmap bitmap) {
         ContentValues values = new ContentValues();
-        values.put(ShoppingDatabaseContract.ProductEntry.COLUMN_PRODUCTNAME, productName);
-        values.put(ShoppingDatabaseContract.ProductEntry.COLUMN_DESCRIPTION, description);
-        values.put(ShoppingDatabaseContract.ProductEntry.COLUMN_PRICE, price);
-        values.put(ShoppingDatabaseContract.ProductEntry.COLUMN_QUANTITY, quantity);
-        values.put(ShoppingDatabaseContract.ProductEntry.COLUMN_CATEGORY , category);
+        values.put(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME, productName);
+        values.put(DatabaseContract.ProductEntry.COLUMN_IMAGE, getImageBytes(bitmap));
+        values.put(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION, description);
+        values.put(DatabaseContract.ProductEntry.COLUMN_PRICE, price);
+        values.put(DatabaseContract.ProductEntry.COLUMN_QUANTITY, quantity);
+        values.put(DatabaseContract.ProductEntry.COLUMN_CATEGORY , category);
 
-
-        long newRowId = mDb.insert(ShoppingDatabaseContract.ProductEntry.TABLE_NAME, null, values);
+        long newRowId = mDb.insert(DatabaseContract.ProductEntry.TABLE_NAME, null, values);
     }
 
     public void insertOrders() {
@@ -81,22 +91,29 @@ public class DatabaseDataWorker {
                              String securityCode, String orderDate, String orderStatus ) {
 
         ContentValues values = new ContentValues();
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID, customerId);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_PRODUCT_ID, productId);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID, employeeId);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_QUANTITY, quantity);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS , shippingAddress);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_TYPE , cardType);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_NUMBER , cardNumber);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_OWNER , cardOwner);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH , expirationMonth);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR , expirationYear);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_CARD_SECURITY_CODE , securityCode);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_ORDER_DATE , orderDate);
-        values.put(ShoppingDatabaseContract.OrderEntry.COLUMN_STATUS , orderStatus);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID, customerId);
+        values.put(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID, productId);
+        values.put(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID, employeeId);
+        values.put(DatabaseContract.OrderEntry.COLUMN_QUANTITY, quantity);
+        values.put(DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS , shippingAddress);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_TYPE , cardType);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_NUMBER , cardNumber);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_OWNER , cardOwner);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH , expirationMonth);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR , expirationYear);
+        values.put(DatabaseContract.OrderEntry.COLUMN_CARD_SECURITY_CODE , securityCode);
+        values.put(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE , orderDate);
+        values.put(DatabaseContract.OrderEntry.COLUMN_STATUS , orderStatus);
 
 
-        long newRowId = mDb.insert(ShoppingDatabaseContract.OrderEntry.TABLE_NAME, null, values);
+
+        long newRowId = mDb.insert(DatabaseContract.OrderEntry.TABLE_NAME, null, values);
+    }
+
+    public static byte[] getImageBytes(Bitmap bitmap) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        return stream.toByteArray();
     }
 
 }

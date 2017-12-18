@@ -10,8 +10,8 @@ import android.provider.BaseColumns;
 // Quantity in Order table represents number of units a customer wants to buy
 // EmployeeId in Order table represents the last employee who updated status for that order
 
-public final class ShoppingDatabaseContract {
-    private ShoppingDatabaseContract() {}
+public final class DatabaseContract {
+    private DatabaseContract() {}
 
     public final class CustomerEntry implements BaseColumns {
         public static final String TABLE_NAME = "customer";
@@ -54,6 +54,7 @@ public final class ShoppingDatabaseContract {
     public final class ProductEntry implements BaseColumns {
         public static final String TABLE_NAME = "product";
         public static final String COLUMN_PRODUCTNAME = "productname";
+        public static final String COLUMN_IMAGE = "image";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
@@ -63,6 +64,7 @@ public final class ShoppingDatabaseContract {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_PRODUCTNAME + " TEXT NOT NULL, " +
+                        COLUMN_IMAGE + " BLOB, " +
                         COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
                         COLUMN_PRICE + " TEXT NOT NULL, " +
                         COLUMN_QUANTITY + " INT, " +

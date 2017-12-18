@@ -8,11 +8,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import com.ling_argume.omgshoppingapp.model.Product;
+
+import static com.ling_argume.omgshoppingapp.utils.Utils.ByteArrayToBitmap;
+
 
 public class DatabaseManager extends SQLiteOpenHelper {
     //
 	private static final String DATABASE_NAME = "omgshopping.db";
     private static final int DATABASE_VERSION = 1;
+    //
+    private Map initialImages;
+    private Context context;
     //
     private String tables[]; //table names
     private String tableCreatorString[]; //SQL statements to create tables
@@ -20,13 +28,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
     //class constructor
     public DatabaseManager(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
 
     }
     //initialize database table names and DDL statements
-    public void dbInitialize(String[] tables, String tableCreatorString[])
+    public void dbInitialize(String[] tables, String tableCreatorString[], Map initialImages)
     {
   	  this.tables=tables;
   	  this.tableCreatorString=tableCreatorString;
+  	  this.initialImages = initialImages;
     }
 
     // Create tables
@@ -43,7 +53,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     	DatabaseDataWorker worker = new DatabaseDataWorker(db);
     	worker.insertCustomers();
     	worker.insertClerks();
-    	worker.insertProducts();
+    	worker.insertProducts(initialImages);
     	worker.insertOrders();
 
     }
@@ -115,6 +125,38 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return table;
     }
 
+    // Read all product records
+    public List<Product> getProducts() {
+        List<Product> productsList = new ArrayList<Product>();
+        // Select all records
+        String selectQuery = "SELECT  * FROM " + DatabaseContract.ProductEntry.TABLE_NAME;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            { // for each row
+                Product product = new Product();
+                product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
+                product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
+                product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
+                product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
+                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
+                product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
+                productsList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        // return table as a list
+        return productsList;
+    }
+
+
     // Update a record
     public int updateRecord(ContentValues values, String tableName, String fields[], String record[]) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -134,4 +176,5 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 new String[] { id });
         db.close();
     }
+
 }
