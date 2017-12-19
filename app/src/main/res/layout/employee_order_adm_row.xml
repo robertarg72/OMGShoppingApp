@@ -33,19 +33,19 @@
         tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/orderid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@+id/name"
+            android:text="@+id/orderid"
             android:textStyle="bold"
             android:textSize="23sp" >
         </TextView>
 
         <TextView
-            android:id="@+id/description"
+            android:id="@+id/orderdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@+id/description"
+            android:text="@+id/orderdate"
             android:textSize="20sp" >
         </TextView>
 
@@ -60,17 +60,36 @@
             android:orientation="horizontal"
             tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
 
-        <TextView
-            android:id="@+id/price"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@+id/price"
-            android:textColor="#E65100"
-            android:textSize="27sp" >
-        </TextView>
+            <TextView
+                android:id="@+id/status"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="status"
+                android:textColor="#E65100"
+                android:textSize="27sp" >
+            </TextView>
 
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="In" />
 
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="De" />
 
         </LinearLayout>
     </LinearLayout>

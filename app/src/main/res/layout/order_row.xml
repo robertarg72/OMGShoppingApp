@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:orientation="horizontal"
+    tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+
+
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+
+            android:orientation="vertical"
+            tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+
+            <TextView
+                android:id="@+id/order_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Order Number"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="23sp" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/order_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="date"
+                android:layout_marginLeft="10dp"
+                android:textSize="20sp" >
+            </TextView>
+
+
+        </LinearLayout>
+
+    <TextView
+        android:id="@+id/order_status"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Status"
+        android:textColor="#E65100"
+        android:textSize="27sp" >
+    </TextView>
+
+
+
+
+
+</LinearLayout>

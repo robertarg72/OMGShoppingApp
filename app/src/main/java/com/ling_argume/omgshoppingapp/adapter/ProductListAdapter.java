@@ -58,12 +58,12 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		return rowView;
 	}
 
-	protected static class ViewHolder{
-		protected TextView name;
-		protected ImageView image;
-		protected TextView description;
-		protected TextView price;
-		protected int quantity;
-		protected TextView category;
+	public static class ViewHolder{
+		public TextView name;
+		public ImageView image;
+		public TextView description;
+		public TextView price;
+		public int quantity;
+		public TextView category;
 	}
 }

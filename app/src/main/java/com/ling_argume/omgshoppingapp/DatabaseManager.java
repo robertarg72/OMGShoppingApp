@@ -3,12 +3,17 @@ package com.ling_argume.omgshoppingapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
 
 import static com.ling_argume.omgshoppingapp.utils.Utils.ByteArrayToBitmap;
@@ -87,7 +92,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // Database operations
     /////////////////////////
     // Add a new record
-    void addRecord(ContentValues values, String tableName, String fields[], String record[]) {
+    public void addRecord(ContentValues values, String tableName, String fields[], String record[]) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         for (int i=1;i<record.length;i++)
@@ -96,7 +101,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.insert(tableName, null, values);
         db.close(); //close database connection
     }
-
 
     // Read all records
     public List getTable(String tableName) {
@@ -139,7 +143,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
             do
             { // for each row
                 Product product = new Product();
-                product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
+                product.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
@@ -156,6 +160,145 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return productsList;
     }
 
+    public List<Order> getOrders() {
+        List<Order> ordersList = new ArrayList<Order>();
+        // Select all records
+        String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            { // for each row
+                Order order = new Order();
+                order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
+                order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
+                order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
+                order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
+
+                order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE)));
+                order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                ordersList.add(order);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        // return table as a list
+        return ordersList;
+    }
+
+    public List<Order> getOrdersByCustomerId(String id) {
+        Cursor cursor = null;
+        List<Order> ordersList = new ArrayList<Order>();
+
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] params = new String[]{ id };
+            cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
+                    DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID + " = ?", params,
+                    null, null, null);
+
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                do {
+                    Order order = new Order();
+                    order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
+                    order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE)));
+                    order.setStatus(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                    ordersList.add(order);
+                } while (cursor.moveToNext());
+            }
+            return ordersList;
+        }finally {
+            cursor.close();
+        }
+    }
+
+
+    public Product getSingleProduct(String id) {
+        Cursor cursor = null;
+        Product product = new Product();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] params = new String[]{ id };
+            cursor = db.query(DatabaseContract.ProductEntry.TABLE_NAME, null,
+                    "_ID = ?", params,
+                    null, null, null);
+
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                product.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
+                product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
+                product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
+                product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
+                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
+                product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
+            }
+            return product;
+        }finally {
+            cursor.close();
+        }
+    }
+
+    public Boolean userIsValid(String username, String password ) {
+
+        // Select all records
+        String selectQuery = "select * from  customer where username=? and password=?";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, new String[]{username,password});
+        if (cursor.moveToFirst()) {
+            cursor.close();
+            return true;
+        }
+        return false;
+
+    }
+
+    public String getCustomerId(String username, String password ) {
+        String customerId = null;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] params = new String[]{ username, password };
+        String[] columns = new String[]{DatabaseContract.CustomerEntry._ID};
+            Cursor cursor = db.query(DatabaseContract.CustomerEntry.TABLE_NAME, columns,
+                DatabaseContract.CustomerEntry.COLUMN_USERNAME + " = ? AND " +
+                        DatabaseContract.CustomerEntry.COLUMN_PASSWORD + "= ?", params,
+                null, null, null);
+
+        if (cursor.moveToFirst()) {
+           customerId = cursor.getString(cursor.getColumnIndex(DatabaseContract.CustomerEntry._ID));
+        }
+        cursor.close();
+        return customerId;
+    }
+
+    public String getEmployeeId(String username, String password ) {
+        String employeeId = null;
+        // Select all records
+//        String selectQuery = "select _id from  clerk where username='?' and password='?'";
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, new String[]{username,password});
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String[] params = new String[]{ username, password };
+        String[] columns = new String[]{DatabaseContract.ClerkEntry._ID};
+        Cursor cursor = db.query(DatabaseContract.ClerkEntry.TABLE_NAME, columns,
+                DatabaseContract.ClerkEntry.COLUMN_USERNAME + " = ? AND " +
+                        DatabaseContract.ClerkEntry.COLUMN_PASSWORD + "= ?", params,
+                null, null, null);
+
+        if (cursor.moveToFirst()) {
+            employeeId = cursor.getString(cursor.getColumnIndex(DatabaseContract.ClerkEntry._ID));
+        }
+        cursor.close();
+        return employeeId;
+    }
 
     // Update a record
     public int updateRecord(ContentValues values, String tableName, String fields[], String record[]) {

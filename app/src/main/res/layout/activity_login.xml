@@ -18,11 +18,13 @@ android:background="#ffffff">
 
         <!--  Username Label -->
         <TextView android:layout_width="match_parent"
+
             android:layout_marginTop="280dp"
             android:layout_height="wrap_content"
             android:textColor="#372c24"
             android:text="Username"/>
         <EditText android:layout_width="fill_parent"
+            android:id="@+id/editText"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:layout_marginBottom="20dip"
@@ -35,22 +37,49 @@ android:background="#ffffff">
             android:textColor="#372c24"
             android:text="Password"/>
         <EditText android:layout_width="fill_parent"
+            android:id="@+id/editText2"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:layout_marginBottom="20dip"
             android:background="@drawable/rounded_border_edit_text"
             android:height="60dp"
             android:password="true"/>
+
+        <!--Customer or Employee radio button-->
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_marginLeft="60dp"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Login as a Customer" />
+
+            <RadioButton
+                android:id="@+id/radioButton2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Login as a Clerk" />
+        </RadioGroup>
+
         <!-- Login button -->
-        <Button android:id="@+id/btnLogin"
+        <Button
+            android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dip"
+            android:layout_marginTop="10dip"
             android:height="60dp"
+            android:background="@drawable/rounded_border_button"
+            android:onClick="onClicked"
             android:text="Login"
             android:textColor="#fff"
-            android:textSize="20dip"
-            android:background="@drawable/rounded_border_button"/>
+            android:textSize="20dip" />
         <!-- Link to Registration Screen -->
         <TextView android:id="@+id/link_to_register"
             android:layout_width="fill_parent"

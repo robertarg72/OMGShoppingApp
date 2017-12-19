@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="vertical"
+    tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+
+    <ImageView
+        android:id="@+id/single_product_image"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="3dp"
+        android:background="#fff"
+        android:padding="1dp"
+        android:src="@drawable/ball" >
+    </ImageView>
+
+
+        <TextView
+            android:id="@+id/single_product_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Name"
+            android:textStyle="bold"
+            android:textSize="36sp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="25dp">
+        </TextView>
+
+    <TextView
+        android:id="@+id/single_product_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Category"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="2dp">
+    </TextView>
+
+    <TextView
+        android:id="@+id/single_product_price"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:text="price"
+        android:layout_marginLeft="40dp"
+        android:textColor="#E65100"
+        android:textSize="37sp" >
+    </TextView>
+
+
+        <TextView
+            android:id="@+id/single_product_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="10dp"
+            android:textSize="20sp" >
+        </TextView>
+
+
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+
+
+            <TextView
+                android:id="@+id/single_product_quantity"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="Qty"
+                android:textColor="#000"
+                android:textSize="27sp" >
+            </TextView>
+
+            <EditText
+                android:id="@+id/qty"
+                android:layout_width="80dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="20dip"
+                android:layout_marginTop="10dip"
+                android:height="60dp"
+                android:background="@drawable/rounded_border_edit_text"
+                android:inputType="number" />
+
+            <Button
+                android:id="@+id/btn_place_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="90dp"
+                android:width="70dp"
+                android:height="30dp"
+                android:background="@color/colorPrimary"
+                android:enabled="true"
+                android:onClick="onClick"
+                android:padding="0dip"
+                android:text="Place Order"
+                android:textColor="#fff"
+                android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
