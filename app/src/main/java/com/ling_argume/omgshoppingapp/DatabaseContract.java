@@ -54,7 +54,7 @@ public final class DatabaseContract {
     public final class ProductEntry implements BaseColumns {
         public static final String TABLE_NAME = "product";
         public static final String COLUMN_PRODUCTNAME = "productname";
-        public static final String COLUMN_IMAGE = "image";
+        public static final String COLUMN_IMAGE = "imagepath";
         public static final String COLUMN_DESCRIPTION = "description";
         public static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
@@ -64,7 +64,7 @@ public final class DatabaseContract {
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_PRODUCTNAME + " TEXT NOT NULL, " +
-                        COLUMN_IMAGE + " BLOB, " +
+                        COLUMN_IMAGE + " TEXT NOT NULL, " +
                         COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
                         COLUMN_PRICE + " TEXT NOT NULL, " +
                         COLUMN_QUANTITY + " INT, " +

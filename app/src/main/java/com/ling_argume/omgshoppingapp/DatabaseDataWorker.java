@@ -3,12 +3,20 @@ package com.ling_argume.omgshoppingapp;
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+
 import java.io.ByteArrayOutputStream;
 import java.util.Map;
 import static com.ling_argume.omgshoppingapp.utils.Utils.BALL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.BOOTS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_CLOTHES;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_ELECTRONICS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_HOME;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_LIBRARY;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_MUSIC;
+import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_SPORTS;
 import static com.ling_argume.omgshoppingapp.utils.Utils.CHAIR;
 import static com.ling_argume.omgshoppingapp.utils.Utils.GUITAR;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.PENCIL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.PHONE;
 
@@ -54,21 +62,25 @@ public class DatabaseDataWorker {
         long newRowId = mDb.insert(DatabaseContract.ClerkEntry.TABLE_NAME, null, values);
     }
 
-    public void insertProducts(Map initialImages) {
-        insertProduct(BOOTS, "Fine winter boots", "220.50", 20, "Men shoes", (Bitmap)initialImages.get(BOOTS));
-        insertProduct(PENCIL, "4B pencil for art drawing", "10.75", 85, "Library", (Bitmap)initialImages.get(PENCIL));
-        insertProduct(BALL, "FIFA approved soccer ball", "31.40", 15, "Sports", (Bitmap)initialImages.get(BALL));
-        insertProduct(PHONE, "Unlocked S8 smart phone", "120.00", 10, "Electronics", (Bitmap)initialImages.get(PHONE));
-        //insertProduct(GUITAR, "Legendary hard rock model", "383.50", 5, "Music", (Bitmap)initialImages.get(GUITAR));
-        insertProduct(CHAIR, "Basic but durable chair", "22.00", 42, "Home", (Bitmap)initialImages.get(CHAIR));
+    public void insertProducts(Map<String, String> initialImages) {
+
+
+        insertProduct(BOOTS, "Fine winter boots", "220.50", 20, CATEGORY_CLOTHES, initialImages.get(BOOTS));
+
+        insertProduct(PENCIL, "4B pencil for art drawing", "10.75", 85, CATEGORY_LIBRARY, initialImages.get(PENCIL));
+        insertProduct(BALL, "FIFA approved soccer ball", "31.40", 15, CATEGORY_SPORTS, initialImages.get(BALL));
+        insertProduct(PHONE, "Unlocked S8 smart phone", "120.00", 10, CATEGORY_ELECTRONICS, initialImages.get(PHONE));
+        insertProduct(GUITAR, "Legendary hard rock model", "383.50", 5, CATEGORY_MUSIC, initialImages.get(GUITAR));
+        insertProduct(CHAIR, "Basic but durable chair", "22.00", 42, CATEGORY_HOME, initialImages.get(CHAIR));
+        //insertProduct(NOTEBOOK, "Notebook Corei7 quadcore 8GB RAM", "849.99", 12, CATEGORY_COMPUTERS, initialImages.get(NOTEBOOK));
 
 
     }
 
-    private void insertProduct(String productName, String description, String price, int quantity, String category, Bitmap bitmap) {
+    private void insertProduct(String productName, String description, String price, int quantity, String category, String filePath) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME, productName);
-        values.put(DatabaseContract.ProductEntry.COLUMN_IMAGE, getImageBytes(bitmap));
+        values.put(DatabaseContract.ProductEntry.COLUMN_IMAGE, filePath);
         values.put(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION, description);
         values.put(DatabaseContract.ProductEntry.COLUMN_PRICE, price);
         values.put(DatabaseContract.ProductEntry.COLUMN_QUANTITY, quantity);
@@ -80,7 +92,7 @@ public class DatabaseDataWorker {
     public void insertOrders() {
         insertOrder(1, 1, 1, 2, "123 Finch Ave",
                 "Credit", "45901234567", "Joe Doe", "jun",
-                "2021", "287", "11/04/2017", "In-Process");
+                "2021", "287", "11/04/2017", ORDER_DELIVERED_TEXT);
 
 
     }
@@ -108,12 +120,6 @@ public class DatabaseDataWorker {
 
 
         long newRowId = mDb.insert(DatabaseContract.OrderEntry.TABLE_NAME, null, values);
-    }
-
-    public static byte[] getImageBytes(Bitmap bitmap) {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        return stream.toByteArray();
     }
 
 }

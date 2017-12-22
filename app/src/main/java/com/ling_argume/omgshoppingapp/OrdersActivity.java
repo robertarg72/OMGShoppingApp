@@ -11,8 +11,8 @@ import com.ling_argume.omgshoppingapp.adapter.OrderListAdapter;
 import com.ling_argume.omgshoppingapp.model.Order;
 import java.util.List;
 
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFENCES_CUSTOMER_ID;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFENCES_STORE;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 
 public class OrdersActivity extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class OrdersActivity extends AppCompatActivity {
         dbm = new DatabaseManager(this);
 
         // Get customerId and bring only the orders belonging to this customer
-        String customerId = getFromSharedPreferences(this, SHARED_PREFENCES_STORE, SHARED_PREFENCES_CUSTOMER_ID);
+        String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
         List<Order> list = dbm.getOrdersByCustomerId(customerId);
 
         ListView lv = (ListView) findViewById(R.id.orders_list);
@@ -47,11 +47,10 @@ public class OrdersActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
-            i.putExtra("order_id", String.valueOf(id));
+        Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
+        i.putExtra("order_id", String.valueOf(id));
 
-            startActivity(i);
-
+        startActivity(i);
         }
     };
 

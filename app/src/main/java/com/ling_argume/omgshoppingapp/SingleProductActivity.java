@@ -9,7 +9,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
 import com.ling_argume.omgshoppingapp.model.Product;
 
 import java.text.SimpleDateFormat;
@@ -28,12 +27,10 @@ import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_QUANTITY;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFENCES_CUSTOMER_ID;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFENCES_STORE;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
-import static com.ling_argume.omgshoppingapp.utils.Utils.getInitialImages;
-import static com.ling_argume.omgshoppingapp.utils.Utils.tableCreatorString;
-import static com.ling_argume.omgshoppingapp.utils.Utils.tables;
 
 public class SingleProductActivity extends AppCompatActivity {
 
@@ -57,14 +54,14 @@ public class SingleProductActivity extends AppCompatActivity {
         dbm = new DatabaseManager(this);
 
         // Get CustomerId from Shared Preferences
-        customerId = getFromSharedPreferences(this, SHARED_PREFENCES_STORE, SHARED_PREFENCES_CUSTOMER_ID);
+        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
 
         // Retrieve product id from previous Activity
         Intent i = getIntent();
         productId = i.getStringExtra("product_id");
 
         // Get all details for Product with that id
-        product = dbm.getSingleProduct(productId +1);
+        product = dbm.getSingleProduct(productId);
 
         //Set views with product data
         name = (TextView) findViewById(R.id.single_product_name);
@@ -114,10 +111,10 @@ public class SingleProductActivity extends AppCompatActivity {
 
             // Order Data and time
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
             record[12] = df.format(c.getTime());
 
-            record[13]= "In-Process";
+            record[13]= ORDER_IN_PROCESS_TEXT;
 
             ContentValues values = new ContentValues();
 

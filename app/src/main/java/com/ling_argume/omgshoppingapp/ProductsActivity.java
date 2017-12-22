@@ -17,10 +17,6 @@ import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
 import com.ling_argume.omgshoppingapp.model.Product;
 import java.util.List;
 
-import static com.ling_argume.omgshoppingapp.utils.Utils.getInitialImages;
-import static com.ling_argume.omgshoppingapp.utils.Utils.tableCreatorString;
-import static com.ling_argume.omgshoppingapp.utils.Utils.tables;
-
 public class ProductsActivity extends AppCompatActivity {
 
     private DatabaseManager dbm;
@@ -58,7 +54,7 @@ public class ProductsActivity extends AppCompatActivity {
 
             //Toast.makeText(getBaseContext(), "WOWWWWWWWW", Toast.LENGTH_LONG).show();
             Intent i = new Intent( ProductsActivity.this, SingleProductActivity.class);
-            i.putExtra("product_id", String.valueOf(id));
+            i.putExtra("product_id", String.valueOf(id + 1));
 
             startActivity(i);
 

@@ -13,23 +13,67 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.ling_argume.omgshoppingapp.utils.ImageHelper.saveDrawableToInternalStorage;
 
 
 public class Utils {
 
+    // Constants to be used for Orders
+    public static final String ORDER_ID_PREFIX = "Order Nbr ";
+    public static final String ORDER_IN_PROCESS_TEXT = "In-Process";
+    public static final String ORDER_DELIVERED_TEXT = "Delivered";
+
+    // Internal Storage Folder, where images will be stored
+    public static final String INTERNAL_STORAGE_FOLDER = "ProductPictures";
+
+    // Product Categories
+    public static final String CATEGORY_LIBRARY = "Library";
+    public static final String CATEGORY_SPORTS = "Sports";
+    public static final String CATEGORY_COMPUTERS = "Computers";
+    public static final String CATEGORY_ELECTRONICS = "Electronics";
+    public static final String CATEGORY_MUSIC = "Music";
+    public static final String CATEGORY_HOME = "Home";
+    public static final String CATEGORY_CLOTHES = "Clothing";
+
+
+    // To add new image:
+    // 1. Copy image to drawables resource folder
+    // 2. Add new string for the corresponding product. Content must be product name.
+    // 3. Add new entry in "drawableMapping" Map, using data in 1. and 2.
+    // 4. Make sure the product's category exists. If not, add it as a category string.
+    // 5. Add one more product to be loaded by the DatabaseDataWorker
     public static final String BOOTS = "Winter Boots";
     public static final String PENCIL = "Artistic Pencil";
     public static final String BALL = "Soccer Ball";
     public static final String CHAIR = "Basic Chair";
     public static final String PHONE = "S8 Phone";
     public static final String GUITAR = "AL 200 Guitar";
+    //public static final String NOTEBOOK = "Samsung Notebook";
+    //public static final String DESKTOP = "Dell Desktop Computer";
+    //public static final String SMART_TV = "Samsung Smart TV";
+    //public static final String PINGPONG_TABLE = "Thibar Table Tennis table";
 
-    public static final String SHARED_PREFENCES_STORE = "OMGASharedPreferences";
-    public static final String SHARED_PREFENCES_USER_KEY = "UserName";
-    public static final String SHARED_PREFENCES_CUSTOMER_ID = "CustomerID";
-    public static final String SHARED_PREFENCES_EMPLOYEE_ID = "EmployeeID";
+    private static Map<String, Integer> drawableMapping = new HashMap<String, Integer>(){{
+        put(BOOTS, R.drawable.boots);
+        put(PENCIL, R.drawable.pencil);
+        put(BALL, R.drawable.ball);
+        put(CHAIR, R.drawable.chair);
+        put(PHONE, R.drawable.phone);
+        put(GUITAR, R.drawable.guitar);
+        //put(NOTEBOOK, R.drawable.notebook);
+        //put(DESKTOP, R.drawable.desktop);
+        //put(SMART_TV, R.drawable.smart_tv);
+        //put(PINGPONG_TABLE, R.drawable.pingpongtable);
+    }};
+
+    // Constants for using Shared Preferences
+    public static final String SHARED_PREFERENCES_STORE = "OMGASharedPreferences";
+    public static final String SHARED_PREFERENCES_USER_KEY = "UserName";
+    public static final String SHARED_PREFERENCES_CUSTOMER_ID = "CustomerID";
+    public static final String SHARED_PREFERENCES_EMPLOYEE_ID = "EmployeeID";
 
 
+    // Constants for SQLite creation of tables
     public static final String tables[] = {
             DatabaseContract.CustomerEntry.TABLE_NAME,
             DatabaseContract.ClerkEntry.TABLE_NAME,
@@ -44,42 +88,50 @@ public class Utils {
             DatabaseContract.OrderEntry.SQL_CREATE_TABLE
     };
 
-    public static Bitmap ByteArrayToBitmap(byte[] byteArray)
-    {
-        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(byteArray);
-        Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
-        return bitmap;
-    }
+    // Public static methods to be used for all classes in the project
 
     public static void saveToSharedPreferences(Context context, String key, String value) {
-        SharedPreferences myPreference = context.getSharedPreferences(SHARED_PREFENCES_STORE, 0);
+        SharedPreferences myPreference = context.getSharedPreferences(SHARED_PREFERENCES_STORE, 0);
         SharedPreferences.Editor prefEditor = myPreference.edit();
         prefEditor.putString(key, value);
         prefEditor.commit();
     }
 
     public static String getFromSharedPreferences(Context context, String store, String key) {
-        SharedPreferences myPref = context.getSharedPreferences(SHARED_PREFENCES_STORE, MODE_PRIVATE);
+        SharedPreferences myPref = context.getSharedPreferences(SHARED_PREFERENCES_STORE, MODE_PRIVATE);
         return myPref.getString(key,"");
     }
 
-    public static Map getInitialImages(Context context){
-        Map<String,Bitmap> initialImages =  new HashMap<String,Bitmap>();
+    public static Map getInitialImages(Context context) {
+        Map<String, String> imagePathMapping = new HashMap<>();
 
-        Bitmap boots = BitmapFactory.decodeResource(context.getResources(), R.drawable.boots);
-        Bitmap pencil = BitmapFactory.decodeResource(context.getResources(), R.drawable.pencil);
-        Bitmap ball = BitmapFactory.decodeResource(context.getResources(), R.drawable.ball);
-        Bitmap chair = BitmapFactory.decodeResource(context.getResources(), R.drawable.chair);
-        Bitmap phone = BitmapFactory.decodeResource(context.getResources(), R.drawable.phone);
-        Bitmap guitar = BitmapFactory.decodeResource(context.getResources(), R.drawable.guitar);
+        for (Map.Entry<String, Integer> entry : drawableMapping.entrySet()) {
+            //imagePathMapping.put(BOOTS, saveDrawableToInternalStorage(context, R.drawable.boots));
+            imagePathMapping.put(entry.getKey(), saveDrawableToInternalStorage(context, entry.getKey(), entry.getValue()));
+        }
 
-        initialImages.put(BOOTS, boots);
-        initialImages.put(PENCIL, pencil);
-        initialImages.put(BALL, ball);
-        initialImages.put(CHAIR, chair);
-        initialImages.put(PHONE, phone);
-        initialImages.put(GUITAR, guitar);
+        return imagePathMapping;
 
-        return initialImages;
+        // Using lambda expression (requires API 24)
+        //imagePathMapping.forEach((k,v)->{imagePathMapping.put(k, saveDrawableToInternalStorage(context, v)); });
+
+//        Map<String,Bitmap> initialImages =  new HashMap<String,Bitmap>();
+//        Bitmap boots = BitmapFactory.decodeResource(context.getResources(), R.drawable.boots);
+//        Bitmap pencil = BitmapFactory.decodeResource(context.getResources(), R.drawable.pencil);
+//        Bitmap ball = BitmapFactory.decodeResource(context.getResources(), R.drawable.ball);
+//        Bitmap chair = BitmapFactory.decodeResource(context.getResources(), R.drawable.chair);
+//        Bitmap phone = BitmapFactory.decodeResource(context.getResources(), R.drawable.phone);
+//        Bitmap guitar = BitmapFactory.decodeResource(context.getResources(), R.drawable.guitar);
+//
+//        initialImages.put(BOOTS, boots);
+//        initialImages.put(PENCIL, pencil);
+//        initialImages.put(BALL, ball);
+//        initialImages.put(CHAIR, chair);
+//        initialImages.put(PHONE, phone);
+//        initialImages.put(GUITAR, guitar);
+//
+//        return initialImages;
+
     }
+
 }

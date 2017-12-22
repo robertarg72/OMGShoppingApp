@@ -2,6 +2,7 @@ package com.ling_argume.omgshoppingapp.adapter;
 
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,9 @@ import com.ling_argume.omgshoppingapp.R;
 import com.ling_argume.omgshoppingapp.model.Order;
 
 import java.util.List;
+
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_ID_PREFIX;
 
 public class OrderListAdapter  extends ArrayAdapter<Order> {
     private final Context context;
@@ -38,6 +42,7 @@ public class OrderListAdapter  extends ArrayAdapter<Order> {
 
             // Hold the view objects in an object
             view = new OrderListAdapter.ViewHolder();
+            view.prefix = (TextView) rowView.findViewById(R.id.order_id_prefix);
             view.id = (TextView) rowView.findViewById(R.id.order_id);
             view.date = (TextView) rowView.findViewById(R.id.order_date);
             view.status = (TextView) rowView.findViewById(R.id.order_status);
@@ -49,14 +54,23 @@ public class OrderListAdapter  extends ArrayAdapter<Order> {
 
         // Set data for each view in the row
         Order item = list.get(position);
+        view.prefix.setText(ORDER_ID_PREFIX);
         view.id.setText(String.valueOf(item.getId()));
         view.date.setText(item.getOrderDate());
         view.status.setText(item.getStatus());
+
+        // Set different color for different status
+        int statusColor = R.color.colorInProcess;
+        if( item.getStatus().compareTo(ORDER_DELIVERED_TEXT) == 0) {
+            statusColor = R.color.colorDelivered;
+        }
+        view.status.setTextColor(context.getResources().getColor((statusColor)));
 
         return rowView;
     }
 
     public static class ViewHolder{
+        public TextView prefix;
         public TextView id;
         public TextView date;
         public TextView status;

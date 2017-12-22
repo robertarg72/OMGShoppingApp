@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.BitmapFactory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,15 +17,14 @@ import java.util.Map;
 import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
 
-import static com.ling_argume.omgshoppingapp.utils.Utils.ByteArrayToBitmap;
-
+import static com.ling_argume.omgshoppingapp.utils.ImageHelper.getBitmapFromPath;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     //
 	private static final String DATABASE_NAME = "omgshopping.db";
     private static final int DATABASE_VERSION = 1;
     //
-    private Map initialImages;
+    private Map<String, String> initialImages;
     private Context context;
     //
     private String tables[]; //table names
@@ -37,10 +37,10 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     }
     //initialize database table names and DDL statements
-    public void dbInitialize(String[] tables, String tableCreatorString[], Map initialImages)
+    public void dbInitialize(String[] tables, String tableCreatorString[], Map<String, String> initialImages)
     {
-  	  this.tables=tables;
-  	  this.tableCreatorString=tableCreatorString;
+  	  this.tables = tables;
+  	  this.tableCreatorString = tableCreatorString;
   	  this.initialImages = initialImages;
     }
 
@@ -60,8 +60,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     	worker.insertClerks();
     	worker.insertProducts(initialImages);
     	worker.insertOrders();
-
     }
+
     //create the database
     public void createDatabase(Context context)
     {
@@ -70,8 +70,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     	DATABASE_NAME,
     	SQLiteDatabase.CREATE_IF_NECESSARY,
     	null);
-
     }
+
    //delete the database
     public void deleteDatabase(Context context)
     {
@@ -88,6 +88,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         // Create tables again
         onCreate(db);
     }
+
     /////////////////////////
     // Database operations
     /////////////////////////
@@ -147,7 +148,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
-                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+                product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
                 product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
                 productsList.add(product);
@@ -236,7 +237,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
-                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+
+//                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+//                byte[] imgByte = cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE));
+//                product.setImage(BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length));
+
+                product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+
                 product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
             }
