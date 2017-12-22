@@ -76,7 +76,7 @@ public final class DatabaseContract {
         public static final String COLUMN_CUSTOMER_ID = "customerid";
         public static final String COLUMN_PRODUCT_ID = "productid";
         public static final String COLUMN_EMPLOYEE_ID = "employeeid";
-        public static final String COLUMN_QUANTITY = "quantity";
+        public static final String COLUMN_ORDER_QUANTITY = "quantity";
         public static final String COLUMN_SHIPPING_ADDRESS = "shippingaddress";
         public static final String COLUMN_CARD_TYPE = "cardtype";
         public static final String COLUMN_CARD_NUMBER = "cardnumber";
@@ -93,14 +93,14 @@ public final class DatabaseContract {
                         COLUMN_CUSTOMER_ID + " INTEGER NOT NULL, " +
                         COLUMN_PRODUCT_ID + " INTEGER NOT NULL, " +
                         COLUMN_EMPLOYEE_ID + " INTEGER NOT NULL, " +
-                        COLUMN_QUANTITY + " INT NOT NULL, " +
-                        COLUMN_SHIPPING_ADDRESS + " TEXT NOT NULL, " +
-                        COLUMN_CARD_TYPE + " TEXT NOT NULL, " +
-                        COLUMN_CARD_NUMBER + " TEXT NOT NULL, " +
-                        COLUMN_CARD_OWNER + " TEXT NOT NULL, " +
-                        COLUMN_CARD_EXPIRATION_MONTH + " TEXT NOT NULL, " +
-                        COLUMN_CARD_EXPIRATION_YEAR + " TEXT NOT NULL, " +
-                        COLUMN_CARD_SECURITY_CODE + " TEXT NOT NULL, " +
+                        COLUMN_ORDER_QUANTITY + " INT NOT NULL, " +
+                        COLUMN_SHIPPING_ADDRESS + " TEXT, " +
+                        COLUMN_CARD_TYPE + " TEXT, " +
+                        COLUMN_CARD_NUMBER + " TEXT, " +
+                        COLUMN_CARD_OWNER + " TEXT, " +
+                        COLUMN_CARD_EXPIRATION_MONTH + " TEXT, " +
+                        COLUMN_CARD_EXPIRATION_YEAR + " TEXT, " +
+                        COLUMN_CARD_SECURITY_CODE + " TEXT, " +
                         COLUMN_ORDER_DATE + " TEXT NOT NULL, " +
                         COLUMN_STATUS + " TEXT NOT NULL, " +
                         "FOREIGN KEY(" + COLUMN_CUSTOMER_ID + ") REFERENCES customer(_ID), " +

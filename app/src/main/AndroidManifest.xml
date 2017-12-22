@@ -19,7 +19,8 @@
         <activity android:name=".ProductsActivity" />
         <activity android:name=".SingleProductActivity" />
         <activity android:name=".OrdersActivity" />
-        <activity android:name=".SingleOrderActivity"></activity>
+        <activity android:name=".SingleOrderActivity" />
+        <activity android:name=".OrdersManagementActivity"></activity>
     </application>
 
 </manifest>

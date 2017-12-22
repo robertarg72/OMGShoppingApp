@@ -2,9 +2,7 @@ package com.ling_argume.omgshoppingapp;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 
-import java.io.ByteArrayOutputStream;
 import java.util.Map;
 import static com.ling_argume.omgshoppingapp.utils.Utils.BALL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.BOOTS;
@@ -106,7 +104,7 @@ public class DatabaseDataWorker {
         values.put(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID, customerId);
         values.put(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID, productId);
         values.put(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID, employeeId);
-        values.put(DatabaseContract.OrderEntry.COLUMN_QUANTITY, quantity);
+        values.put(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY, quantity);
         values.put(DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS , shippingAddress);
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_TYPE , cardType);
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_NUMBER , cardNumber);

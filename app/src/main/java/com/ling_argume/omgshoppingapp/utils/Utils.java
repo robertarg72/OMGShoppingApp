@@ -19,6 +19,7 @@ import static com.ling_argume.omgshoppingapp.utils.ImageHelper.saveDrawableToInt
 public class Utils {
 
     // Constants to be used for Orders
+    public static final String ORDER_DEFAULT_EMPLOYEE_ID = "1";
     public static final String ORDER_ID_PREFIX = "Order Nbr ";
     public static final String ORDER_IN_PROCESS_TEXT = "In-Process";
     public static final String ORDER_DELIVERED_TEXT = "Delivered";

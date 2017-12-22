@@ -178,9 +178,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
                 order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
                 order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
-
+                order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
                 order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE)));
-                order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                order.setStatus(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
                 ordersList.add(order);
             } while (cursor.moveToNext());
         }
@@ -219,6 +219,31 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
+    public Order getSingleOrder(String id) {
+        Cursor cursor = null;
+        Order order = new Order();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] params = new String[]{ id };
+            cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
+                    "_ID = ?", params,
+                    null, null, null);
+
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
+                order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
+                order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
+                order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
+                order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
+                order.setStatus(cursor.getString(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+            }
+            return order;
+        }finally {
+            cursor.close();
+        }
+    }
 
     public Product getSingleProduct(String id) {
         Cursor cursor = null;
@@ -237,10 +262,6 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
-
-//                product.setImage(ByteArrayToBitmap( cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
-//                byte[] imgByte = cursor.getBlob(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE));
-//                product.setImage(BitmapFactory.decodeByteArray(imgByte, 0, imgByte.length));
 
                 product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
 

@@ -7,11 +7,11 @@ public class Order {
     private int employeeId;
     private int customerId;
     private int productId;
-
+    private int quantity;
     private String shippingAddress;
     private String cardType;
     private String cardOwner;
-    private String cardNuber;
+    private String cardNumber;
     private String cardExpirationMonth;
     private String getCardExpirationYear;
     private String cardSecurityCode;
@@ -22,15 +22,24 @@ public class Order {
 
     }
 
-    public Order(int id, int employeeId, int customerId, int productId, String shippingAddress, String cardType, String cardOwner, String cardNuber, String cardExpirationMonth, String getCardExpirationYear, String cardSecurityCode, String orderDate, String status) {
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public Order(int id, int employeeId, int customerId, int productId, int quantity, String shippingAddress, String cardType, String cardOwner, String cardNumber, String cardExpirationMonth, String getCardExpirationYear, String cardSecurityCode, String orderDate, String status) {
         this.id = id;
         this.employeeId = employeeId;
         this.customerId = customerId;
         this.productId = productId;
+        this.quantity = quantity;
         this.shippingAddress = shippingAddress;
         this.cardType = cardType;
         this.cardOwner = cardOwner;
-        this.cardNuber = cardNuber;
+        this.cardNumber = cardNumber;
         this.cardExpirationMonth = cardExpirationMonth;
         this.getCardExpirationYear = getCardExpirationYear;
         this.cardSecurityCode = cardSecurityCode;
@@ -94,12 +103,12 @@ public class Order {
         this.cardOwner = cardOwner;
     }
 
-    public String getCardNuber() {
-        return cardNuber;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setCardNuber(String cardNuber) {
-        this.cardNuber = cardNuber;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getCardExpirationMonth() {

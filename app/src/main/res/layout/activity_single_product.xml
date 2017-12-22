@@ -109,13 +109,13 @@
                 android:layout_marginLeft="90dp"
                 android:width="70dp"
                 android:height="30dp"
-                android:background="@color/colorPrimary"
                 android:enabled="true"
                 android:onClick="onClick"
                 android:padding="0dip"
                 android:text="Place Order"
                 android:textColor="#fff"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:background="@drawable/rounded_border_button"/>
 
 
     </LinearLayout>

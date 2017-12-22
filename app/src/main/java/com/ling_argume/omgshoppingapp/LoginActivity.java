@@ -65,9 +65,6 @@ public class LoginActivity extends AppCompatActivity {
         String userName = username.getText().toString();
         String passWord = password.getText().toString();
         if (flag == 0) {
-
-            Boolean test =  db.userIsValid( userName,  passWord);
-                    //if (login(userName, passWord)) {
             customerId = customerLogin(userName, passWord);
             if (customerId != null) {
                 saveToSharedPreferences(this, SHARED_PREFERENCES_USER_KEY, username.getText().toString());
@@ -87,7 +84,9 @@ public class LoginActivity extends AppCompatActivity {
             if (employeeId != null) {
                 saveToSharedPreferences(this, SHARED_PREFERENCES_USER_KEY, username.getText().toString());
                 saveToSharedPreferences(this, SHARED_PREFERENCES_EMPLOYEE_ID, employeeId);
-                Toast.makeText(LoginActivity.this, "Login Successfully（ZY，111）", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, OrdersManagementActivity.class);
+                startActivity(intent);
+
             } else {
                 Toast.makeText(LoginActivity.this, "Wrong username or password", Toast.LENGTH_SHORT).show();
             }
@@ -96,15 +95,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String customerLogin( String username, String password) {
-
-        //return db.userIsValid(username, password);
         return db.getCustomerId(username, password);
 
     }
 
     public String employeeLogin( String username, String password) {
-
-        //return db.userIsValid(username, password);
         return db.getEmployeeId(username, password);
 
     }

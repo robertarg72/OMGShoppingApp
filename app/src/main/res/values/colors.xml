@@ -2,8 +2,11 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!--<color name="colorAccent">#FF4081</color>-->
+    <color name="colorAccent">#008000</color>
     <color name="colorDelivered">#008000</color>
     <color name="colorInProcess">#E65100</color>
+
+    <color name="menu_text_color">#AABBDD</color>
 
 </resources>

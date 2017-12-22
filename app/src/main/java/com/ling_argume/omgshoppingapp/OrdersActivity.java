@@ -3,6 +3,8 @@ package com.ling_argume.omgshoppingapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -48,10 +50,40 @@ public class OrdersActivity extends AppCompatActivity {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
-        i.putExtra("order_id", String.valueOf(id));
+        i.putExtra("order_id", String.valueOf(id + 1));
 
         startActivity(i);
         }
     };
+
+    //Initialize the contents of the Activity's standard options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //show the menu
+        getMenuInflater().inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+    // called whenever an item in your options menu is selected
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent next;
+        //handle menu items  y their id
+        switch (item.getItemId())
+        {
+            case R.id.products_screen:
+                next = new Intent( OrdersActivity.this, ProductsActivity.class);
+                startActivity(next);
+                return true;
+            case R.id.orders_screen:
+                break;
+//            case R.id.login_screen:
+//                next = new Intent( OrdersActivity.this, LoginActivity.class);
+//                startActivity(next);
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
 
 }

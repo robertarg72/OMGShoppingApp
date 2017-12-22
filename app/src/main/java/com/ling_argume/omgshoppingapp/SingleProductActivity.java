@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,9 +26,10 @@ import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_DATE;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
-import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_QUANTITY;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
@@ -55,7 +58,7 @@ public class SingleProductActivity extends AppCompatActivity {
 
         // Get CustomerId from Shared Preferences
         customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
-
+        employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
         // Retrieve product id from previous Activity
         Intent i = getIntent();
         productId = i.getStringExtra("product_id");
@@ -87,7 +90,7 @@ public class SingleProductActivity extends AppCompatActivity {
             // Save the new order in DB
 
             String fields[] = {"", COLUMN_CUSTOMER_ID, COLUMN_PRODUCT_ID, COLUMN_EMPLOYEE_ID,
-                    COLUMN_QUANTITY, COLUMN_SHIPPING_ADDRESS, COLUMN_CARD_TYPE, COLUMN_CARD_NUMBER,
+                    COLUMN_ORDER_QUANTITY, COLUMN_SHIPPING_ADDRESS, COLUMN_CARD_TYPE, COLUMN_CARD_NUMBER,
                     COLUMN_CARD_OWNER, COLUMN_CARD_EXPIRATION_MONTH, COLUMN_CARD_EXPIRATION_YEAR,
                     COLUMN_CARD_SECURITY_CODE, COLUMN_ORDER_DATE, COLUMN_STATUS
             };
@@ -126,6 +129,36 @@ public class SingleProductActivity extends AppCompatActivity {
         }
     }
 
+    //Initialize the contents of the Activity's standard options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //show the menu
+        getMenuInflater().inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+    // called whenever an item in your options menu is selected
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent next;
+        //handle menu items  y their id
+        switch (item.getItemId())
+        {
+            case R.id.products_screen:
+                next = new Intent( SingleProductActivity.this, ProductsActivity.class);
+                startActivity(next);
+                return true;
+            case R.id.orders_screen:
+                next = new Intent( SingleProductActivity.this, OrdersActivity.class);
+                startActivity(next);
+                return true;
+//            case R.id.login_screen:
+//                next = new Intent( SingleProductActivity.this, LoginActivity.class);
+//                startActivity(next);
+//                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
 
 }
