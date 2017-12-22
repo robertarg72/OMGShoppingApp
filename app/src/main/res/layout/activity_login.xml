@@ -58,14 +58,17 @@ android:background="#ffffff">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Login as a Customer" />
+                android:checked="true"
+                android:text="Login as a Customer"
+                android:textStyle="bold" />
 
             <RadioButton
                 android:id="@+id/radioButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Login as a Clerk" />
+                android:text="Login as a Clerk"
+                android:textStyle="bold" />
         </RadioGroup>
 
         <!-- Login button -->
