@@ -23,14 +23,15 @@ android:background="#ffffff">
             android:layout_height="wrap_content"
             android:textColor="#372c24"
             android:text="Username"/>
-        <EditText android:layout_width="fill_parent"
+
+        <EditText
             android:id="@+id/editText"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
             android:layout_marginBottom="20dip"
+            android:layout_marginTop="10dip"
             android:height="60dp"
-            android:background="@drawable/rounded_border_edit_text"
-            />
+            android:background="@drawable/rounded_border_edit_text" />
         <!--  Password Label -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -48,10 +49,10 @@ android:background="#ffffff">
         <!--Customer or Employee radio button-->
         <RadioGroup
             android:id="@+id/rg"
-            android:layout_marginLeft="60dp"
-            android:orientation="horizontal"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radioButton"
