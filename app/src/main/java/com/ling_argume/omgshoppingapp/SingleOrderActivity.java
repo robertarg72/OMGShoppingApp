@@ -38,6 +38,7 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class SingleOrderActivity extends AppCompatActivity {
 
@@ -62,6 +63,9 @@ public class SingleOrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_single_order);
 
         dbm = new DatabaseManager(this);
+
+        // Set greeting for logged in user
+        setUserGreetingTextView(this, R.id.greeting);
 
         // Get CustomerId from Shared Preferences
         customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);

@@ -16,6 +16,7 @@ import java.util.List;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class OrdersActivity extends AppCompatActivity {
 
@@ -27,6 +28,9 @@ public class OrdersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_orders);
 
         dbm = new DatabaseManager(this);
+
+        // Set greeting for logged in user
+        setUserGreetingTextView(this, R.id.greeting);
 
         // Get customerId and bring only the orders belonging to this customer
         String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);

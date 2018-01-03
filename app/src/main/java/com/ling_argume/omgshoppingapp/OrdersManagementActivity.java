@@ -14,6 +14,7 @@ import java.util.List;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class OrdersManagementActivity extends AppCompatActivity {
 
@@ -26,6 +27,8 @@ public class OrdersManagementActivity extends AppCompatActivity {
 
         dbm = new DatabaseManager(this);
 
+        // Set greeting for logged in user
+        setUserGreetingTextView(this, R.id.greeting);
 
         List<Order> list = dbm.getOrders();
 

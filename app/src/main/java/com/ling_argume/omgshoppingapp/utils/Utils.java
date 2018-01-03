@@ -1,9 +1,12 @@
 package com.ling_argume.omgshoppingapp.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
+import android.widget.TextView;
 
 import com.ling_argume.omgshoppingapp.DatabaseContract;
 import com.ling_argume.omgshoppingapp.R;
@@ -66,6 +69,9 @@ public class Utils {
         //put(SMART_TV, R.drawable.smart_tv);
         //put(PINGPONG_TABLE, R.drawable.pingpongtable);
     }};
+
+    // Constant for greeting the username
+    public static final String GREETING = "Hello, ";
 
     // Constants for using Shared Preferences
     public static final String SHARED_PREFERENCES_STORE = "OMGASharedPreferences";
@@ -134,5 +140,13 @@ public class Utils {
 //        return initialImages;
 
     }
+
+    public static void setUserGreetingTextView(Activity context, int textViewId) {
+        String username = getFromSharedPreferences(context, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_USER_KEY);
+        TextView loggedInUserGreeting = (TextView) context.findViewById(textViewId);
+        loggedInUserGreeting.setText(GREETING + username);
+        loggedInUserGreeting.setTypeface(Typeface.DEFAULT_BOLD);
+    }
+
 
 }

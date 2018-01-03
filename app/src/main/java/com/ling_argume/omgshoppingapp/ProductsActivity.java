@@ -1,23 +1,28 @@
 package com.ling_argume.omgshoppingapp;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.ling_argume.omgshoppingapp.SingleProductActivity;
+import android.graphics.Typeface;
 
 import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
 import com.ling_argume.omgshoppingapp.model.Product;
 import java.util.List;
+
+import static com.ling_argume.omgshoppingapp.utils.Utils.GREETING;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_USER_KEY;
+import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class ProductsActivity extends AppCompatActivity {
 
@@ -34,9 +39,12 @@ public class ProductsActivity extends AppCompatActivity {
         // For testing table creation
         //SQLiteDatabase testdb = dbm.getReadableDatabase();
 
-        List<Product> list = dbm.getProducts();
+        // Set greeting for logged in user
+        setUserGreetingTextView(this, R.id.greeting);
 
-        ListView lv = (ListView) findViewById(R.id.products_list);
+        // Set up list adapter for products list view, with database info
+        List<Product> list = dbm.getProducts();
+        ListView lv = (ListView) this.findViewById(R.id.products_list);
 
         ProductListAdapter adapter = new ProductListAdapter(ProductsActivity.this, list);
         lv.setAdapter(adapter);

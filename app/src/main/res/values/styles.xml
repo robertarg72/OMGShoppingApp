@@ -21,5 +21,11 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="labelStyle">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textColor">@color/primary_text</item>
+
+    </style>
+
 
 </resources>

@@ -2,7 +2,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="horizontal" >
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/greeting"
+        style="@style/labelStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/large_text_margin"
+        android:layout_marginTop="@dimen/text_margin"
+        android:text="Hello User"
+        android:textAlignment="viewEnd" />
 
     <ListView
         android:id="@+id/orders_management_list"

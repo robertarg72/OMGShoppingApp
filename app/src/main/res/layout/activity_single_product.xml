@@ -7,7 +7,18 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical"
-    tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+    tools:context="com.ling_argume.omgshoppingapp.SingleProductActivity">
+
+    <TextView
+        android:id="@+id/greeting"
+        style="@style/labelStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginRight="@dimen/large_text_margin"
+        android:layout_marginTop="@dimen/text_margin"
+        android:text="Hello User"
+        android:textAlignment="viewEnd" />
 
     <ImageView
         android:id="@+id/single_product_image"
@@ -31,7 +42,7 @@
             android:textStyle="bold"
             android:textSize="36sp"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="25dp">
+            android:layout_marginTop="15dp">
         </TextView>
 
     <TextView
@@ -76,7 +87,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:layout_marginLeft="40dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="25dp"
             android:orientation="horizontal"
             tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
 
@@ -96,7 +107,7 @@
                 android:layout_width="80dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="20dip"
-                android:layout_marginTop="10dip"
+                android:layout_marginTop="5dip"
                 android:height="60dp"
                 android:background="@drawable/rounded_border_edit_text"
                 android:inputType="number" />
@@ -109,13 +120,13 @@
                 android:layout_marginLeft="90dp"
                 android:width="70dp"
                 android:height="30dp"
+                android:background="@drawable/rounded_border_button"
                 android:enabled="true"
-                android:onClick="onClick"
+                android:onClick="onButtonClick"
                 android:padding="0dip"
                 android:text="Place Order"
                 android:textColor="#fff"
-                android:textSize="16sp"
-                android:background="@drawable/rounded_border_button"/>
+                android:textSize="16sp" />
 
 
     </LinearLayout>
