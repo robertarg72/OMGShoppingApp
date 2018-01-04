@@ -130,6 +130,7 @@ public class OrdersManagementListAdapter extends ArrayAdapter<Order> {
                     statusColor = R.color.colorInProcess;
                     newStatus = ORDER_IN_PROCESS_TEXT;
                 }
+                currentOrder.setStatus(newStatus);
                 view.status.setTextColor(context.getResources().getColor((statusColor)));
                 view.status.setText(newStatus);
                 updateOrderStatusInDB(currentOrder, newStatus);
