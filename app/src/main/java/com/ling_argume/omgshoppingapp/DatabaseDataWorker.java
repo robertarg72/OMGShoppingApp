@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.Map;
+
 import static com.ling_argume.omgshoppingapp.utils.Utils.BALL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.BOOTS;
 import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_CLOTHES;

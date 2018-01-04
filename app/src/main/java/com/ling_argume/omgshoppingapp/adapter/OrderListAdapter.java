@@ -2,7 +2,6 @@ package com.ling_argume.omgshoppingapp.adapter;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,14 +37,14 @@ public class OrderListAdapter  extends ArrayAdapter<Order> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            rowView = inflater.inflate(R.layout.order_row, null);
+            rowView = inflater.inflate(R.layout.order_row, parent, false);
 
             // Hold the view objects in an object
             view = new OrderListAdapter.ViewHolder();
-            view.prefix = (TextView) rowView.findViewById(R.id.order_id_prefix);
-            view.id = (TextView) rowView.findViewById(R.id.order_id);
-            view.date = (TextView) rowView.findViewById(R.id.order_date);
-            view.status = (TextView) rowView.findViewById(R.id.order_status);
+            view.prefix = rowView.findViewById(R.id.order_id_prefix);
+            view.id = rowView.findViewById(R.id.order_id);
+            view.date = rowView.findViewById(R.id.order_date);
+            view.status = rowView.findViewById(R.id.order_status);
 
             rowView.setTag(view);
         } else {

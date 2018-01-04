@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -17,11 +16,22 @@ import com.ling_argume.omgshoppingapp.DatabaseManager;
 import com.ling_argume.omgshoppingapp.R;
 import com.ling_argume.omgshoppingapp.model.Order;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 
-import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.*;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_NUMBER;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_OWNER;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_SECURITY_CODE;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_TYPE;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_DATE;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry._ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_ID_PREFIX;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
@@ -35,7 +45,7 @@ public class OrdersManagementListAdapter extends ArrayAdapter<Order> {
     private final Context context;
     private final List<Order> list;
     Order item;
-    public static DatabaseManager dbm;
+    public DatabaseManager dbm;
 
 
     public OrdersManagementListAdapter(Context context, List<Order> orders) {
@@ -62,15 +72,15 @@ public class OrdersManagementListAdapter extends ArrayAdapter<Order> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            rowView = inflater.inflate(R.layout.order_management_row, null);
+            rowView = inflater.inflate(R.layout.order_management_row, parent, false);
 
             // Hold the view objects in an object
             view = new OrdersManagementListAdapter.ViewHolder();
-            view.prefix = (TextView) rowView.findViewById(R.id.order_id_prefix);
-            view.id = (TextView) rowView.findViewById(R.id.order_id);
-            view.date = (TextView) rowView.findViewById(R.id.order_date);
-            view.status = (TextView) rowView.findViewById(R.id.order_status);
-            view.switchButton = (Switch) rowView.findViewById(R.id.status_switch_button);
+            view.prefix = rowView.findViewById(R.id.order_id_prefix);
+            view.id = rowView.findViewById(R.id.order_id);
+            view.date = rowView.findViewById(R.id.order_date);
+            view.status = rowView.findViewById(R.id.order_status);
+            view.switchButton = rowView.findViewById(R.id.status_switch_button);
             view.switchButton.setTag(position);
 
             rowView.setTag(view);

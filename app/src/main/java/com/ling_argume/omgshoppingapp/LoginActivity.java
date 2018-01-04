@@ -1,8 +1,8 @@
 package com.ling_argume.omgshoppingapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         // For testing table creation
         //SQLiteDatabase testdb = db.getReadableDatabase();
 
-        RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
+        RadioGroup rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -58,10 +58,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void onClicked(View view) {
-        String customerId = null;
-        String employeeId = null;
-        username = (EditText) findViewById(R.id.editText);
-        password = (EditText) findViewById(R.id.editText2);
+        String customerId;
+        String employeeId;
+        username = findViewById(R.id.editText);
+        password = findViewById(R.id.editText2);
         String userName = username.getText().toString();
         String passWord = password.getText().toString();
         if (flag == 0) {

@@ -1,19 +1,16 @@
 package com.ling_argume.omgshoppingapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.ling_argume.omgshoppingapp.adapter.OrderListAdapter;
 import com.ling_argume.omgshoppingapp.adapter.OrdersManagementListAdapter;
 import com.ling_argume.omgshoppingapp.model.Order;
+
 import java.util.List;
 
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_EMPLOYEE_ID;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
-import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class OrdersManagementActivity extends AppCompatActivity {
@@ -32,7 +29,7 @@ public class OrdersManagementActivity extends AppCompatActivity {
 
         List<Order> list = dbm.getOrders();
 
-        ListView lv = (ListView) findViewById(R.id.orders_management_list);
+        ListView lv = findViewById(R.id.orders_management_list);
 
         OrdersManagementListAdapter adapter = new OrdersManagementListAdapter(OrdersManagementActivity.this, list);
         adapter.setDatabaseManager(dbm);

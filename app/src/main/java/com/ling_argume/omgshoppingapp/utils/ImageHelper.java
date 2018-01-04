@@ -1,8 +1,10 @@
 package com.ling_argume.omgshoppingapp.utils;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -25,7 +27,7 @@ public class ImageHelper {
         int bufferSize = 1024;
         byte[] buffer = new byte[bufferSize];
 
-        int len = 0;
+        int len;
         while ((len = inputStream.read(buffer)) != -1) {
             byteBuffer.write(buffer, 0, len);
         }
@@ -45,8 +47,7 @@ public class ImageHelper {
     public static Bitmap ByteArrayToBitmap(byte[] byteArray)
     {
         ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(byteArray);
-        Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
-        return bitmap;
+        return BitmapFactory.decodeStream(arrayInputStream);
     }
 
     // Save a bitmap as a png immage to internal storage.
@@ -54,12 +55,12 @@ public class ImageHelper {
     // If there is any problem, it will return an empty string
     public static String saveBitmapToInternalStorage(Context context, String imageName, Bitmap picture) {
 
-        String picturePath = "";
+        String picturePath;
         File internalStorage = context.getDir(INTERNAL_STORAGE_FOLDER, Context.MODE_PRIVATE);
         File reportFilePath = new File(internalStorage, imageName + ".png");
         picturePath = reportFilePath.toString();
 
-        FileOutputStream fos = null;
+        FileOutputStream fos;
         try {
             fos = new FileOutputStream(reportFilePath);
             picture.compress(Bitmap.CompressFormat.PNG, 100, fos);

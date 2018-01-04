@@ -2,8 +2,8 @@ package com.ling_argume.omgshoppingapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +17,7 @@ import com.ling_argume.omgshoppingapp.model.Product;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static android.provider.BaseColumns._ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH;
@@ -32,6 +33,7 @@ import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.AVAILABLE_TEXT_PREFIX;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
@@ -56,6 +58,7 @@ public class SingleOrderActivity extends AppCompatActivity {
     TextView price;
     TextView category;
     EditText quantityView;
+    TextView availableQuantityView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,23 +84,27 @@ public class SingleOrderActivity extends AppCompatActivity {
         product = dbm.getSingleProduct(productId);
 
         //Set views with product data
-        name = (TextView) findViewById(R.id.order_single_product_name);
+        name = findViewById(R.id.order_single_product_name);
         name.setText(product.getName());
 
-        image = (ImageView) findViewById(R.id.order_single_product_image);
+        image = findViewById(R.id.order_single_product_image);
         image.setImageBitmap(product.getImage());
 
-        description = (TextView) findViewById(R.id.order_single_product_description);
+        description = findViewById(R.id.order_single_product_description);
         description.setText(product.getDescription());
 
-        price = (TextView) findViewById(R.id.order_single_product_price);
+        price = findViewById(R.id.order_single_product_price);
         price.setText(product.getPrice());
 
-        category = (TextView) findViewById(R.id.order_single_product_category);
+        category = findViewById(R.id.order_single_product_category);
         category.setText(product.getCategory());
 
-        quantityView = (EditText) findViewById(R.id.order_editable_qty);
+        quantityView = findViewById(R.id.order_editable_qty);
         quantityView.setText(String.valueOf(order.getQuantity()));
+
+        availableQuantityView = findViewById(R.id.order_product_availability);
+        availableQuantityView.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(product.getQuantity()));
+
     }
 
     public void onClick(View v){
@@ -123,7 +130,7 @@ public class SingleOrderActivity extends AppCompatActivity {
                 record[3] = String.valueOf(order.getEmployeeId());
 
                 // Quantity will be set by the user
-                quantityView = (EditText) findViewById(R.id.order_editable_qty);
+                quantityView = findViewById(R.id.order_editable_qty);
                 record[4] = quantityView.getText().toString();
 
                 record[5] = ""; //shipping address
@@ -136,7 +143,7 @@ public class SingleOrderActivity extends AppCompatActivity {
 
                 // Order Data and time
                 Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+                SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.CANADA);
                 record[12] = df.format(c.getTime());
 
                 record[13] = ORDER_IN_PROCESS_TEXT;

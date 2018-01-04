@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -14,7 +13,6 @@
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="260dp"
             android:layout_height="wrap_content"
@@ -24,7 +22,6 @@
             tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,14 +35,15 @@
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="23sp"
-                    android:text="Order Nbr " />
+                    android:text="@string/order_nbr_sample_text" />
 
                 <TextView
                         android:id="@+id/order_id"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Number"
+                        android:text="@string/number_sample_text"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginStart="10dp"
                         android:textStyle="bold"
                         android:textSize="23sp" >
                     </TextView>
@@ -55,8 +53,9 @@
                 android:id="@+id/order_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="date"
+                android:text="@string/date_sample_text"
                 android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:textSize="20sp" >
             </TextView>
 
@@ -68,7 +67,7 @@
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Status"
+        android:text="@string/status_sample_text"
         android:textSize="27sp" >
     </TextView>
 

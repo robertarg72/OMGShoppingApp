@@ -8,10 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.List;
+
 import com.ling_argume.omgshoppingapp.R;
 import com.ling_argume.omgshoppingapp.model.Product;
-
-import java.util.List;
+import static com.ling_argume.omgshoppingapp.utils.Utils.AVAILABLE_TEXT_PREFIX;
 
 public class ProductListAdapter extends ArrayAdapter<Product> {
 	private final Context context;
@@ -34,14 +35,15 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-			rowView = inflater.inflate(R.layout.product_row, null);
+			rowView = inflater.inflate(R.layout.product_row, parent, false);
 
 			// Hold the view objects in an object
 			view = new ViewHolder();
-			view.name = (TextView) rowView.findViewById(R.id.name);
-			view.image = (ImageView) rowView.findViewById(R.id.image);
-            view.description = (TextView) rowView.findViewById(R.id.description);
-            view.price = (TextView) rowView.findViewById(R.id.price);
+			view.name = rowView.findViewById(R.id.name);
+			view.image = rowView.findViewById(R.id.image);
+            view.description = rowView.findViewById(R.id.description);
+            view.price = rowView.findViewById(R.id.price);
+			view.quantity = rowView.findViewById(R.id.product_availability);
 
 			rowView.setTag(view);
 		} else {
@@ -54,6 +56,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		view.image.setImageBitmap(item.getImage());
 		view.description.setText(item.getDescription());
 		view.price.setText(item.getPrice());
+		view.quantity.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(item.getQuantity()));
 
 		return rowView;
 	}
@@ -63,7 +66,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		public ImageView image;
 		public TextView description;
 		public TextView price;
-		public int quantity;
+		public TextView quantity;
 		public TextView category;
 	}
 }

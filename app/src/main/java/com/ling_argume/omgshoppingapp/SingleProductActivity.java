@@ -2,8 +2,8 @@ package com.ling_argume.omgshoppingapp;
 
 import android.content.ContentValues;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +15,7 @@ import com.ling_argume.omgshoppingapp.model.Product;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR;
@@ -25,10 +26,11 @@ import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_DATE;
-import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
+import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
+import static com.ling_argume.omgshoppingapp.utils.Utils.AVAILABLE_TEXT_PREFIX;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
@@ -49,6 +51,7 @@ public class SingleProductActivity extends AppCompatActivity {
     TextView price;
     TextView category;
     TextView quantityView;
+    TextView availableQuantityView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,20 +74,24 @@ public class SingleProductActivity extends AppCompatActivity {
         product = dbm.getSingleProduct(productId);
 
         //Set views with product data
-        name = (TextView) findViewById(R.id.single_product_name);
+        name = findViewById(R.id.single_product_name);
         name.setText(product.getName());
 
-        image = (ImageView) findViewById(R.id.single_product_image);
+        image = findViewById(R.id.single_product_image);
         image.setImageBitmap(product.getImage());
 
-        description = (TextView) findViewById(R.id.single_product_description);
+        description = findViewById(R.id.single_product_description);
         description.setText(product.getDescription());
 
-        price = (TextView) findViewById(R.id.single_product_price);
+        price = findViewById(R.id.single_product_price);
         price.setText(product.getPrice());
 
-        category = (TextView) findViewById(R.id.single_product_category);
+        category = findViewById(R.id.single_product_category);
         category.setText(product.getCategory());
+
+        availableQuantityView = findViewById(R.id.single_product_availability);
+        availableQuantityView.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(product.getQuantity()));
+
     }
 
     public void onButtonClick(View v){
@@ -105,7 +112,7 @@ public class SingleProductActivity extends AppCompatActivity {
             record[3] = employeeId;
 
             // Quantity will be set by the user
-            EditText quantityView = (EditText) findViewById(R.id.qty);
+            quantityView = (EditText) findViewById(R.id.qty);
             record[4] = quantityView.getText().toString();
 
             record[5] = ""; //shipping address
@@ -118,7 +125,7 @@ public class SingleProductActivity extends AppCompatActivity {
 
             // Order Data and time
             Calendar c = Calendar.getInstance();
-            SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss");
+            SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.CANADA);
             record[12] = df.format(c.getTime());
 
             record[13]= ORDER_IN_PROCESS_TEXT;

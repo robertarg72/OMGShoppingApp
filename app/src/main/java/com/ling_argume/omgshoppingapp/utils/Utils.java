@@ -3,15 +3,12 @@ package com.ling_argume.omgshoppingapp.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
 import com.ling_argume.omgshoppingapp.DatabaseContract;
 import com.ling_argume.omgshoppingapp.R;
 
-import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +17,11 @@ import static com.ling_argume.omgshoppingapp.utils.ImageHelper.saveDrawableToInt
 
 
 public class Utils {
+
+    // Constant for greeting the username
+    public static final String GREETING = "Hello, ";
+    public static final String AVAILABLE_TEXT_PREFIX = "Available: ";
+
 
     // Constants to be used for Orders
     public static final String ORDER_DEFAULT_EMPLOYEE_ID = "1";
@@ -70,9 +72,6 @@ public class Utils {
         //put(PINGPONG_TABLE, R.drawable.pingpongtable);
     }};
 
-    // Constant for greeting the username
-    public static final String GREETING = "Hello, ";
-
     // Constants for using Shared Preferences
     public static final String SHARED_PREFERENCES_STORE = "OMGASharedPreferences";
     public static final String SHARED_PREFERENCES_USER_KEY = "UserName";
@@ -101,7 +100,8 @@ public class Utils {
         SharedPreferences myPreference = context.getSharedPreferences(SHARED_PREFERENCES_STORE, 0);
         SharedPreferences.Editor prefEditor = myPreference.edit();
         prefEditor.putString(key, value);
-        prefEditor.commit();
+        //prefEditor.commit(); // this writes to persistent storage inmediately
+        prefEditor.apply(); // this will handle writing in the background
     }
 
     public static String getFromSharedPreferences(Context context, String store, String key) {
@@ -143,8 +143,9 @@ public class Utils {
 
     public static void setUserGreetingTextView(Activity context, int textViewId) {
         String username = getFromSharedPreferences(context, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_USER_KEY);
-        TextView loggedInUserGreeting = (TextView) context.findViewById(textViewId);
-        loggedInUserGreeting.setText(GREETING + username);
+        TextView loggedInUserGreeting = context.findViewById(textViewId);
+        String greeting = GREETING + username;
+        loggedInUserGreeting.setText(greeting);
         loggedInUserGreeting.setTypeface(Typeface.DEFAULT_BOLD);
     }
 

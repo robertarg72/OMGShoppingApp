@@ -2,12 +2,11 @@
 
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="com.ling_argume.omgshoppingapp.LoginActivity"
-android:background="#ffffff">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.ling_argume.omgshoppingapp.LoginActivity"
+    android:background="#ffffff">
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,32 +18,34 @@ android:background="#ffffff">
         <!--  Username Label -->
         <TextView android:layout_width="match_parent"
 
-            android:layout_marginTop="280dp"
+            android:layout_marginTop="310dp"
             android:layout_height="wrap_content"
             android:textColor="#372c24"
-            android:text="Username"/>
+            android:text="@string/username_label"/>
 
         <EditText
             android:id="@+id/editText"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginBottom="20dip"
             android:layout_marginTop="10dip"
             android:height="60dp"
-            android:background="@drawable/rounded_border_edit_text" />
+            android:background="@drawable/rounded_border_edit_text"
+            android:inputType="text"/>
         <!--  Password Label -->
         <TextView android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textColor="#372c24"
-            android:text="Password"/>
+            android:text="@string/password_label"/>
         <EditText android:layout_width="fill_parent"
             android:id="@+id/editText2"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginTop="10dip"
             android:layout_marginBottom="20dip"
             android:background="@drawable/rounded_border_edit_text"
             android:height="60dp"
-            android:password="true"/>
+            android:password="true"
+            android:inputType="textPassword"/>
 
         <!--Customer or Employee radio button-->
         <RadioGroup
@@ -52,6 +53,7 @@ android:background="#ffffff">
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="60dp"
+            android:layout_marginStart="60dp"
             android:orientation="horizontal">
 
             <RadioButton
@@ -60,7 +62,7 @@ android:background="#ffffff">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:checked="true"
-                android:text="Login as a Customer"
+                android:text="@string/login_as_a_customer_label"
                 android:textStyle="bold" />
 
             <RadioButton
@@ -68,7 +70,7 @@ android:background="#ffffff">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Login as a Clerk"
+                android:text="@string/login_as_a_clerk_label"
                 android:textStyle="bold" />
         </RadioGroup>
 
@@ -81,18 +83,18 @@ android:background="#ffffff">
             android:height="60dp"
             android:background="@drawable/rounded_border_button"
             android:onClick="onClicked"
-            android:text="Login"
+            android:text="@string/login_button_text"
             android:textColor="#fff"
-            android:textSize="20dip" />
+            android:textSize="20sp" />
         <!-- Link to Registration Screen -->
         <TextView android:id="@+id/link_to_register"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dip"
 
-            android:text="Register here"
+            android:text="@string/register_here_label"
             android:gravity="center"
-            android:textSize="20dip"
+            android:textSize="20sp"
             android:textColor="#0b84aa"/>
 
     </LinearLayout>

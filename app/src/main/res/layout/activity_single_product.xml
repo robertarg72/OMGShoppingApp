@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,8 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginRight="@dimen/large_text_margin"
+        android:layout_marginEnd="@dimen/large_text_margin"
         android:layout_marginTop="@dimen/text_margin"
-        android:text="Hello User"
+        android:text="@string/hello_user_sample_text"
         android:textAlignment="viewEnd" />
 
     <ImageView
@@ -30,7 +30,8 @@
         android:layout_marginBottom="3dp"
         android:background="#fff"
         android:padding="1dp"
-        android:src="@drawable/ball" >
+        android:src="@drawable/ball"
+        android:contentDescription="@string/product_image_sample_text">
     </ImageView>
 
 
@@ -38,10 +39,11 @@
             android:id="@+id/single_product_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Product Name"
+            android:text="@string/product_name_sample_text"
             android:textStyle="bold"
             android:textSize="36sp"
             android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="15dp">
         </TextView>
 
@@ -49,47 +51,72 @@
         android:id="@+id/single_product_category"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category"
+        android:text="@string/category_sample_text"
         android:textStyle="bold"
         android:textSize="30sp"
         android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="2dp">
     </TextView>
 
-    <TextView
-        android:id="@+id/single_product_price"
-        android:layout_width="150dp"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text="price"
-        android:layout_marginLeft="40dp"
-        android:textColor="#E65100"
-        android:textSize="37sp" >
-    </TextView>
+        android:padding="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp"
+        android:orientation="horizontal"
+        tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+
+        <TextView
+            android:id="@+id/single_product_price"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="@string/price_sample_text"
+            android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
+            android:textColor="#E65100"
+            android:textSize="37sp" >
+        </TextView>
+
+        <TextView
+            android:id="@+id/single_product_availability"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginStart="25dp"
+            android:text="@string/available_sample_text"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    </LinearLayout>
 
 
         <TextView
             android:id="@+id/single_product_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="description"
+            android:text="@string/description_sample_text"
             android:layout_marginLeft="40dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
             android:textSize="20sp" >
         </TextView>
 
 
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="25dp"
-            android:orientation="horizontal"
-            tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
 
 
             <TextView
@@ -97,7 +124,7 @@
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Qty"
+                android:text="@string/qty_short_text"
                 android:textColor="#000"
                 android:textSize="27sp" >
             </TextView>
@@ -118,13 +145,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="90dp"
+                android:layout_marginStart="90dp"
                 android:width="70dp"
                 android:height="30dp"
                 android:background="@drawable/rounded_border_button"
                 android:enabled="true"
                 android:onClick="onButtonClick"
                 android:padding="0dip"
-                android:text="Place Order"
+                android:text="@string/place_order_button_text"
                 android:textColor="#fff"
                 android:textSize="16sp" />
 

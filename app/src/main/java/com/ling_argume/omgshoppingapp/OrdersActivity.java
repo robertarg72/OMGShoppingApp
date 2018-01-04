@@ -1,8 +1,8 @@
 package com.ling_argume.omgshoppingapp;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.ling_argume.omgshoppingapp.adapter.OrderListAdapter;
 import com.ling_argume.omgshoppingapp.model.Order;
+
 import java.util.List;
 
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
@@ -36,7 +37,7 @@ public class OrdersActivity extends AppCompatActivity {
         String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
         List<Order> list = dbm.getOrdersByCustomerId(customerId);
 
-        ListView lv = (ListView) findViewById(R.id.orders_list);
+        ListView lv = findViewById(R.id.orders_list);
 
         OrderListAdapter adapter = new OrderListAdapter(OrdersActivity.this, list);
         lv.setAdapter(adapter);

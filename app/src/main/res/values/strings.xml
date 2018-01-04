@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">OMG Shopping App</string>
+    <string name="qty_short_text">Qty</string>
+    <string name="update_order_button_text">Update Order</string>
+    <string name="place_order_button_text">Place Order</string>
+    <string name="username_label">Username</string>
+    <string name="password_label">Password</string>
+    <string name="login_as_a_customer_label">Login as a Customer</string>
+    <string name="login_as_a_clerk_label">Login as a Clerk</string>
+    <string name="login_button_text">Login</string>
+    <string name="register_here_label">Register here</string>
+    <string name="hello_user_sample_text">Hello User</string>
+    <string name="product_image_sample_text">Product Image</string>
+    <string name="product_name_sample_text">Product Name</string>
+    <string name="category_sample_text">Category</string>
+    <string name="price_sample_text">Price</string>
+    <string name="available_sample_text">Available:</string>
+    <string name="description_sample_text">description</string>
+    <string name="order_nbr_sample_text">Order Nbr</string>
+    <string name="number_sample_text">Number</string>
+    <string name="date_sample_text">date</string>
+    <string name="status_sample_text">Status</string>
 </resources>

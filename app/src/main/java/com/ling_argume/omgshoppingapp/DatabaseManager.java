@@ -3,19 +3,15 @@ package com.ling_argume.omgshoppingapp;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.graphics.BitmapFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static com.ling_argume.omgshoppingapp.utils.ImageHelper.getBitmapFromPath;
 
@@ -68,7 +64,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     	SQLiteDatabase mDatabase;
     	mDatabase = context.openOrCreateDatabase(
     	DATABASE_NAME,
-    	SQLiteDatabase.CREATE_IF_NECESSARY,
+    	//SQLiteDatabase.CREATE_IF_NECESSARY,
+                SQLiteDatabase.OPEN_READWRITE,
     	null);
     }
 
@@ -125,6 +122,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
             } while (cursor.moveToNext());
         }
+        cursor.close();
 
         // return table as a list
         return table;
@@ -132,7 +130,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     // Read all product records
     public List<Product> getProducts() {
-        List<Product> productsList = new ArrayList<Product>();
+        List<Product> productsList = new ArrayList<>();
         // Select all records
         String selectQuery = "SELECT  * FROM " + DatabaseContract.ProductEntry.TABLE_NAME;
 
@@ -144,11 +142,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
             do
             { // for each row
                 Product product = new Product();
+                product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
                 product.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
-                product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
                 product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
                 productsList.add(product);
@@ -162,7 +160,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     }
 
     public List<Order> getOrders() {
-        List<Order> ordersList = new ArrayList<Order>();
+        List<Order> ordersList = new ArrayList<>();
         // Select all records
         String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
 
@@ -193,7 +191,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     public List<Order> getOrdersByCustomerId(String id) {
         Cursor cursor = null;
-        List<Order> ordersList = new ArrayList<Order>();
+        List<Order> ordersList = new ArrayList<>();
 
         try {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -215,7 +213,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
             }
             return ordersList;
         }finally {
-            cursor.close();
+            if( cursor != null) {
+                cursor.close();
+            }
         }
     }
 
@@ -241,7 +241,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
             }
             return order;
         }finally {
-            cursor.close();
+            if(cursor != null) {
+                cursor.close();
+            }
         }
     }
 
@@ -270,7 +272,9 @@ public class DatabaseManager extends SQLiteOpenHelper {
             }
             return product;
         }finally {
-            cursor.close();
+            if(cursor != null) {
+                cursor.close();
+            }
         }
     }
 
