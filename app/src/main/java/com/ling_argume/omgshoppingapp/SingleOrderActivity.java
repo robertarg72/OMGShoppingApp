@@ -38,8 +38,12 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.saveToSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class SingleOrderActivity extends AppCompatActivity {
@@ -184,6 +188,11 @@ public class SingleOrderActivity extends AppCompatActivity {
                 String productFields[] = {DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry.COLUMN_QUANTITY};
                 String productRecords[] = { productId, newAvailableQuantity};
                 dbm.updateRecord(values, DatabaseContract.ProductEntry.TABLE_NAME, productFields, productRecords);
+
+                // Setup a flag to let know Products List Activity that at least one Product stock was updated
+                saveToSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG, "Flag" );
+                saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST, productId );
+                saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY, newAvailableQuantity );
 
                 // Refresh value in Available qty label as well
                 availableQuantityView.setText(newAvailableQuantity);

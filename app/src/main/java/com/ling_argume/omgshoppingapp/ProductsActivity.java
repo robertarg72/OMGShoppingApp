@@ -63,7 +63,7 @@ public class ProductsActivity extends AppCompatActivity {
             String productId = getFromSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST);
             String quantity = getFromSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY);
 
-            // Find the specific product, update product stock, and notify the adapter of data source update
+            // Get product, update stock, and notify the adapter of data source update
             Product product = list.get(Integer.valueOf(productId)-1);
             product.setQuantity(Integer.valueOf(quantity));
             adapter.notifyDataSetChanged();
