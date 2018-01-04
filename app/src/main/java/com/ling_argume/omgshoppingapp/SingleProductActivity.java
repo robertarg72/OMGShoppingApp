@@ -155,9 +155,9 @@ public class SingleProductActivity extends AppCompatActivity {
 
             ContentValues values = new ContentValues();
 
-            dbm.addRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
+            dbm.addRecord(values, DatabaseContract.OrderEntry.TABLE_NAME, fields, record);
 
-            Toast.makeText(SingleProductActivity.this, "Order created succesfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SingleProductActivity.this, "Order created successfully", Toast.LENGTH_SHORT).show();
 
             // Redirect user to see the list of this orders
             Intent i = new Intent( SingleProductActivity.this, OrdersActivity.class);

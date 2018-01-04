@@ -29,8 +29,9 @@ public class DatabaseDataWorker {
 
     public void insertCustomers() {
         insertCustomer("rob", "123", "Robert", "Argume", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("ling", "123", "Ling", "Bao", "24 sheppard avenue", "scarborough", "m1s5t1");
-        insertCustomer("joe", "123", "Joe", "Doe", "2627 mccowan", "scarborough", "m1s5t1");
+        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "scarborough", "m1s5t1");
+        insertCustomer("fatih", "123", "Fatih", "Inan", "2627 mccowan", "scarborough", "m1s5t1");
+        insertCustomer("kamal", "123", "Kamal", "Singh", "2627 mccowan", "scarborough", "m1s5t1");
     }
 
      private void insertCustomer(String username, String password, String firstName, String lastName, String address, String city, String postalCode) {
