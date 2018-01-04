@@ -77,6 +77,11 @@ public class Utils {
     public static final String SHARED_PREFERENCES_USER_KEY = "UserName";
     public static final String SHARED_PREFERENCES_CUSTOMER_ID = "CustomerID";
     public static final String SHARED_PREFERENCES_EMPLOYEE_ID = "EmployeeID";
+    public static final String SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG = "QuantityUpdated";
+    public static final String SHARED_PREFERENCES_UPDATED_FLAG_VALUE = "Flag";
+    public static final String SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST = "ProductsUpdated";
+    public static final String SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY = "ProductQuantities";
+
 
 
     // Constants for SQLite creation of tables
@@ -104,7 +109,7 @@ public class Utils {
         prefEditor.apply(); // this will handle writing in the background
     }
 
-    public static String getFromSharedPreferences(Context context, String store, String key) {
+    public static String getFromSharedPreferences(Context context, String key) {
         SharedPreferences myPref = context.getSharedPreferences(SHARED_PREFERENCES_STORE, MODE_PRIVATE);
         return myPref.getString(key,"");
     }
@@ -142,7 +147,7 @@ public class Utils {
     }
 
     public static void setUserGreetingTextView(Activity context, int textViewId) {
-        String username = getFromSharedPreferences(context, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_USER_KEY);
+        String username = getFromSharedPreferences(context, SHARED_PREFERENCES_USER_KEY);
         TextView loggedInUserGreeting = context.findViewById(textViewId);
         String greeting = GREETING + username;
         loggedInUserGreeting.setText(greeting);

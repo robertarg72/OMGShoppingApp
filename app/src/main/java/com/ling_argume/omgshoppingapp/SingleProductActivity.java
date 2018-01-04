@@ -31,12 +31,15 @@ import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.DatabaseContract.OrderEntry.COLUMN_STATUS;
-import static com.ling_argume.omgshoppingapp.utils.Utils.AVAILABLE_TEXT_PREFIX;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
+import static com.ling_argume.omgshoppingapp.utils.Utils.saveToSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class SingleProductActivity extends AppCompatActivity {
@@ -65,7 +68,7 @@ public class SingleProductActivity extends AppCompatActivity {
         setUserGreetingTextView(this, R.id.greeting);
 
         // Get CustomerId from Shared Preferences
-        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
+        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
         employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
         // Retrieve product id from previous Activity
         Intent i = getIntent();
@@ -156,6 +159,21 @@ public class SingleProductActivity extends AppCompatActivity {
             ContentValues values = new ContentValues();
 
             dbm.addRecord(values, DatabaseContract.OrderEntry.TABLE_NAME, fields, record);
+
+            // We decrease available quantity in Products table
+            String newAvailableQuantity = String.valueOf(availableQty - qty);
+            values = new ContentValues();
+            String productFields[] = {DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry.COLUMN_QUANTITY};
+            String productRecords[] = { productId, newAvailableQuantity};
+            dbm.updateRecord(values, DatabaseContract.ProductEntry.TABLE_NAME, productFields, productRecords);
+
+            // Setup a flag to let know Products List Activity that at least one Product stock was updated
+            saveToSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG, "Flag" );
+            saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST, productId );
+            saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY, newAvailableQuantity );
+
+            // Refresh value in Available qty label as well
+            availableQuantityView.setText(newAvailableQuantity);
 
             Toast.makeText(SingleProductActivity.this, "Order created successfully", Toast.LENGTH_SHORT).show();
 

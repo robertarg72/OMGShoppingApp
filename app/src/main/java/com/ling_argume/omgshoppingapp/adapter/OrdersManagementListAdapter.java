@@ -64,7 +64,7 @@ public class OrdersManagementListAdapter extends ArrayAdapter<Order> {
         final OrdersManagementListAdapter.ViewHolder view;
 
         // Get employeeId and bring all orders belonging to all customer
-        String employeeId = getFromSharedPreferences(context, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_EMPLOYEE_ID);
+        String employeeId = getFromSharedPreferences(context, SHARED_PREFERENCES_EMPLOYEE_ID);
 
         if(rowView == null)
         {

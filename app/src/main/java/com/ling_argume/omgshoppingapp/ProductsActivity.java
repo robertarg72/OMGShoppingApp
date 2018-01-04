@@ -12,14 +12,20 @@ import android.widget.ListView;
 
 import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
 import com.ling_argume.omgshoppingapp.model.Product;
+import com.ling_argume.omgshoppingapp.utils.Utils;
 
 import java.util.List;
 
+import static com.ling_argume.omgshoppingapp.utils.Utils.*;
+import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG;
+import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class ProductsActivity extends AppCompatActivity {
 
     private DatabaseManager dbm;
+    ProductListAdapter adapter;
+    List<Product> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +38,10 @@ public class ProductsActivity extends AppCompatActivity {
         setUserGreetingTextView(this, R.id.greeting);
 
         // Set up list adapter for products list view, with database info
-        List<Product> list = dbm.getProducts();
+        list = dbm.getProducts();
         ListView lv = this.findViewById(R.id.products_list);
 
-        ProductListAdapter adapter = new ProductListAdapter(ProductsActivity.this, list);
+        adapter = new ProductListAdapter(ProductsActivity.this, list);
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(onListClick);
@@ -45,6 +51,23 @@ public class ProductsActivity extends AppCompatActivity {
     protected void onDestroy() {
         dbm.close();
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String flag = getFromSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG);
+        if (flag.compareTo(SHARED_PREFERENCES_UPDATED_FLAG_VALUE) == 0) {
+            // Retrieve values
+            saveToSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG, "");
+            String productId = getFromSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST);
+            String quantity = getFromSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY);
+
+            // Find the specific product, update product stock, and notify the adapter of data source update
+            Product product = list.get(Integer.valueOf(productId)-1);
+            product.setQuantity(Integer.valueOf(quantity));
+            adapter.notifyDataSetChanged();
+        }
     }
 
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {

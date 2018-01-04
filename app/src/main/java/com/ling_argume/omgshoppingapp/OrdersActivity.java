@@ -34,7 +34,7 @@ public class OrdersActivity extends AppCompatActivity {
         setUserGreetingTextView(this, R.id.greeting);
 
         // Get customerId and bring only the orders belonging to this customer
-        String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
+        String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
         List<Order> list = dbm.getOrdersByCustomerId(customerId);
 
         ListView lv = findViewById(R.id.orders_list);

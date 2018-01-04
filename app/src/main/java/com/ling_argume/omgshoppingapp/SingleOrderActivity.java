@@ -49,6 +49,7 @@ public class SingleOrderActivity extends AppCompatActivity {
     String productId;
     String customerId = "";
     String employeeId = "";
+    int previousOrderQuantity;
 
     Order order;
     Product product;
@@ -71,7 +72,7 @@ public class SingleOrderActivity extends AppCompatActivity {
         setUserGreetingTextView(this, R.id.greeting);
 
         // Get CustomerId from Shared Preferences
-        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_STORE, SHARED_PREFERENCES_CUSTOMER_ID);
+        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
         employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
         // Retrieve product id from previous Activity
         Intent i = getIntent();
@@ -100,7 +101,8 @@ public class SingleOrderActivity extends AppCompatActivity {
         category.setText(product.getCategory());
 
         quantityView = findViewById(R.id.order_editable_qty);
-        quantityView.setText(String.valueOf(order.getQuantity()));
+        previousOrderQuantity = order.getQuantity();
+        quantityView.setText(String.valueOf(previousOrderQuantity));
 
         availableQuantityView = findViewById(R.id.order_product_availability);
         availableQuantityView.setText(String.valueOf(product.getQuantity()));
@@ -154,7 +156,7 @@ public class SingleOrderActivity extends AppCompatActivity {
                 record[3] = String.valueOf(order.getEmployeeId());
 
                 // Quantity will be set by the user
-                record[4] = quantityView.getText().toString();
+                record[4] = qtyString;
 
                 record[5] = ""; //shipping address
                 record[6] = ""; //card type
@@ -175,7 +177,18 @@ public class SingleOrderActivity extends AppCompatActivity {
 
                 dbm.updateRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
 
-                Toast.makeText(SingleOrderActivity.this, "Order updated succesfully", Toast.LENGTH_SHORT).show();
+                // We update available quantity in Products table
+                int quantityDifference = previousOrderQuantity - qty;
+                String newAvailableQuantity = String.valueOf(availableQty + quantityDifference);
+                values = new ContentValues();
+                String productFields[] = {DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry.COLUMN_QUANTITY};
+                String productRecords[] = { productId, newAvailableQuantity};
+                dbm.updateRecord(values, DatabaseContract.ProductEntry.TABLE_NAME, productFields, productRecords);
+
+                // Refresh value in Available qty label as well
+                availableQuantityView.setText(newAvailableQuantity);
+
+                Toast.makeText(SingleOrderActivity.this, "Order updated successfully", Toast.LENGTH_SHORT).show();
 
                 // Redirect user to see the list of this orders
                 Intent i = new Intent( SingleOrderActivity.this, OrdersActivity.class);
