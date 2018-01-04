@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ling_argume.omgshoppingapp.model.Product;
 
@@ -50,7 +51,7 @@ public class SingleProductActivity extends AppCompatActivity {
     TextView description;
     TextView price;
     TextView category;
-    TextView quantityView;
+    EditText quantityView;
     TextView availableQuantityView;
 
     @Override
@@ -90,13 +91,36 @@ public class SingleProductActivity extends AppCompatActivity {
         category.setText(product.getCategory());
 
         availableQuantityView = findViewById(R.id.single_product_availability);
-        availableQuantityView.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(product.getQuantity()));
+        availableQuantityView.setText(String.valueOf(product.getQuantity()));
 
     }
 
     public void onButtonClick(View v){
         int id = v.getId();
         if( id == R.id.btn_place_order){
+
+            // Show error if no quantity is there
+            quantityView = findViewById(R.id.qty);
+
+            String qtyString = quantityView.getText().toString().trim();
+            if (qtyString.length() == 0) {
+                Toast.makeText(SingleProductActivity.this, "Add Quantity", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            int qty = Integer.valueOf(qtyString);
+            if(qty == 0) {
+                Toast.makeText(SingleProductActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Show error if quantity is more than available items
+            int availableQty = Integer.valueOf(availableQuantityView.getText().toString());
+            if (qty > availableQty){
+                Toast.makeText(SingleProductActivity.this, "Quantity cannot be greater than available items", Toast.LENGTH_SHORT).show();
+
+                return;
+            }
 
             // Save the new order in DB
 
@@ -112,7 +136,6 @@ public class SingleProductActivity extends AppCompatActivity {
             record[3] = employeeId;
 
             // Quantity will be set by the user
-            quantityView = (EditText) findViewById(R.id.qty);
             record[4] = quantityView.getText().toString();
 
             record[5] = ""; //shipping address
@@ -133,6 +156,8 @@ public class SingleProductActivity extends AppCompatActivity {
             ContentValues values = new ContentValues();
 
             dbm.addRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
+
+            Toast.makeText(SingleProductActivity.this, "Order created succesfully", Toast.LENGTH_SHORT).show();
 
             // Redirect user to see the list of this orders
             Intent i = new Intent( SingleProductActivity.this, OrdersActivity.class);

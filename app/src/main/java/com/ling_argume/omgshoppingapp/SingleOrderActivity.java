@@ -103,7 +103,7 @@ public class SingleOrderActivity extends AppCompatActivity {
         quantityView.setText(String.valueOf(order.getQuantity()));
 
         availableQuantityView = findViewById(R.id.order_product_availability);
-        availableQuantityView.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(product.getQuantity()));
+        availableQuantityView.setText(String.valueOf(product.getQuantity()));
 
     }
 
@@ -115,6 +115,30 @@ public class SingleOrderActivity extends AppCompatActivity {
                 Toast.makeText(SingleOrderActivity.this, "Sorry, the order is already Delivered.", Toast.LENGTH_SHORT).show();
             }
             else {
+
+                // Show error if no quantity is there
+                quantityView = findViewById(R.id.order_editable_qty);
+
+                String qtyString = quantityView.getText().toString().trim();
+                if (qtyString.length() == 0) {
+                    Toast.makeText(SingleOrderActivity.this, "Add Quantity", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                int qty = Integer.valueOf(qtyString);
+                if(qty == 0) {
+                    Toast.makeText(SingleOrderActivity.this, "Quantity cannot be 0", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Show error if quantity is more than available items
+                int availableQty = Integer.valueOf(availableQuantityView.getText().toString());
+                if (qty > availableQty){
+                    Toast.makeText(SingleOrderActivity.this, "Quantity cannot be greater than available items", Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+
                 // Update order in DB
 
                 String fields[] = {_ID, COLUMN_CUSTOMER_ID, COLUMN_PRODUCT_ID, COLUMN_EMPLOYEE_ID,
@@ -130,7 +154,6 @@ public class SingleOrderActivity extends AppCompatActivity {
                 record[3] = String.valueOf(order.getEmployeeId());
 
                 // Quantity will be set by the user
-                quantityView = findViewById(R.id.order_editable_qty);
                 record[4] = quantityView.getText().toString();
 
                 record[5] = ""; //shipping address
@@ -151,6 +174,8 @@ public class SingleOrderActivity extends AppCompatActivity {
                 ContentValues values = new ContentValues();
 
                 dbm.updateRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
+
+                Toast.makeText(SingleOrderActivity.this, "Order updated succesfully", Toast.LENGTH_SHORT).show();
 
                 // Redirect user to see the list of this orders
                 Intent i = new Intent( SingleOrderActivity.this, OrdersActivity.class);

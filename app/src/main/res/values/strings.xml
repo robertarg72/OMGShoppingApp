@@ -14,10 +14,11 @@
     <string name="product_name_sample_text">Product Name</string>
     <string name="category_sample_text">Category</string>
     <string name="price_sample_text">Price</string>
-    <string name="available_sample_text">Available:</string>
+    <string name="available_sample_text">25</string>
     <string name="description_sample_text">description</string>
     <string name="order_nbr_sample_text">Order Nbr</string>
     <string name="number_sample_text">Number</string>
     <string name="date_sample_text">date</string>
     <string name="status_sample_text">Status</string>
+    <string name="available_prefix">Available: </string>
 </resources>

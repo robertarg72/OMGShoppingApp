@@ -56,7 +56,7 @@ public class ProductListAdapter extends ArrayAdapter<Product> {
 		view.image.setImageBitmap(item.getImage());
 		view.description.setText(item.getDescription());
 		view.price.setText(item.getPrice());
-		view.quantity.setText(AVAILABLE_TEXT_PREFIX + String.valueOf(item.getQuantity()));
+		view.quantity.setText(String.valueOf(item.getQuantity()));
 
 		return rowView;
 	}
