@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         // Initialize database manager
         db = new DatabaseManager(this);
         db.dbInitialize(tables, tableCreatorString, Utils.getInitialImages(this));
+        //db.dbInitialize(tables, tableCreatorString, null);
 
         RadioGroup rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {

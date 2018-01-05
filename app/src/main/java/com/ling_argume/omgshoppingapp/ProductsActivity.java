@@ -106,6 +106,7 @@ public class ProductsActivity extends AppCompatActivity {
             case R.id.login_screen:
                 next = new Intent( ProductsActivity.this, LoginActivity.class);
                 startActivity(next);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -34,10 +34,19 @@ public class ImageHelper {
         return byteBuffer.toByteArray();
     }
 
-    public static Bitmap getBitmapFromPath(String picturePath) {
+    public static Bitmap getBitmapFromPath(String picturePath) throws OutOfMemoryError {
         if (picturePath == null || picturePath.length() == 0)
             return null;
-        return BitmapFactory.decodeFile(picturePath);
+        //return BitmapFactory.decodeFile(picturePath);
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+
+        //int sampleSize = calculateInSampleSize(options, 120, 120);
+        //options.inSampleSize = sampleSize;
+
+        // Force minimum sample size to avoid OutOfMemory exception
+        options.inSampleSize = 8;
+        return BitmapFactory.decodeFile(picturePath,options);
     }
 
     public static Bitmap getBitmapFromBytes(byte[] image) {
@@ -63,7 +72,7 @@ public class ImageHelper {
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(reportFilePath);
-            picture.compress(Bitmap.CompressFormat.PNG, 5, fos);
+            picture.compress(Bitmap.CompressFormat.JPEG, 50, fos);
             fos.close();
         } catch (Exception ex) {
             Log.i("INTERNAL STORAGE", "Problem saving bitmap image", ex);
@@ -78,5 +87,28 @@ public class ImageHelper {
         // UUID.randomUUID().toString() to generate a unique filename. Problem: files are copied many times
 
         return ImageHelper.saveBitmapToInternalStorage(context, imageName.replace(" ","_"), bitmap);
+    }
+
+    // Calculates the sample size to decode an Bitmap image. This prevent Out of memory exceptions
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) >= reqHeight
+                    && (halfWidth / inSampleSize) >= reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 }

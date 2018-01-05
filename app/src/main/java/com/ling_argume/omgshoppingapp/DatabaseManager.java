@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import static android.content.ContentValues.TAG;
 import static com.ling_argume.omgshoppingapp.utils.ImageHelper.getBitmapFromPath;
 
 public class DatabaseManager extends SQLiteOpenHelper {
@@ -142,7 +145,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
             do
             { // for each row
                 Product product = new Product();
-                product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
+                try {
+                    Bitmap productImage = getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE)));
+                    product.setImage(productImage);
+                }
+                catch (OutOfMemoryError e) {
+                    Log.d(TAG, "getProducts: OutOfMemory when loading product image");
+                    //e.printStackTrace();
+                }
+
                 product.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
