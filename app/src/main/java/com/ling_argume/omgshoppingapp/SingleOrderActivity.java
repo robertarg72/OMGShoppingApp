@@ -202,6 +202,7 @@ public class SingleOrderActivity extends AppCompatActivity {
                 // Redirect user to see the list of this orders
                 Intent i = new Intent( SingleOrderActivity.this, OrdersActivity.class);
                 startActivity(i);
+                //finish();
             }
 
         }
@@ -229,10 +230,11 @@ public class SingleOrderActivity extends AppCompatActivity {
                 next = new Intent( SingleOrderActivity.this, OrdersActivity.class);
                 startActivity(next);
                 return true;
-//            case R.id.login_screen:
-//                next = new Intent( SingleOrderActivity.this, LoginActivity.class);
-//                startActivity(next);
-//                return true;
+            case R.id.login_screen:
+                next = new Intent( SingleOrderActivity.this, LoginActivity.class);
+                startActivity(next);
+                finish();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

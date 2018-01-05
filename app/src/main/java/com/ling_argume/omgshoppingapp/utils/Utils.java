@@ -60,12 +60,12 @@ public class Utils {
     //public static final String PINGPONG_TABLE = "Thibar Table Tennis table";
 
     private static Map<String, Integer> drawableMapping = new HashMap<String, Integer>(){{
-        put(BOOTS, R.drawable.boots);
-        put(PENCIL, R.drawable.pencil);
-        put(BALL, R.drawable.ball);
-        put(CHAIR, R.drawable.chair);
-        put(PHONE, R.drawable.phone);
-        put(GUITAR, R.drawable.guitar);
+        put(BOOTS, R.mipmap.boots);
+        put(PENCIL, R.mipmap.pencil);
+        put(BALL, R.mipmap.ball);
+        put(CHAIR, R.mipmap.chair);
+        put(PHONE, R.mipmap.phone);
+        put(GUITAR, R.mipmap.guitar);
         //put(NOTEBOOK, R.drawable.notebook);
         //put(DESKTOP, R.drawable.desktop);
         //put(SMART_TV, R.drawable.smart_tv);

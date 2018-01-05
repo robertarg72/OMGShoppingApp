@@ -78,6 +78,7 @@ public class ProductsActivity extends AppCompatActivity {
             i.putExtra("product_id", String.valueOf(id + 1));
 
             startActivity(i);
+            //finish();
 
         }
     };
@@ -102,10 +103,10 @@ public class ProductsActivity extends AppCompatActivity {
                 next = new Intent( ProductsActivity.this, OrdersActivity.class);
                 startActivity(next);
                 return true;
-//            case R.id.login_screen:
-//                next = new Intent( ProductsActivity.this, LoginActivity.class);
-//                startActivity(next);
-//                return true;
+            case R.id.login_screen:
+                next = new Intent( ProductsActivity.this, LoginActivity.class);
+                startActivity(next);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

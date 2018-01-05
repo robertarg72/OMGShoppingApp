@@ -63,7 +63,7 @@ public class ImageHelper {
         FileOutputStream fos;
         try {
             fos = new FileOutputStream(reportFilePath);
-            picture.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            picture.compress(Bitmap.CompressFormat.PNG, 5, fos);
             fos.close();
         } catch (Exception ex) {
             Log.i("INTERNAL STORAGE", "Problem saving bitmap image", ex);

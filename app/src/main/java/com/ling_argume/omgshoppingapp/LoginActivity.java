@@ -38,9 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         db = new DatabaseManager(this);
         db.dbInitialize(tables, tableCreatorString, Utils.getInitialImages(this));
 
-        // For testing table creation
-        //SQLiteDatabase testdb = db.getReadableDatabase();
-
         RadioGroup rg = findViewById(R.id.rg);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
