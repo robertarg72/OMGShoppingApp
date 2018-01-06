@@ -9,7 +9,10 @@ import android.widget.TextView;
 import com.ling_argume.omgshoppingapp.database.DatabaseContract;
 import com.ling_argume.omgshoppingapp.R;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -22,12 +25,16 @@ public class Utils {
     private static final String GREETING = "Hello, ";
     public static final String AVAILABLE_TEXT_PREFIX = "Available: ";
 
-
     // Constants to be used for Orders
     public static final String ORDER_DEFAULT_EMPLOYEE_ID = "1";
     public static final String ORDER_ID_PREFIX = "Order Nbr ";
     public static final String ORDER_IN_PROCESS_TEXT = "In-Process";
     public static final String ORDER_DELIVERED_TEXT = "Delivered";
+    public static final String ORDER_SHOPPING_CART = "Shopping-Cart";
+
+    // Constants to be used for each order item
+    public static final String ORDER_ITEM_AVAILABLE = "Stock Available";
+    public static final String ORDER_ITEM_NOT_AVAILABLE = "Stock Not Available";
 
     // Internal Storage Folder, where images will be stored
     static final String INTERNAL_STORAGE_FOLDER = "ProductPictures";
@@ -89,14 +96,16 @@ public class Utils {
             DatabaseContract.CustomerEntry.TABLE_NAME,
             DatabaseContract.ClerkEntry.TABLE_NAME,
             DatabaseContract.ProductEntry.TABLE_NAME,
-            DatabaseContract.OrderEntry.TABLE_NAME
+            DatabaseContract.OrderEntry.TABLE_NAME,
+            DatabaseContract.OrderItemEntry.TABLE_NAME
     };
 
     public static final String tableCreatorString[] = {
             DatabaseContract.CustomerEntry.SQL_CREATE_TABLE,
             DatabaseContract.ClerkEntry.SQL_CREATE_TABLE,
             DatabaseContract.ProductEntry.SQL_CREATE_TABLE,
-            DatabaseContract.OrderEntry.SQL_CREATE_TABLE
+            DatabaseContract.OrderEntry.SQL_CREATE_TABLE,
+            DatabaseContract.OrderItemEntry.SQL_CREATE_TABLE
     };
 
     // Public static methods to be used for all classes in the project
@@ -152,6 +161,12 @@ public class Utils {
         String greeting = GREETING + username;
         loggedInUserGreeting.setText(greeting);
         loggedInUserGreeting.setTypeface(Typeface.DEFAULT_BOLD);
+    }
+
+    public static String getCurrentDateTime() {
+        Calendar c = Calendar.getInstance();
+        SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.CANADA);
+        return df.format(c.getTime());
     }
 
 

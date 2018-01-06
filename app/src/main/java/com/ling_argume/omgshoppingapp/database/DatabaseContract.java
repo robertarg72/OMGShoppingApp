@@ -74,10 +74,12 @@ public final class DatabaseContract {
     public final class OrderEntry implements BaseColumns {
         public static final String TABLE_NAME = "customerorder";
         public static final String COLUMN_CUSTOMER_ID = "customerid";
-        public static final String COLUMN_PRODUCT_ID = "productid";
+        //public static final String COLUMN_PRODUCT_ID = "productid";
         public static final String COLUMN_EMPLOYEE_ID = "employeeid";
-        public static final String COLUMN_ORDER_QUANTITY = "quantity";
+        //public static final String COLUMN_ORDER_QUANTITY = "quantity";
         public static final String COLUMN_SHIPPING_ADDRESS = "shippingaddress";
+        public static final String COLUMN_SHIPPING_CITY = "shippingcity";
+        public static final String COLUMN_SHIPPING_POSTALCODE = "shippingpostalcode";
         public static final String COLUMN_CARD_TYPE = "cardtype";
         public static final String COLUMN_CARD_NUMBER = "cardnumber";
         public static final String COLUMN_CARD_OWNER = "cardowner";
@@ -86,15 +88,18 @@ public final class DatabaseContract {
         public static final String COLUMN_CARD_SECURITY_CODE = "cardsecuritycode";
         public static final String COLUMN_ORDER_DATE = "orderdate";
         public static final String COLUMN_STATUS = "status";
+        public static final String COLUMN_TOTAL_PRICE = "totalprice";
 
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
                         _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_CUSTOMER_ID + " INTEGER NOT NULL, " +
-                        COLUMN_PRODUCT_ID + " INTEGER NOT NULL, " +
+                        //COLUMN_PRODUCT_ID + " INTEGER NOT NULL, " +
                         COLUMN_EMPLOYEE_ID + " INTEGER NOT NULL, " +
-                        COLUMN_ORDER_QUANTITY + " INT NOT NULL, " +
+                        //COLUMN_ORDER_QUANTITY + " INT NOT NULL, " +
                         COLUMN_SHIPPING_ADDRESS + " TEXT, " +
+                        COLUMN_SHIPPING_CITY + " TEXT, " +
+                        COLUMN_SHIPPING_POSTALCODE + " TEXT, " +
                         COLUMN_CARD_TYPE + " TEXT, " +
                         COLUMN_CARD_NUMBER + " TEXT, " +
                         COLUMN_CARD_OWNER + " TEXT, " +
@@ -103,11 +108,32 @@ public final class DatabaseContract {
                         COLUMN_CARD_SECURITY_CODE + " TEXT, " +
                         COLUMN_ORDER_DATE + " TEXT NOT NULL, " +
                         COLUMN_STATUS + " TEXT NOT NULL, " +
+                        COLUMN_TOTAL_PRICE + " TEXT NOT NULL, " +
                         "FOREIGN KEY(" + COLUMN_CUSTOMER_ID + ") REFERENCES customer(_ID), " +
-                        "FOREIGN KEY(" + COLUMN_PRODUCT_ID + ") REFERENCES product(_ID), " +
+                        //"FOREIGN KEY(" + COLUMN_PRODUCT_ID + ") REFERENCES product(_ID), " +
                         "FOREIGN KEY(" + COLUMN_EMPLOYEE_ID + ") REFERENCES clerk(_ID))";
     }
 
+
+    public final class OrderItemEntry implements BaseColumns {
+        public static final String TABLE_NAME = "orderitem";
+        public static final String COLUMN_PRODUCT_ID = "productid";
+        public static final String COLUMN_ORDER_ID = "orderid";
+        public static final String COLUMN_ORDER_ITEM_QUANTITY = "quantity";
+        public static final String COLUMN_ORDER_ITEM_DATE = "date";
+        public static final String COLUMN_ORDER_ITEM_STATUS = "status";
+
+        public static final String SQL_CREATE_TABLE =
+                "CREATE TABLE " + TABLE_NAME + " (" +
+                        _ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                        COLUMN_PRODUCT_ID + " INTEGER NOT NULL, " +
+                        COLUMN_ORDER_ID + " INTEGER NOT NULL, " +
+                        COLUMN_ORDER_ITEM_QUANTITY + " INT NOT NULL, " +
+                        COLUMN_ORDER_ITEM_DATE + " TEXT NOT NULL, " +
+                        COLUMN_ORDER_ITEM_STATUS + " TEXT NOT NULL, " +
+                        "FOREIGN KEY(" + COLUMN_PRODUCT_ID + ") REFERENCES product(_ID), " +
+                        "FOREIGN KEY(" + COLUMN_ORDER_ID + ") REFERENCES customerorder(_ID))";
+    }
 }
 
 

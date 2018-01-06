@@ -18,7 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
+import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_STATUS;
 import static com.ling_argume.omgshoppingapp.utils.ImageHelper.getBitmapFromPath;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_SHOPPING_CART;
 
 public class DatabaseManager extends SQLiteOpenHelper {
     //
@@ -180,13 +182,19 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return productsList;
     }
 
+    // Get all order except the shopping cart order
     public List<Order> getOrders() {
         List<Order> ordersList = new ArrayList<>();
         // Select all records
-        String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
+//        String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
+//
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, null);
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
+        Cursor cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
+                        COLUMN_STATUS + " <> '" + ORDER_SHOPPING_CART + "'", null,
+                        null, null, null);
 
         if (cursor.moveToFirst())
         {
@@ -194,12 +202,12 @@ public class DatabaseManager extends SQLiteOpenHelper {
             { // for each row
                 Order order = new Order();
                 order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
-                order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
+                //order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
                 order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
                 order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
-                order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
+                //order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
                 order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE)));
-                order.setStatus(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                order.setStatus(cursor.getString( cursor.getColumnIndex(COLUMN_STATUS)));
                 ordersList.add(order);
             } while (cursor.moveToNext());
         }
@@ -219,7 +227,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
             String[] params = new String[]{ id };
             cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
-                    DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID + " = ?", params,
+                    DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID + " = ? AND " +
+                            DatabaseContract.OrderEntry.COLUMN_STATUS + " <> '" + ORDER_SHOPPING_CART + "'", params,
                     null, null, null);
 
             if(cursor.getCount() > 0) {
@@ -228,7 +237,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                     Order order = new Order();
                     order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
                     order.setOrderDate(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE)));
-                    order.setStatus(cursor.getString( cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                    order.setStatus(cursor.getString( cursor.getColumnIndex(COLUMN_STATUS)));
                     ordersList.add(order);
                 } while (cursor.moveToNext());
             }
@@ -254,11 +263,36 @@ public class DatabaseManager extends SQLiteOpenHelper {
             if(cursor.getCount() > 0) {
                 cursor.moveToFirst();
                 order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
-                order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
+                //order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID)));
                 order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
                 order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
-                order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
-                order.setStatus(cursor.getString(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_STATUS)));
+                //order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
+                order.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
+            }
+            return order;
+        }finally {
+            if(cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
+    public Order getShoppingCartOrder() {
+        Cursor cursor = null;
+        Order order = new Order();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
+                    COLUMN_STATUS + " = '" + ORDER_SHOPPING_CART + "'", null,
+                    null, null, null);
+
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID)));
+                order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
+                order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
+                order.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
             }
             return order;
         }finally {

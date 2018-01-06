@@ -17,10 +17,6 @@ import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 import static android.provider.BaseColumns._ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR;
@@ -31,17 +27,17 @@ import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntr
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_ORDER_DATE;
-import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
-import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
+import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_SHIPPING_CITY;
+import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_SHIPPING_POSTALCODE;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_STATUS;
-import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DEFAULT_EMPLOYEE_ID;
+import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_TOTAL_PRICE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY;
+import static com.ling_argume.omgshoppingapp.utils.Utils.getCurrentDateTime;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.saveToSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
@@ -70,46 +66,46 @@ public class SingleOrderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_order);
 
-        dbm = new DatabaseManager(this);
-
-        // Set greeting for logged in user
+//        dbm = new DatabaseManager(this);
+//
+//        // Set greeting for logged in user
         setUserGreetingTextView(this, R.id.greeting);
-
-        // Get CustomerId from Shared Preferences
-        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
-        employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
-        // Retrieve product id from previous Activity
-        Intent i = getIntent();
-        orderId = i.getStringExtra("order_id");
-        order = dbm.getSingleOrder(orderId);
-
-        productId = String.valueOf(order.getProductId());
-
-        // Get all details for Product with that id
-        product = dbm.getSingleProduct(productId);
-
-        //Set views with product data
-        name = findViewById(R.id.order_single_product_name);
-        name.setText(product.getName());
-
-        image = findViewById(R.id.order_single_product_image);
-        image.setImageBitmap(product.getImage());
-
-        description = findViewById(R.id.order_single_product_description);
-        description.setText(product.getDescription());
-
-        price = findViewById(R.id.order_single_product_price);
-        price.setText(product.getPrice());
-
-        category = findViewById(R.id.order_single_product_category);
-        category.setText(product.getCategory());
-
-        quantityView = findViewById(R.id.order_editable_qty);
-        previousOrderQuantity = order.getQuantity();
-        quantityView.setText(String.valueOf(previousOrderQuantity));
-
-        availableQuantityView = findViewById(R.id.order_product_availability);
-        availableQuantityView.setText(String.valueOf(product.getQuantity()));
+//
+//        // Get CustomerId from Shared Preferences
+//        customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
+//        employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
+//        // Retrieve product id from previous Activity
+//        Intent i = getIntent();
+//        orderId = i.getStringExtra("order_id");
+//        order = dbm.getSingleOrder(orderId);
+//
+//        productId = String.valueOf(order.getProductId());
+//
+//        // Get all details for Product with that id
+//        product = dbm.getSingleProduct(productId);
+//
+//        //Set views with product data
+//        name = findViewById(R.id.order_single_product_name);
+//        name.setText(product.getName());
+//
+//        image = findViewById(R.id.order_single_product_image);
+//        image.setImageBitmap(product.getImage());
+//
+//        description = findViewById(R.id.order_single_product_description);
+//        description.setText(product.getDescription());
+//
+//        price = findViewById(R.id.order_single_product_price);
+//        price.setText(product.getPrice());
+//
+//        category = findViewById(R.id.order_single_product_category);
+//        category.setText(product.getCategory());
+//
+//        quantityView = findViewById(R.id.order_editable_qty);
+//        previousOrderQuantity = order.getQuantity();
+//        quantityView.setText(String.valueOf(previousOrderQuantity));
+//
+//        availableQuantityView = findViewById(R.id.order_product_availability);
+//        availableQuantityView.setText(String.valueOf(product.getQuantity()));
 
     }
 
@@ -145,64 +141,15 @@ public class SingleOrderActivity extends AppCompatActivity {
                     return;
                 }
 
-                // Update order in DB
-
-                String fields[] = {_ID, COLUMN_CUSTOMER_ID, COLUMN_PRODUCT_ID, COLUMN_EMPLOYEE_ID,
-                        COLUMN_ORDER_QUANTITY, COLUMN_SHIPPING_ADDRESS, COLUMN_CARD_TYPE, COLUMN_CARD_NUMBER,
-                        COLUMN_CARD_OWNER, COLUMN_CARD_EXPIRATION_MONTH, COLUMN_CARD_EXPIRATION_YEAR,
-                        COLUMN_CARD_SECURITY_CODE, COLUMN_ORDER_DATE, COLUMN_STATUS
-                };
-
-                String record[] = new String[14];
-                record[0] = String.valueOf(order.getId());
-                record[1] = String.valueOf(order.getCustomerId());
-                record[2] = String.valueOf(order.getProductId());
-                record[3] = String.valueOf(order.getEmployeeId());
-
-                // Quantity will be set by the user
-                record[4] = qtyString;
-
-                record[5] = ""; //shipping address
-                record[6] = ""; //card type
-                record[7] = ""; //card number
-                record[8] = ""; //card owner
-                record[9] = ""; //card expiration month
-                record[10] = ""; //card expiration year
-                record[11] = ""; //card security code
-
-                // Order Data and time
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat df = new SimpleDateFormat("dd/M/yyyy hh:mm:ss", Locale.CANADA);
-                record[12] = df.format(c.getTime());
-
-                record[13] = ORDER_IN_PROCESS_TEXT;
-
-                ContentValues values = new ContentValues();
-
-                dbm.updateRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
-
-                // We update available quantity in Products table
-                int quantityDifference = previousOrderQuantity - qty;
-                String newAvailableQuantity = String.valueOf(availableQty + quantityDifference);
-                values = new ContentValues();
-                String productFields[] = {DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry.COLUMN_QUANTITY};
-                String productRecords[] = { productId, newAvailableQuantity};
-                dbm.updateRecord(values, DatabaseContract.ProductEntry.TABLE_NAME, productFields, productRecords);
-
-                // Setup a flag to let know Products List Activity that at least one Product stock was updated
-                saveToSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG, "Flag" );
-                saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST, productId );
-                saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY, newAvailableQuantity );
-
-                // Refresh value in Available qty label as well
-                availableQuantityView.setText(newAvailableQuantity);
+                // Update order in DB and product availability across App
+                updateOrderInDB();
+                updateProductAvailability(qty, availableQty);
 
                 Toast.makeText(SingleOrderActivity.this, "Order updated successfully", Toast.LENGTH_SHORT).show();
 
                 // Redirect user to see the list of this orders
                 Intent i = new Intent( SingleOrderActivity.this, OrdersActivity.class);
                 startActivity(i);
-                //finish();
             }
 
         }
@@ -245,6 +192,57 @@ public class SingleOrderActivity extends AppCompatActivity {
         }
     }
 
+    private void updateOrderInDB() {
+        // Don't need to be all fields for update
+        String fields[] = {_ID, COLUMN_CUSTOMER_ID, COLUMN_EMPLOYEE_ID, COLUMN_SHIPPING_ADDRESS,
+                COLUMN_SHIPPING_CITY, COLUMN_SHIPPING_POSTALCODE,
+                COLUMN_CARD_TYPE, COLUMN_CARD_NUMBER, COLUMN_CARD_OWNER, COLUMN_CARD_EXPIRATION_MONTH,
+                COLUMN_CARD_EXPIRATION_YEAR, COLUMN_CARD_SECURITY_CODE, COLUMN_ORDER_DATE,
+                COLUMN_STATUS, COLUMN_TOTAL_PRICE
+        };
 
+        String record[] = new String[14];
+        record[0] = String.valueOf(order.getId());
+        record[1] = String.valueOf(order.getCustomerId());
+        record[2] = String.valueOf(order.getEmployeeId());
+
+        record[3] = ""; //shipping address
+        record[4] = ""; //shipping city
+        record[5] = ""; //shipping postalcode
+        record[6] = ""; //card type
+        record[7] = ""; //card number
+        record[8] = ""; //card owner
+        record[9] = ""; //card expiration month
+        record[10] = ""; //card expiration year
+        record[11] = ""; //card security code
+
+        record[12] = getCurrentDateTime();
+        record[13] = ORDER_IN_PROCESS_TEXT; //status
+        record[14] = ""; // set the total price
+
+        ContentValues values = new ContentValues();
+
+        dbm.updateRecord(values, DatabaseContract.OrderEntry.TABLE_NAME,fields, record);
+    }
+
+    private void updateProductAvailability(int qty, int availableQty) {
+        ContentValues values;
+
+        // We update available quantity in Products table
+        int quantityDifference = previousOrderQuantity - qty;
+        String newAvailableQuantity = String.valueOf(availableQty + quantityDifference);
+        values = new ContentValues();
+        String productFields[] = {DatabaseContract.ProductEntry._ID, DatabaseContract.ProductEntry.COLUMN_QUANTITY};
+        String productRecords[] = { productId, newAvailableQuantity};
+        dbm.updateRecord(values, DatabaseContract.ProductEntry.TABLE_NAME, productFields, productRecords);
+
+        // Setup a flag to let know Products List Activity that at least one Product stock was updated
+        saveToSharedPreferences(this, SHARED_PREFERENCES_PRODUCT_QUANTITY_UPDATED_FLAG, "Flag" );
+        saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_LIST, productId );
+        saveToSharedPreferences(this, SHARED_PREFERENCES_UPDATED_PRODUCTS_QUANTITY, newAvailableQuantity );
+
+        // Refresh value in Available qty label as well
+        availableQuantityView.setText(newAvailableQuantity);
+    }
 
 }

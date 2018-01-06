@@ -18,6 +18,7 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.CATEGORY_SPORTS;
 import static com.ling_argume.omgshoppingapp.utils.Utils.CHAIR;
 import static com.ling_argume.omgshoppingapp.utils.Utils.GUITAR;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
+import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.PENCIL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.PHONE;
 
@@ -31,7 +32,7 @@ class DatabaseDataWorker {
 
     void insertCustomers() {
         insertCustomer("rob", "123", "Robert", "Argume", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "North York", "m1s5t2");
+        insertCustomer("irvin", "123", "Irving", "Kuhr", "24 sheppard avenue", "North York", "m1s5t2");
         insertCustomer("fatih", "123", "Fatih", "Inan", "2621 mccowan", "Downtown", "m1s5t3");
         insertCustomer("kamal", "123", "Kamal", "Singh", "2697 mccowan", "Etobicoke", "m1s5t4");
     }
@@ -94,25 +95,28 @@ class DatabaseDataWorker {
     }
 
     void insertOrders() {
-        insertOrder(1, 1, 1, 2, "123 Finch Ave",
+        insertOrder(1, 1, "123 Finch Ave", "Toronto", "M1S5T1",
                 "Credit", "45901234567", "Joe Doe", "jun",
-                "2021", "287", "11/04/2017", ORDER_DELIVERED_TEXT);
+                "2021", "287", "11/04/2017", ORDER_DELIVERED_TEXT, "250");
 
+        insertOrder(1, 1, "123 Finch Ave",  "Toronto", "M1S5T1",
+                "Credit", "45901234567", "Joe Doe", "jun",
+                "2021", "287", "11/04/2017", ORDER_IN_PROCESS_TEXT, "488");
 
     }
 
     @SuppressWarnings("SameParameterValue")
-    private void insertOrder(int customerId, int productId, int employeeId, int quantity,
-                             String shippingAddress, String cardType, String cardNumber,
+    private void insertOrder(int customerId, int employeeId,
+                             String shippingAddress, String shippingCity, String shippingPostalCode, String cardType, String cardNumber,
                              String cardOwner, String expirationMonth, String expirationYear,
-                             String securityCode, String orderDate, String orderStatus ) {
+                             String securityCode, String orderDate, String orderStatus, String price ) {
 
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID, customerId);
-        values.put(DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID, productId);
         values.put(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID, employeeId);
-        values.put(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY, quantity);
         values.put(DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS , shippingAddress);
+        values.put(DatabaseContract.OrderEntry.COLUMN_SHIPPING_CITY , shippingCity);
+        values.put(DatabaseContract.OrderEntry.COLUMN_SHIPPING_POSTALCODE , shippingPostalCode);
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_TYPE , cardType);
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_NUMBER , cardNumber);
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_OWNER , cardOwner);
@@ -121,6 +125,7 @@ class DatabaseDataWorker {
         values.put(DatabaseContract.OrderEntry.COLUMN_CARD_SECURITY_CODE , securityCode);
         values.put(DatabaseContract.OrderEntry.COLUMN_ORDER_DATE , orderDate);
         values.put(DatabaseContract.OrderEntry.COLUMN_STATUS , orderStatus);
+        values.put(DatabaseContract.OrderEntry.COLUMN_TOTAL_PRICE , price);
 
 
 

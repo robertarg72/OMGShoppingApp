@@ -162,7 +162,7 @@
                 android:enabled="true"
                 android:onClick="onButtonClick"
                 android:padding="0dip"
-                android:text="@string/place_order_button_text"
+                android:text="@string/add_to_cart_button_text"
                 android:textColor="#fff"
                 android:textSize="16sp" />
 

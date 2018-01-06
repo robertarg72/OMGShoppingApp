@@ -2,7 +2,7 @@
     <string name="app_name">OMG Shopping App</string>
     <string name="qty_short_text">Qty</string>
     <string name="update_order_button_text">Update Order</string>
-    <string name="place_order_button_text">Place Order</string>
+    <string name="add_to_cart_button_text">Add to Cart</string>
     <string name="username_label">Username</string>
     <string name="password_label">Password</string>
     <string name="login_as_a_customer_label">Login as a Customer</string>

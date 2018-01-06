@@ -6,9 +6,9 @@ public class Order {
     private int id;
     private int employeeId;
     private int customerId;
-    private int productId;
-    private int quantity;
     private String shippingAddress;
+    private String shippingCity;
+    private String shippingPostalCode;
     private String cardType;
     private String cardOwner;
     private String cardNumber;
@@ -17,26 +17,21 @@ public class Order {
     private String cardSecurityCode;
     private String orderDate;
     private String status;
+    private String totalPrice;
 
-    public Order() {
 
-    }
+    public Order() {}
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Order(int id, int employeeId, int customerId, int productId, int quantity, String shippingAddress, String cardType, String cardOwner, String cardNumber, String cardExpirationMonth, String getCardExpirationYear, String cardSecurityCode, String orderDate, String status) {
+    public Order(int id, int employeeId, int customerId, String shippingAddress, String shippingCity,
+                 String shippingPostalCode, String cardType, String cardOwner, String cardNumber,
+                 String cardExpirationMonth, String getCardExpirationYear, String cardSecurityCode,
+                 String orderDate, String status) {
         this.id = id;
         this.employeeId = employeeId;
         this.customerId = customerId;
-        this.productId = productId;
-        this.quantity = quantity;
         this.shippingAddress = shippingAddress;
+        this.shippingCity = shippingCity;
+        this.shippingPostalCode = shippingPostalCode;
         this.cardType = cardType;
         this.cardOwner = cardOwner;
         this.cardNumber = cardNumber;
@@ -45,6 +40,7 @@ public class Order {
         this.cardSecurityCode = cardSecurityCode;
         this.orderDate = orderDate;
         this.status = status;
+        this.totalPrice = "0";
     }
 
     public int getId() {
@@ -71,20 +67,28 @@ public class Order {
         this.customerId = customerId;
     }
 
-    public int getProductId() {
-        return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
-    }
-
     public String getShippingAddress() {
         return shippingAddress;
     }
 
     public void setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
+    }
+
+    public String getShippingCity() {
+        return shippingCity;
+    }
+
+    public void setShippingCity(String shippingCity) {
+        this.shippingCity = shippingCity;
+    }
+
+    public String getShippingPostalCode() {
+        return shippingPostalCode;
+    }
+
+    public void setShippingPostalCode(String shippingPostalCode) {
+        this.shippingPostalCode = shippingPostalCode;
     }
 
     public String getCardType() {
@@ -149,5 +153,13 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
     }
 }

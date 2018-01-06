@@ -17,7 +17,10 @@ import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.R;
 import com.ling_argume.omgshoppingapp.model.Order;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_MONTH;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CARD_EXPIRATION_YEAR;
@@ -28,8 +31,8 @@ import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntr
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_ORDER_DATE;
-import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
-import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
+//import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY;
+//import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_PRODUCT_ID;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_SHIPPING_ADDRESS;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_STATUS;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry._ID;
@@ -37,6 +40,7 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_DELIVERED_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_ID_PREFIX;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_EMPLOYEE_ID;
+import static com.ling_argume.omgshoppingapp.utils.Utils.getCurrentDateTime;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 
 
@@ -147,30 +151,15 @@ public class OrdersManagementListAdapter extends ArrayAdapter<Order> {
 
     private void updateOrderStatusInDB(Order currentOrder, String newStatus) {
 
-        String fields[] = { _ID, COLUMN_CUSTOMER_ID, COLUMN_PRODUCT_ID, COLUMN_EMPLOYEE_ID,
-                COLUMN_ORDER_QUANTITY, COLUMN_SHIPPING_ADDRESS, COLUMN_CARD_TYPE, COLUMN_CARD_NUMBER,
-                COLUMN_CARD_OWNER, COLUMN_CARD_EXPIRATION_MONTH, COLUMN_CARD_EXPIRATION_YEAR,
-                COLUMN_CARD_SECURITY_CODE, COLUMN_ORDER_DATE, COLUMN_STATUS
-        };
+        String fields[] = { _ID, COLUMN_EMPLOYEE_ID, COLUMN_ORDER_DATE, COLUMN_STATUS };
 
-        String record[] = new String[14];
+        String record[] = new String[4];
         record[0] = String.valueOf(currentOrder.getId());
-        record[1] = String.valueOf(currentOrder.getCustomerId());
-        record[2] = String.valueOf(currentOrder.getProductId());
-        record[3] = employeeId;
-        record[4] = String.valueOf(currentOrder.getQuantity());
-        record[5] = currentOrder.getShippingAddress();
-        record[6] = currentOrder.getCardType();
-        record[7] = currentOrder.getCardNumber();
-        record[8] = currentOrder.getCardOwner();
-        record[9] = currentOrder.getCardExpirationMonth();
-        record[10] = currentOrder.getGetCardExpirationYear();
-        record[11] = currentOrder.getCardSecurityCode();
-        record[12] = currentOrder.getOrderDate();
-        record[13]= newStatus;
+        record[1] = employeeId;
+        record[2] = getCurrentDateTime();
+        record[3]= newStatus;
 
         ContentValues values = new ContentValues();
-
         dbm.updateRecord(values, DatabaseContract.OrderEntry.TABLE_NAME, fields, record);
     }
 
