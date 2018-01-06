@@ -103,6 +103,10 @@ public class ProductsActivity extends AppCompatActivity {
                 next = new Intent( ProductsActivity.this, OrdersActivity.class);
                 startActivity(next);
                 return true;
+            case R.id.update_catalog:
+                dbm.updateProductsCatalog();
+                updateProductsListAdapter();
+                return true;
             case R.id.login_screen:
                 next = new Intent( ProductsActivity.this, LoginActivity.class);
                 startActivity(next);
@@ -112,6 +116,13 @@ public class ProductsActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void updateProductsListAdapter() {
+        list = dbm.getProducts();
+        adapter.clear();
+        adapter.addAll(list);
+        adapter.notifyDataSetChanged();
     }
 
 }

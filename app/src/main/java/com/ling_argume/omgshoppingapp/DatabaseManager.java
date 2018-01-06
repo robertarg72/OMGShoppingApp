@@ -23,7 +23,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "omgshopping.db";
     private static final int DATABASE_VERSION = 1;
     //
-    private Map<String, String> initialImages;
+    private static Map<String, String> initialImages;
     private Context context;
     //
     private String tables[]; //table names
@@ -53,12 +53,8 @@ public class DatabaseManager extends SQLiteOpenHelper {
     	for (int i=0;i<tables.length;i++)
     		db.execSQL(tableCreatorString[i]);
 
-    	// Load initial data in database
-    	DatabaseDataWorker worker = new DatabaseDataWorker(db);
-    	worker.insertCustomers();
-    	worker.insertClerks();
-    	worker.insertProducts(initialImages);
-    	worker.insertOrders();
+    	// Load initial data into database
+        loadInitialData(db);
     }
 
     //create the database
@@ -170,7 +166,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return productsList;
     }
 
-    public List<Order> getOrders() {
+    List<Order> getOrders() {
         List<Order> ordersList = new ArrayList<>();
         // Select all records
         String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
@@ -200,7 +196,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return ordersList;
     }
 
-    public List<Order> getOrdersByCustomerId(String id) {
+    List<Order> getOrdersByCustomerId(String id) {
         Cursor cursor = null;
         List<Order> ordersList = new ArrayList<>();
 
@@ -230,7 +226,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    public Order getSingleOrder(String id) {
+    Order getSingleOrder(String id) {
         Cursor cursor = null;
         Order order = new Order();
         try {
@@ -258,7 +254,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    public Product getSingleProduct(String id) {
+    Product getSingleProduct(String id) {
         Cursor cursor = null;
         Product product = new Product();
         try {
@@ -303,7 +299,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     }
 
-    public String getCustomerId(String username, String password ) {
+    String getCustomerId(String username, String password ) {
         String customerId = null;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -321,7 +317,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return customerId;
     }
 
-    public String getEmployeeId(String username, String password ) {
+    String getEmployeeId(String username, String password ) {
         String employeeId = null;
         // Select all records
 //        String selectQuery = "select _id from  clerk where username='?' and password='?'";
@@ -361,6 +357,23 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.delete(tableName, idName + " = ?",
                 new String[] { id });
         db.close();
+    }
+
+    // Update products information
+    // For now will reload initial data to db, but the idea is to connect to a web service and
+    // retrieve updated information for the products catalgo
+    void updateProductsCatalog() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        DatabaseDataWorker worker = new DatabaseDataWorker(db);
+        worker.updateProducts();
+    }
+
+    private void loadInitialData(SQLiteDatabase db) {
+        DatabaseDataWorker worker = new DatabaseDataWorker(db);
+        worker.insertCustomers();
+        worker.insertClerks();
+        worker.insertProducts(initialImages);
+        worker.insertOrders();
     }
 
 }

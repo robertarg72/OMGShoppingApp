@@ -20,18 +20,18 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.PENCIL;
 import static com.ling_argume.omgshoppingapp.utils.Utils.PHONE;
 
 
-public class DatabaseDataWorker {
+class DatabaseDataWorker {
     private SQLiteDatabase mDb;
 
-    public DatabaseDataWorker(SQLiteDatabase db) {
+    DatabaseDataWorker(SQLiteDatabase db) {
         mDb = db;
     }
 
-    public void insertCustomers() {
+    void insertCustomers() {
         insertCustomer("rob", "123", "Robert", "Argume", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "scarborough", "m1s5t1");
-        insertCustomer("fatih", "123", "Fatih", "Inan", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("kamal", "123", "Kamal", "Singh", "2627 mccowan", "scarborough", "m1s5t1");
+        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "North York", "m1s5t1");
+        insertCustomer("fatih", "123", "Fatih", "Inan", "2621 mccowan", "Downtown", "m1s5t1");
+        insertCustomer("kamal", "123", "Kamal", "Singh", "2697 mccowan", "Etobicoke", "m1s5t1");
     }
 
      private void insertCustomer(String username, String password, String firstName, String lastName, String address, String city, String postalCode) {
@@ -47,7 +47,7 @@ public class DatabaseDataWorker {
         long newRowId = mDb.insert(DatabaseContract.CustomerEntry.TABLE_NAME, null, values);
     }
 
-    public void insertClerks() {
+    void insertClerks() {
         insertClerk("clerk1", "123", "robert", "argume");
         insertClerk("clerk2", "123", "john", "doe");
     }
@@ -62,7 +62,7 @@ public class DatabaseDataWorker {
         long newRowId = mDb.insert(DatabaseContract.ClerkEntry.TABLE_NAME, null, values);
     }
 
-    public void insertProducts(Map<String, String> initialImages) {
+    void insertProducts(Map<String, String> initialImages) {
 
 
         insertProduct(BOOTS, "Fine winter boots", "220.50", 20, CATEGORY_CLOTHES, initialImages.get(BOOTS));
@@ -89,7 +89,7 @@ public class DatabaseDataWorker {
         long newRowId = mDb.insert(DatabaseContract.ProductEntry.TABLE_NAME, null, values);
     }
 
-    public void insertOrders() {
+    void insertOrders() {
         insertOrder(1, 1, 1, 2, "123 Finch Ave",
                 "Credit", "45901234567", "Joe Doe", "jun",
                 "2021", "287", "11/04/2017", ORDER_DELIVERED_TEXT);
@@ -120,6 +120,29 @@ public class DatabaseDataWorker {
 
 
         long newRowId = mDb.insert(DatabaseContract.OrderEntry.TABLE_NAME, null, values);
+    }
+
+    // UPDATING METHOD for UPDATE CATALOG
+    // It will change to connect to a web service to retrieve updated information
+
+    void updateProducts() {
+
+        updateProduct(1, 20);
+        updateProduct(2, 85);
+        updateProduct(3, 15);
+        updateProduct(4, 10);
+        updateProduct(5, 5);
+        updateProduct(6, 42);
+    }
+
+    private void updateProduct(int productId, int quantity) {
+        ContentValues values = new ContentValues();
+
+        values.put(DatabaseContract.ProductEntry.COLUMN_QUANTITY, String.valueOf(quantity));
+        String where = " _ID = ?";
+        String[] whereArgs = { String.valueOf(productId) };
+
+        long newRowId = mDb.update(DatabaseContract.ProductEntry.TABLE_NAME, values, where, whereArgs);
     }
 
 }

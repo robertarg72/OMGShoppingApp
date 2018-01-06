@@ -21,7 +21,8 @@
     <string name="date_sample_text">date</string>
     <string name="status_sample_text">Status</string>
     <string name="available_prefix">Available: </string>
-    <string name="logout_menuitem_text">Logout</string>
-    <string name="orders_menuitem_text">Orders</string>
-    <string name="products_menuitem_text">Products</string>
+    <string name="logout_menu_item_text">Logout</string>
+    <string name="orders_menu_item_text">Orders</string>
+    <string name="products_menu_item_text">Products</string>
+    <string name="update_products_menu_item_text">Update Catalog</string>
 </resources>

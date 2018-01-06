@@ -81,6 +81,9 @@ public class OrdersActivity extends AppCompatActivity {
                 return true;
             case R.id.orders_screen:
                 break;
+            case R.id.update_catalog:
+                dbm.updateProductsCatalog();
+                return true;
             case R.id.login_screen:
                 next = new Intent( OrdersActivity.this, LoginActivity.class);
                 startActivity(next);

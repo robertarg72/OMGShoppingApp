@@ -206,6 +206,11 @@ public class SingleProductActivity extends AppCompatActivity {
                 next = new Intent( SingleProductActivity.this, OrdersActivity.class);
                 startActivity(next);
                 return true;
+            case R.id.update_catalog:
+                dbm.updateProductsCatalog();
+                product = dbm.getSingleProduct(productId);
+                availableQuantityView.setText(String.valueOf(product.getQuantity()));
+                return true;
             case R.id.login_screen:
                 next = new Intent( SingleProductActivity.this, LoginActivity.class);
                 startActivity(next);
