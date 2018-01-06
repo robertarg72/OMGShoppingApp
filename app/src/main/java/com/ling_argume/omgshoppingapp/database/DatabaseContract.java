@@ -1,4 +1,4 @@
-package com.ling_argume.omgshoppingapp;
+package com.ling_argume.omgshoppingapp.database;
 
 import android.provider.BaseColumns;
 
@@ -15,13 +15,13 @@ public final class DatabaseContract {
 
     public final class CustomerEntry implements BaseColumns {
         public static final String TABLE_NAME = "customer";
-        public static final String COLUMN_USERNAME = "username";
-        public static final String COLUMN_PASSWORD = "password";
-        public static final String COLUMN_FIRSTNAME = "firstname";
-        public static final String COLUMN_LASTNAME = "lastname";
-        public static final String COLUMN_ADDRESS = "address";
-        public static final String COLUMN_CITY = "city";
-        public static final String COLUMN_POSTALCODE = "postalcode";
+        static final String COLUMN_USERNAME = "username";
+        static final String COLUMN_PASSWORD = "password";
+        static final String COLUMN_FIRSTNAME = "firstname";
+        static final String COLUMN_LASTNAME = "lastname";
+        static final String COLUMN_ADDRESS = "address";
+        static final String COLUMN_CITY = "city";
+        static final String COLUMN_POSTALCODE = "postalcode";
 
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
@@ -37,10 +37,10 @@ public final class DatabaseContract {
 
     public final class ClerkEntry implements BaseColumns {
         public static final String TABLE_NAME = "clerk";
-        public static final String COLUMN_USERNAME = "username";
-        public static final String COLUMN_PASSWORD = "password";
-        public static final String COLUMN_FIRSTNAME = "firstname";
-        public static final String COLUMN_LASTNAME = "lastname";
+        static final String COLUMN_USERNAME = "username";
+        static final String COLUMN_PASSWORD = "password";
+        static final String COLUMN_FIRSTNAME = "firstname";
+        static final String COLUMN_LASTNAME = "lastname";
 
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
@@ -53,12 +53,12 @@ public final class DatabaseContract {
 
     public final class ProductEntry implements BaseColumns {
         public static final String TABLE_NAME = "product";
-        public static final String COLUMN_PRODUCTNAME = "productname";
-        public static final String COLUMN_IMAGE = "imagepath";
-        public static final String COLUMN_DESCRIPTION = "description";
-        public static final String COLUMN_PRICE = "price";
+        static final String COLUMN_PRODUCTNAME = "productname";
+        static final String COLUMN_IMAGE = "imagepath";
+        static final String COLUMN_DESCRIPTION = "description";
+        static final String COLUMN_PRICE = "price";
         public static final String COLUMN_QUANTITY = "quantity";
-        public static final String COLUMN_CATEGORY = "category";
+        static final String COLUMN_CATEGORY = "category";
 
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +

@@ -10,12 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ling_argume.omgshoppingapp.adapter.OrderListAdapter;
+import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.model.Order;
 
 import java.util.List;
 
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
-import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_STORE;
 import static com.ling_argume.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 

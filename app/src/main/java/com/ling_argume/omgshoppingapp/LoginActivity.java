@@ -9,7 +9,10 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.utils.Utils;
+
+import java.util.Map;
 
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.ling_argume.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_EMPLOYEE_ID;

@@ -1,4 +1,4 @@
-package com.ling_argume.omgshoppingapp;
+package com.ling_argume.omgshoppingapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Bitmap;
 import android.util.Log;
 
+import com.ling_argume.omgshoppingapp.database.DatabaseContract;
+import com.ling_argume.omgshoppingapp.database.DatabaseDataWorker;
 import com.ling_argume.omgshoppingapp.model.Order;
 import com.ling_argume.omgshoppingapp.model.Product;
 
@@ -47,11 +49,20 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
     	// Drop existing tables
-    	for (int i=0;i<tables.length;i++)
-    		db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
+    	//for (int i=0;i<tables.length;i++)
+        //db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
+
+
+        for (String aTable: tables) {
+            db.execSQL("DROP TABLE IF EXISTS " + aTable);
+        }
+
         //create them
-    	for (int i=0;i<tables.length;i++)
-    		db.execSQL(tableCreatorString[i]);
+//    	for (int i=0;i<tables.length;i++)
+//    		db.execSQL(tableCreatorString[i]);
+
+        for (String aCreateString: tableCreatorString)
+            db.execSQL(aCreateString);
 
     	// Load initial data into database
         loadInitialData(db);
@@ -78,8 +89,11 @@ public class DatabaseManager extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop existing tables
-    	for (int i=0;i<tables.length;i++)
-    		db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
+//    	for (int i=0;i<tables.length;i++)
+//    		db.execSQL("DROP TABLE IF EXISTS " + tables[i]);
+
+        for (String aTable: tables)
+            db.execSQL("DROP TABLE IF EXISTS " + aTable);
 
         // Create tables again
         onCreate(db);
@@ -101,13 +115,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     // Read all records
     public List getTable(String tableName) {
-        List table = new ArrayList(); //to store all rows
+        List<List<String>> table = new ArrayList<>(); //to store all rows
         // Select all records
         String selectQuery = "SELECT  * FROM " + tableName;
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        ArrayList row=new ArrayList(); //to store one row
+        ArrayList<String> row = new ArrayList<>(); //to store one row
         //scroll over rows and store each row in an array list object
         if (cursor.moveToFirst())
         {
@@ -166,7 +180,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return productsList;
     }
 
-    List<Order> getOrders() {
+    public List<Order> getOrders() {
         List<Order> ordersList = new ArrayList<>();
         // Select all records
         String selectQuery = "SELECT  * FROM " + DatabaseContract.OrderEntry.TABLE_NAME;
@@ -196,7 +210,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return ordersList;
     }
 
-    List<Order> getOrdersByCustomerId(String id) {
+    public List<Order> getOrdersByCustomerId(String id) {
         Cursor cursor = null;
         List<Order> ordersList = new ArrayList<>();
 
@@ -226,7 +240,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    Order getSingleOrder(String id) {
+    public Order getSingleOrder(String id) {
         Cursor cursor = null;
         Order order = new Order();
         try {
@@ -254,7 +268,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    Product getSingleProduct(String id) {
+    public Product getSingleProduct(String id) {
         Cursor cursor = null;
         Product product = new Product();
         try {
@@ -299,7 +313,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
     }
 
-    String getCustomerId(String username, String password ) {
+    public String getCustomerId(String username, String password ) {
         String customerId = null;
 
         SQLiteDatabase db = this.getReadableDatabase();
@@ -317,7 +331,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return customerId;
     }
 
-    String getEmployeeId(String username, String password ) {
+    public String getEmployeeId(String username, String password ) {
         String employeeId = null;
         // Select all records
 //        String selectQuery = "select _id from  clerk where username='?' and password='?'";
@@ -362,7 +376,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
     // Update products information
     // For now will reload initial data to db, but the idea is to connect to a web service and
     // retrieve updated information for the products catalgo
-    void updateProductsCatalog() {
+    public void updateProductsCatalog() {
         SQLiteDatabase db = this.getWritableDatabase();
         DatabaseDataWorker worker = new DatabaseDataWorker(db);
         worker.updateProducts();

@@ -1,7 +1,9 @@
-package com.ling_argume.omgshoppingapp;
+package com.ling_argume.omgshoppingapp.database;
 
 import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
+
+import com.ling_argume.omgshoppingapp.database.DatabaseContract;
 
 import java.util.Map;
 
@@ -29,22 +31,23 @@ class DatabaseDataWorker {
 
     void insertCustomers() {
         insertCustomer("rob", "123", "Robert", "Argume", "2627 mccowan", "scarborough", "m1s5t1");
-        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "North York", "m1s5t1");
-        insertCustomer("fatih", "123", "Fatih", "Inan", "2621 mccowan", "Downtown", "m1s5t1");
-        insertCustomer("kamal", "123", "Kamal", "Singh", "2697 mccowan", "Etobicoke", "m1s5t1");
+        insertCustomer("irving", "123", "Irving", "Kuhr", "24 sheppard avenue", "North York", "m1s5t2");
+        insertCustomer("fatih", "123", "Fatih", "Inan", "2621 mccowan", "Downtown", "m1s5t3");
+        insertCustomer("kamal", "123", "Kamal", "Singh", "2697 mccowan", "Etobicoke", "m1s5t4");
     }
 
-     private void insertCustomer(String username, String password, String firstName, String lastName, String address, String city, String postalCode) {
+    @SuppressWarnings("SameParameterValue")
+    private void insertCustomer(String username, String password, String firstName, String lastName, String address, String city, String postalCode) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.CustomerEntry.COLUMN_USERNAME, username);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_PASSWORD, password);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_FIRSTNAME, firstName);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_LASTNAME, lastName);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_ADDRESS , address);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_CITY, city);
-         values.put(DatabaseContract.CustomerEntry.COLUMN_POSTALCODE, postalCode);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_PASSWORD, password);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_FIRSTNAME, firstName);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_LASTNAME, lastName);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_ADDRESS , address);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_CITY, city);
+        values.put(DatabaseContract.CustomerEntry.COLUMN_POSTALCODE, postalCode);
 
-        long newRowId = mDb.insert(DatabaseContract.CustomerEntry.TABLE_NAME, null, values);
+        mDb.insert(DatabaseContract.CustomerEntry.TABLE_NAME, null, values);
     }
 
     void insertClerks() {
@@ -52,6 +55,7 @@ class DatabaseDataWorker {
         insertClerk("clerk2", "123", "john", "doe");
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void insertClerk(String username, String password, String firstName, String lastName) {
         ContentValues values = new ContentValues();
         values.put(DatabaseContract.ClerkEntry.COLUMN_USERNAME, username);
@@ -86,7 +90,7 @@ class DatabaseDataWorker {
         values.put(DatabaseContract.ProductEntry.COLUMN_QUANTITY, quantity);
         values.put(DatabaseContract.ProductEntry.COLUMN_CATEGORY , category);
 
-        long newRowId = mDb.insert(DatabaseContract.ProductEntry.TABLE_NAME, null, values);
+        mDb.insert(DatabaseContract.ProductEntry.TABLE_NAME, null, values);
     }
 
     void insertOrders() {
@@ -97,6 +101,7 @@ class DatabaseDataWorker {
 
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void insertOrder(int customerId, int productId, int employeeId, int quantity,
                              String shippingAddress, String cardType, String cardNumber,
                              String cardOwner, String expirationMonth, String expirationYear,
@@ -119,7 +124,7 @@ class DatabaseDataWorker {
 
 
 
-        long newRowId = mDb.insert(DatabaseContract.OrderEntry.TABLE_NAME, null, values);
+        mDb.insert(DatabaseContract.OrderEntry.TABLE_NAME, null, values);
     }
 
     // UPDATING METHOD for UPDATE CATALOG
@@ -142,7 +147,7 @@ class DatabaseDataWorker {
         String where = " _ID = ?";
         String[] whereArgs = { String.valueOf(productId) };
 
-        long newRowId = mDb.update(DatabaseContract.ProductEntry.TABLE_NAME, values, where, whereArgs);
+        mDb.update(DatabaseContract.ProductEntry.TABLE_NAME, values, where, whereArgs);
     }
 
 }

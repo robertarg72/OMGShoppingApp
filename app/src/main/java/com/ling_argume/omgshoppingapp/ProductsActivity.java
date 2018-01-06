@@ -11,8 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
+import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.model.Product;
-import com.ling_argume.omgshoppingapp.utils.Utils;
 
 import java.util.List;
 

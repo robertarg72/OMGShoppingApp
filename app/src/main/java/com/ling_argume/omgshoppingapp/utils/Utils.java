@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.widget.TextView;
 
-import com.ling_argume.omgshoppingapp.DatabaseContract;
+import com.ling_argume.omgshoppingapp.database.DatabaseContract;
 import com.ling_argume.omgshoppingapp.R;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import static com.ling_argume.omgshoppingapp.utils.ImageHelper.saveDrawableToInt
 public class Utils {
 
     // Constant for greeting the username
-    public static final String GREETING = "Hello, ";
+    private static final String GREETING = "Hello, ";
     public static final String AVAILABLE_TEXT_PREFIX = "Available: ";
 
 
@@ -30,7 +30,7 @@ public class Utils {
     public static final String ORDER_DELIVERED_TEXT = "Delivered";
 
     // Internal Storage Folder, where images will be stored
-    public static final String INTERNAL_STORAGE_FOLDER = "ProductPictures";
+    static final String INTERNAL_STORAGE_FOLDER = "ProductPictures";
 
     // Product Categories
     public static final String CATEGORY_LIBRARY = "Library";
@@ -73,7 +73,7 @@ public class Utils {
     }};
 
     // Constants for using Shared Preferences
-    public static final String SHARED_PREFERENCES_STORE = "OMGASharedPreferences";
+    private static final String SHARED_PREFERENCES_STORE = "OMGASharedPreferences";
     public static final String SHARED_PREFERENCES_USER_KEY = "UserName";
     public static final String SHARED_PREFERENCES_CUSTOMER_ID = "CustomerID";
     public static final String SHARED_PREFERENCES_EMPLOYEE_ID = "EmployeeID";
@@ -114,7 +114,7 @@ public class Utils {
         return myPref.getString(key,"");
     }
 
-    public static Map getInitialImages(Context context) {
+    public static Map<String, String> getInitialImages(Context context) {
         Map<String, String> imagePathMapping = new HashMap<>();
 
         for (Map.Entry<String, Integer> entry : drawableMapping.entrySet()) {

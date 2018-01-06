@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.ling_argume.omgshoppingapp.adapter.OrdersManagementListAdapter;
+import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.model.Order;
 
 import java.util.List;
