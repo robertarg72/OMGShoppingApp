@@ -25,4 +25,5 @@
     <string name="orders_menu_item_text">Orders</string>
     <string name="products_menu_item_text">Products</string>
     <string name="update_products_menu_item_text">Update Catalog</string>
+    <string name="show_cart_menu_item_text">Show Cart</string>
 </resources>

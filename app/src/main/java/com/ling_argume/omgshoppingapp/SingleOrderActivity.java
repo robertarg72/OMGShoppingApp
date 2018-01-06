@@ -169,6 +169,10 @@ public class SingleOrderActivity extends AppCompatActivity {
         //handle menu items  y their id
         switch (item.getItemId())
         {
+            case R.id.shopping_cart_screen:
+                next = new Intent( SingleOrderActivity.this, ShoppingCartActivity.class);
+                startActivity(next);
+                return true;
             case R.id.products_screen:
                 next = new Intent( SingleOrderActivity.this, ProductsActivity.class);
                 startActivity(next);

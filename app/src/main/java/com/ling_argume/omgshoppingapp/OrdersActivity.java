@@ -75,6 +75,10 @@ public class OrdersActivity extends AppCompatActivity {
         //handle menu items  y their id
         switch (item.getItemId())
         {
+            case R.id.shopping_cart_screen:
+                next = new Intent( OrdersActivity.this, ShoppingCartActivity.class);
+                startActivity(next);
+                return true;
             case R.id.products_screen:
                 next = new Intent( OrdersActivity.this, ProductsActivity.class);
                 startActivity(next);
