@@ -40,6 +40,8 @@ public class Utils {
     static final String INTERNAL_STORAGE_FOLDER = "ProductPictures";
 
     // Product Categories
+    public static final String CATEGORY_PARAM = "category";
+    public static final String CATEGORY_ALL = "All Categories";
     public static final String CATEGORY_LIBRARY = "Library";
     public static final String CATEGORY_SPORTS = "Sports";
     public static final String CATEGORY_COMPUTERS = "Computers";

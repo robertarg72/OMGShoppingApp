@@ -80,7 +80,7 @@ public class OrdersActivity extends AppCompatActivity {
                 startActivity(next);
                 return true;
             case R.id.products_screen:
-                next = new Intent( OrdersActivity.this, ProductsActivity.class);
+                next = new Intent( OrdersActivity.this, CategoriesActivity.class);
                 startActivity(next);
                 return true;
             case R.id.orders_screen:

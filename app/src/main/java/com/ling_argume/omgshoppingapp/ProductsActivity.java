@@ -14,6 +14,7 @@ import com.ling_argume.omgshoppingapp.adapter.ProductListAdapter;
 import com.ling_argume.omgshoppingapp.database.DatabaseManager;
 import com.ling_argume.omgshoppingapp.model.Product;
 
+import java.security.cert.CertificateRevokedException;
 import java.util.List;
 
 import static com.ling_argume.omgshoppingapp.utils.Utils.*;
@@ -37,8 +38,17 @@ public class ProductsActivity extends AppCompatActivity {
         // Set greeting for logged in user
         setUserGreetingTextView(this, R.id.greeting);
 
+        Bundle extras = getIntent().getExtras();
+
+        String requestedCategory = (extras != null) ? extras.getString(CATEGORY_PARAM) : CATEGORY_ALL;
+
         // Set up list adapter for products list view, with database info
-        list = dbm.getProducts();
+        if( requestedCategory.compareTo(CATEGORY_ALL) == 0) {
+            list = dbm.getProducts();
+        }else {
+            list = dbm.getProductsByCategory(requestedCategory);
+        }
+
         ListView lv = this.findViewById(R.id.products_list);
 
         adapter = new ProductListAdapter(ProductsActivity.this, list);
@@ -78,7 +88,6 @@ public class ProductsActivity extends AppCompatActivity {
             i.putExtra("product_id", String.valueOf(id + 1));
 
             startActivity(i);
-            //finish();
 
         }
     };
@@ -102,7 +111,9 @@ public class ProductsActivity extends AppCompatActivity {
                 startActivity(next);
                 return true;
             case R.id.products_screen:
-                break;
+                next = new Intent( ProductsActivity.this, CategoriesActivity.class);
+                startActivity(next);
+                return true;
             case R.id.orders_screen:
                 next = new Intent( ProductsActivity.this, OrdersActivity.class);
                 startActivity(next);
@@ -119,7 +130,6 @@ public class ProductsActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-        return true;
     }
 
     private void updateProductsListAdapter() {

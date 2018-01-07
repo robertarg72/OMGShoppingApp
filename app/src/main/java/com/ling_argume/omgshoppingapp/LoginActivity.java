@@ -70,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             if (customerId != null) {
                 saveToSharedPreferences(this, SHARED_PREFERENCES_USER_KEY, username.getText().toString());
                 saveToSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID, customerId);
-                Intent intent = new Intent(this, ProductsActivity.class);
+                //Intent intent = new Intent(this, ProductsActivity.class);
+                Intent intent = new Intent(this, CategoriesActivity.class);
                 startActivity(intent);
 
             } else {

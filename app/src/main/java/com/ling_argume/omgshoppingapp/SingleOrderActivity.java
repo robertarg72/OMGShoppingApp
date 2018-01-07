@@ -174,7 +174,7 @@ public class SingleOrderActivity extends AppCompatActivity {
                 startActivity(next);
                 return true;
             case R.id.products_screen:
-                next = new Intent( SingleOrderActivity.this, ProductsActivity.class);
+                next = new Intent( SingleOrderActivity.this, CategoriesActivity.class);
                 startActivity(next);
                 return true;
             case R.id.orders_screen:

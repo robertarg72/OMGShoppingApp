@@ -22,7 +22,12 @@
         <activity android:name=".OrdersActivity" />
         <activity android:name=".SingleOrderActivity" />
         <activity android:name=".OrdersManagementActivity" />
-        <activity android:name=".ShoppingCartActivity"></activity>
+        <activity android:name=".ShoppingCartActivity" />
+        <activity android:name=".CategoriesActivity"/>
+
+
     </application>
+
+
 
 </manifest>

@@ -19,6 +19,7 @@ import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 import static com.ling_argume.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_STATUS;
+import static com.ling_argume.omgshoppingapp.database.DatabaseContract.ProductEntry.COLUMN_CATEGORY;
 import static com.ling_argume.omgshoppingapp.utils.ImageHelper.getBitmapFromPath;
 import static com.ling_argume.omgshoppingapp.utils.Utils.ORDER_SHOPPING_CART;
 
@@ -143,6 +144,50 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return table;
     }
 
+    // Read all products that belong to a specific category
+    public List<Product> getProductsByCategory(String category) {
+        List<Product> productsList = new ArrayList<>();
+        // Select all records
+//        String selectQuery = "SELECT  * FROM " + DatabaseContract.ProductEntry.TABLE_NAME;
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DatabaseContract.ProductEntry.TABLE_NAME, null,
+                COLUMN_CATEGORY + " = '" + category + "'", null,
+                null, null, null);
+
+        if (cursor.moveToFirst())
+        {
+            do
+            { // for each row
+                Product product = new Product();
+                try {
+                    Bitmap productImage = getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE)));
+                    product.setImage(productImage);
+                }
+                catch (OutOfMemoryError e) {
+                    Log.d(TAG, "getProducts: OutOfMemory when loading product image");
+                    //e.printStackTrace();
+                }
+
+                product.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry._ID)));
+                product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
+                product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
+                product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
+                product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
+                productsList.add(product);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+
+        // return table as a list
+        return productsList;
+    }
+
+
     // Read all product records
     public List<Product> getProducts() {
         List<Product> productsList = new ArrayList<>();
@@ -170,7 +215,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 product.setName(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME)));
                 product.setDescription(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
                 product.setPrice(cursor.getString( cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
-                product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
                 productsList.add(product);
             } while (cursor.moveToNext());
@@ -322,7 +367,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
 
                 product.setImage(getBitmapFromPath(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE))));
 
-                product.setCategory(cursor.getString(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_CATEGORY)));
+                product.setCategory(cursor.getString(cursor.getColumnIndex(COLUMN_CATEGORY)));
                 product.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY)));
             }
             return product;

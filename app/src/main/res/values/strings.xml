@@ -23,7 +23,8 @@
     <string name="available_prefix">Available: </string>
     <string name="logout_menu_item_text">Logout</string>
     <string name="orders_menu_item_text">Orders</string>
-    <string name="products_menu_item_text">Products</string>
+    <string name="products_menu_item_text">Categories</string>
     <string name="update_products_menu_item_text">Update Catalog</string>
     <string name="show_cart_menu_item_text">Show Cart</string>
+    <string name="category_name_sample_text">Example Title</string>
 </resources>

@@ -49,6 +49,14 @@ public class ImageHelper {
         return BitmapFactory.decodeFile(picturePath,options);
     }
 
+    public static Bitmap getBitmapFromResource(Context context, Integer resouceId) throws OutOfMemoryError {
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        // Force minimum sample size to avoid OutOfMemory exception
+        options.inSampleSize = 8;
+        return BitmapFactory.decodeResource(context.getResources(), resouceId);
+    }
+
     public static Bitmap getBitmapFromBytes(byte[] image) {
         return BitmapFactory.decodeByteArray(image, 0, image.length);
     }
