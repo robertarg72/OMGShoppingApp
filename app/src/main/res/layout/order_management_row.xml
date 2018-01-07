@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:orientation="horizontal"
-    tools:context="com.ling_argume.omgshoppingapp.OrdersManagementActivity">
+    tools:context="com.centennialcollege.omgshoppingapp.OrdersManagementActivity">
 
 
 
@@ -17,7 +17,7 @@
         android:padding="5dp"
 
         android:orientation="vertical"
-        tools:context="com.ling_argume.omgshoppingapp.OrdersManagementActivity">
+        tools:context="com.centennialcollege.omgshoppingapp.OrdersManagementActivity">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:padding="5dp"
             android:orientation="horizontal"
-            tools:context="com.ling_argume.omgshoppingapp.OrdersManagementActivity">
+            tools:context="com.centennialcollege.omgshoppingapp.OrdersManagementActivity">
 
             <TextView
                 android:id="@+id/order_id_prefix"
@@ -66,7 +66,7 @@
         android:layout_height="wrap_content"
         android:padding="7dp"
         android:orientation="vertical"
-        tools:context="com.ling_argume.omgshoppingapp.OrdersManagementActivity">
+        tools:context="com.centennialcollege.omgshoppingapp.OrdersManagementActivity">
 
         <TextView
             android:id="@+id/order_status"

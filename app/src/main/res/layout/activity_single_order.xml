@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="5dp"
     android:orientation="vertical"
-    tools:context="com.ling_argume.omgshoppingapp.SingleOrderActivity">
+    tools:context="com.centennialcollege.omgshoppingapp.SingleOrderActivity">
 
     <TextView
         android:id="@+id/greeting"
@@ -69,7 +69,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         android:orientation="horizontal"
-        tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+        tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
         <TextView
             android:id="@+id/order_single_product_price"
@@ -126,7 +126,7 @@
         android:layout_marginStart="40dp"
         android:layout_marginTop="25dp"
         android:orientation="horizontal"
-        tools:context="com.ling_argume.omgshoppingapp.SingleOrderActivity">
+        tools:context="com.centennialcollege.omgshoppingapp.SingleOrderActivity">
 
 
         <TextView

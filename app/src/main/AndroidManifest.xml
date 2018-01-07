@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ling_argume.omgshoppingapp">
+    package="com.centennialcollege.omgshoppingapp">
 
     <application
         android:allowBackup="true"
@@ -10,20 +10,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity">
+        <activity android:name="com.centennialcollege.omgshoppingapp.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProductsActivity" />
-        <activity android:name=".SingleProductActivity" />
-        <activity android:name=".OrdersActivity" />
-        <activity android:name=".SingleOrderActivity" />
-        <activity android:name=".OrdersManagementActivity" />
-        <activity android:name=".ShoppingCartActivity" />
-        <activity android:name=".CategoriesActivity"/>
+        <activity android:name="com.centennialcollege.omgshoppingapp.ProductsActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.SingleProductActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.OrdersActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.SingleOrderActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.OrdersManagementActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.ShoppingCartActivity" />
+        <activity android:name="com.centennialcollege.omgshoppingapp.CategoriesActivity"/>
 
 
     </application>

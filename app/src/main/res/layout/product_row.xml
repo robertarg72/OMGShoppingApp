@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:orientation="horizontal"
-    tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+    tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
     <ImageView
         android:id="@+id/image"
@@ -31,7 +31,7 @@
         android:padding="5dp"
         android:layout_marginTop="10dp"
         android:orientation="vertical"
-        tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+        tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
         <TextView
             android:id="@+id/name"
@@ -58,7 +58,7 @@
             android:padding="5dp"
 
             android:orientation="horizontal"
-            tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+            tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
             <TextView
                 android:id="@+id/price"

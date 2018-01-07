@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ling_argume.omgshoppingapp.LoginActivity"
+    tools:context="com.centennialcollege.omgshoppingapp.LoginActivity"
     android:background="#ffffff">
 
     <LinearLayout

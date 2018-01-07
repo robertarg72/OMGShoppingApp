@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:padding="5dp"
     android:orientation="horizontal"
-    tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+    tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
 
 
@@ -19,7 +19,7 @@
             android:padding="5dp"
 
             android:orientation="vertical"
-            tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+            tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"
                 android:padding="5dp"
                 android:orientation="horizontal"
-                tools:context="com.ling_argume.omgshoppingapp.ProductsActivity">
+                tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
                 <TextView
                     android:id="@+id/order_id_prefix"
