@@ -11,4 +11,10 @@
     <dimen name="large_text_margin">20dp</dimen>
     <dimen name="label_text_size">16dp</dimen>
 
+    <dimen name="productNameTextSize">23sp</dimen>
+    <dimen name="productDescriptionTextSize">20sp</dimen>
+    <dimen name="productPriceTextSize">27sp</dimen>
+    <dimen name="productAvailableTextSize">14dp</dimen>
+
+
 </resources>

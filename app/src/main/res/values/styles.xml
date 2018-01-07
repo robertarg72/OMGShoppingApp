@@ -27,5 +27,68 @@
 
     </style>
 
+    <style name="productName">
+        <item name="android:textColor">@color/productNameTextColor</item>
+        <item name="android:textSize">@dimen/productNameTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:text">@string/product_name_sample_text</item>
+    </style>
+
+    <style name="productDescription">
+        <item name="android:textColor">@color/productDescriptionTextColor</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+        <item name="android:text">@string/description_sample_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="productPrice">
+        <item name="android:textColor">@color/productPriceTextColor</item>
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:text">@string/price_sample_text</item>
+        <item name="android:textSize">@dimen/productPriceTextSize</item>
+    </style>
+
+    <style name="productImage">
+        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_height">120dp</item>
+        <item name="android:layout_marginLeft">3dp</item>
+        <item name="android:layout_marginRight">25dp</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:background">#fff</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:src">@mipmap/ball</item>
+        <item name="android:contentDescription">@string/product_image_sample_text</item>
+
+    </style>
+
+    <style name="productAvailable">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productAvailableTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/available_prefix</item>
+        <item name="android:layout_marginTop">3dp</item>
+
+    </style>
+
+    <style name="productAvailableNumber">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productAvailableTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/available_sample_text</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+    </style>
+
 
 </resources>
