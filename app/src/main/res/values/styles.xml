@@ -90,5 +90,150 @@
         <item name="android:layout_marginStart">5dp</item>
     </style>
 
+    <style name="singleProductGreeting">
+        <item name="android:textSize">@dimen/label_text_size</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">end</item>
+        <item name="android:layout_marginRight">@dimen/large_text_margin</item>
+        <item name="android:layout_marginEnd">@dimen/large_text_margin</item>
+        <item name="android:layout_marginTop">@dimen/text_margin</item>
+        <item name="android:text">@string/hello_user_sample_text</item>
+        <item name="android:textAlignment">viewEnd</item>
+
+    </style>
+
+    <style name="singleProductImage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">250dp</item>
+        <item name="android:layout_marginLeft">3dp</item>
+        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:layout_marginTop">20dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:background">#fff</item>
+        <item name="android:padding">1dp</item>
+        <item name="android:src">@mipmap/ball</item>
+        <item name="android:contentDescription">@string/product_image_sample_text</item>
+
+    </style>
+
+<style name="singleProductName">
+    <item name="android:textColor">@color/productNameTextColor</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textStyle">bold</item>
+    <item name="android:layout_marginLeft">40dp</item>
+    <item name="android:layout_marginStart">40dp</item>
+    <item name="android:text">@string/product_name_sample_text</item>
+    <item name="android:layout_marginTop">5dp</item>
+    <item name="android:textSize">@dimen/singleProductNameTextSize</item>
+
+</style>
+
+
+    <style name="singleProductCategory">
+        <item name="android:textColor">@color/productNameTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/category_sample_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:layout_marginTop">2dp</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+
+    </style>
+
+    <style name="singleProductPrice">
+        <item name="android:textColor">@color/productPriceTextColor</item>
+        <item name="android:layout_width">180dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+        <item name="android:text">@string/price_sample_text</item>
+        <item name="android:textSize">@dimen/singleProductPriceTextSize</item>
+    </style>
+
+
+
+    <style name="singleProductAvailable">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productAvailableTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/available_prefix</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginLeft">25dp</item>
+
+    </style>
+
+
+    <style name="singleProductAvailableNumber">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productAvailableTextSize</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:text">@string/available_sample_text</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginStart">5dp</item>
+    </style>
+
+    <style name="singleProductDescription">
+        <item name="android:textColor">@color/productDescriptionTextColor</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+        <item name="android:text">@string/description_sample_text</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">3dp</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginStart">40dp</item>
+
+    </style>
+
+    <style name="singleProductQuantity">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productPriceTextSize</item>
+        <item name="android:text">@string/qty_short_text</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">36dp</item>
+    </style>
+
+    <style name="singleProductQuantityNumber">
+        <item name="android:textColor">@color/productAvailableTextColor</item>
+        <item name="android:textSize">@dimen/productNameTextSize</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_marginTop">36dp</item>
+        <item name="android:layout_marginBottom">20dp</item>
+        <item name="android:height">60dp</item>
+        <item name="android:background">@drawable/rounded_border_edit_text</item>
+        <item name="android:inputType">number</item>
+    </style>
+
+
+    <style name="singleProductCart">
+        <item name="android:layout_width">100dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginLeft">90dp</item>
+        <item name="android:layout_marginStart">90dp</item>
+        <item name="android:background">@drawable/rounded_border_button</item>
+        <item name="android:enabled">true</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:scaleType">fitCenter</item>
+        <item name="android:src">@mipmap/ic_addtocart</item>
+
+    </style>
+
+
+
+
+
+
 
 </resources>

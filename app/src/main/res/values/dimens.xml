@@ -14,7 +14,10 @@
     <dimen name="productNameTextSize">23sp</dimen>
     <dimen name="productDescriptionTextSize">20sp</dimen>
     <dimen name="productPriceTextSize">27sp</dimen>
+    <dimen name="singleProductPriceTextSize">30sp</dimen>
     <dimen name="productAvailableTextSize">14dp</dimen>
+
+    <dimen name="singleProductNameTextSize">36sp</dimen>
 
 
 </resources>
