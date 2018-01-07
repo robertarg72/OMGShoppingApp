@@ -22,6 +22,7 @@ import static com.ling_argume.omgshoppingapp.utils.Utils.setUserGreetingTextView
 public class OrdersActivity extends AppCompatActivity {
 
     private DatabaseManager dbm;
+    List<Order> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,7 @@ public class OrdersActivity extends AppCompatActivity {
 
         // Get customerId and bring only the orders belonging to this customer
         String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
-        List<Order> list = dbm.getOrdersByCustomerId(customerId);
+        list = dbm.getOrdersByCustomerId(customerId);
 
         ListView lv = findViewById(R.id.orders_list);
 
@@ -55,7 +56,8 @@ public class OrdersActivity extends AppCompatActivity {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
-        i.putExtra("order_id", String.valueOf(id + 1));
+
+        i.putExtra("order_id", String.valueOf(list.get(position).getId()));
 
         startActivity(i);
         }

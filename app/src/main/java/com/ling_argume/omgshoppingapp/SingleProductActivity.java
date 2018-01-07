@@ -79,9 +79,11 @@ public class SingleProductActivity extends AppCompatActivity {
         customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
         employeeId = ORDER_DEFAULT_EMPLOYEE_ID;
         // Retrieve product id from previous Activity
-        Intent i = getIntent();
-        productId = i.getStringExtra("product_id");
+//        Intent i = getIntent();
+//        productId = i.getStringExtra("product_id");
 
+        Bundle extras = getIntent().getExtras();
+        productId = extras.getString("product_id");
         // Get all details for Product with that id
         product = dbm.getSingleProduct(productId);
 

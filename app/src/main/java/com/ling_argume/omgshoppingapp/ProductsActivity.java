@@ -85,7 +85,8 @@ public class ProductsActivity extends AppCompatActivity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
             Intent i = new Intent( ProductsActivity.this, SingleProductActivity.class);
-            i.putExtra("product_id", String.valueOf(id + 1));
+
+            i.putExtra("product_id", String.valueOf(list.get(position).getId()));
 
             startActivity(i);
 
