@@ -153,15 +153,15 @@
 
             <ImageButton
                 android:id="@+id/btn_place_order"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="100dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="90dp"
                 android:layout_marginStart="90dp"
                 android:background="@drawable/rounded_border_button"
                 android:enabled="true"
                 android:onClick="onButtonClick"
-                android:padding="15dip"
+                android:padding="0dp"
                 android:text="@string/add_to_cart_button_text"
                 android:scaleType="fitCenter"
                 android:textColor="@color/white"
