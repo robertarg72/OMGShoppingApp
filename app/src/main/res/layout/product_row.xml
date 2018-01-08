@@ -39,6 +39,9 @@
             tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
             <TextView
+                android:id="@+id/currency"
+                style="@style/productCurrency" />
+            <TextView
                 android:id="@+id/price"
                 style="@style/productPrice" />
 

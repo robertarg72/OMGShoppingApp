@@ -50,4 +50,5 @@
                 Centennial College\n
                 2018</string>
     <string name="about_menu_item_text">About</string>
+    <string name="currency">$ </string>
 </resources>

@@ -43,6 +43,11 @@
         tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
         <TextView
+            android:id="@+id/currency"
+            style="@style/currency">
+        </TextView>
+
+        <TextView
             android:id="@+id/order_single_product_price"
             style="@style/singleProductPrice">
 
@@ -71,8 +76,6 @@
         android:layout_height="wrap_content"
         android:padding="5dp"
         android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="25dp"
         android:orientation="horizontal"
         tools:context="com.centennialcollege.omgshoppingapp.SingleOrderActivity">
 

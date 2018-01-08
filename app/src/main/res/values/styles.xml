@@ -46,10 +46,19 @@
 
     <style name="productPrice">
         <item name="android:textColor">@color/productPriceTextColor</item>
-        <item name="android:layout_width">120dp</item>
+        <item name="android:layout_width">100dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:text">@string/price_sample_text</item>
+        <item name="android:textSize">@dimen/productPriceTextSize</item>
+    </style>
+
+    <style name="productCurrency">
+        <item name="android:textColor">@color/productPriceTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:text">@string/currency</item>
         <item name="android:textSize">@dimen/productPriceTextSize</item>
     </style>
 
@@ -145,13 +154,23 @@
 
     </style>
 
+    <style name="currency">
+        <item name="android:textColor">@color/productPriceTextColor</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:text">@string/currency</item>
+        <item name="android:textSize">@dimen/singleProductPriceTextSize</item>
+    </style>
+
+
     <style name="singleProductPrice">
         <item name="android:textColor">@color/productPriceTextColor</item>
         <item name="android:layout_width">180dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginLeft">40dp</item>
+        <item name="android:layout_marginLeft">5dp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:layout_marginStart">40dp</item>
         <item name="android:text">@string/price_sample_text</item>
         <item name="android:textSize">@dimen/singleProductPriceTextSize</item>
     </style>
@@ -200,7 +219,7 @@
         <item name="android:text">@string/qty_short_text</item>
         <item name="android:layout_width">50dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">36dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
     <style name="singleProductQuantityNumber">
@@ -208,7 +227,7 @@
         <item name="android:textSize">@dimen/productNameTextSize</item>
         <item name="android:layout_width">80dp</item>
         <item name="android:layout_height">36dp</item>
-        <item name="android:layout_marginTop">36dp</item>
+        <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:height">60dp</item>
         <item name="android:background">@drawable/rounded_border_edit_text</item>
@@ -231,8 +250,8 @@
     </style>
 
     <style name="orderUpdateOrderButton">
-        <item name="android:layout_width">100dp</item>
-        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">90dp</item>
         <item name="android:layout_marginStart">90dp</item>
