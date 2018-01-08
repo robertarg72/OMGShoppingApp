@@ -1,26 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.centennialcollege.omgshoppingapp.ShoppingCartActivity">
 
-    <TextView
-        android:id="@+id/greeting"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="@dimen/large_text_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:text="Hello User"
-        android:textAlignment="viewEnd" />
+            <TextView
+                android:id="@+id/greeting"
+                style="@style/labelStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="@dimen/large_text_margin"
+                android:layout_marginTop="@dimen/text_margin"
+                android:text="Hello User"
+                android:textAlignment="viewEnd" />
 
-    <ListView
-        android:id="@+id/order_Items_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+                    <ListView
+                        android:id="@+id/order_Items_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                    </ListView>
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/checkoutButton"
+                style="@style/checkoutButton"
+                android:text="Checkout"/>
+
+</LinearLayout>
+
+</ScrollView>

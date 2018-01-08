@@ -245,7 +245,7 @@ public class SingleProductActivity extends AppCompatActivity {
 
             ContentValues values = new ContentValues();
             dbm.addRecord(values, DatabaseContract.OrderItemEntry.TABLE_NAME, fields, record);
-            
+
         }
     }
 

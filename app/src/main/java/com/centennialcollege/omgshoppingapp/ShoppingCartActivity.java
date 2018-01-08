@@ -50,6 +50,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         adapter = new CartListAdapter(ShoppingCartActivity.this, list);
         lv.setAdapter(adapter);
+
+
+        Helper.getListViewSize(lv);
     }
 
     @Override
