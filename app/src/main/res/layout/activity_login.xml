@@ -34,6 +34,7 @@
         <EditText
             android:id="@+id/editText"
             style="@style/loginEditText"
+            android:hint="@string/username_label"
             android:inputType="text"/>
         <!--  Password Label -->
         <TextView
@@ -45,6 +46,7 @@
         <EditText
             style="@style/loginEditText"
             android:id="@+id/editText2"
+            android:hint="@string/password_label"
             android:inputType="textPassword"/>
 
     </LinearLayout>
