@@ -8,10 +8,6 @@
     android:orientation="horizontal"
     tools:context="com.centennialcollege.omgshoppingapp.ProductsActivity">
 
-
-
-
-
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="260dp"
