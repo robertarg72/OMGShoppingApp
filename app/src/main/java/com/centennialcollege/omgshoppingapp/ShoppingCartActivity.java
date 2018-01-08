@@ -1,8 +1,13 @@
 package com.centennialcollege.omgshoppingapp;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 
 import com.centennialcollege.omgshoppingapp.adapter.CartListAdapter;
 import com.centennialcollege.omgshoppingapp.adapter.ProductListAdapter;
@@ -27,6 +32,9 @@ public class ShoppingCartActivity extends AppCompatActivity {
     private DatabaseManager dbm;
     CartListAdapter adapter;
     List<Product> list;
+    Product product;
+    TextView availableQuantityView;
+    String productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +61,51 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
 
         Helper.getListViewSize(lv);
+    }
+
+    //Initialize the contents of the Activity's standard options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //show the menu
+        getMenuInflater().inflate(R.menu.customer_menu, menu);
+        return true;
+    }
+
+    // called whenever an item in your options menu is selected
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        Intent next;
+        //handle menu items  y their id
+        switch (item.getItemId())
+        {
+            case R.id.shopping_cart_screen:
+                next = new Intent( ShoppingCartActivity.this, ShoppingCartActivity.class);
+                next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(next);
+                return true;
+            case R.id.products_screen:
+                next = new Intent( ShoppingCartActivity.this, CategoriesActivity.class);
+                startActivity(next);
+                return true;
+            case R.id.orders_screen:
+                next = new Intent( ShoppingCartActivity.this, OrdersActivity.class);
+                startActivity(next);
+                return true;
+            case R.id.update_catalog:
+                dbm.updateProductsCatalog();
+                return true;
+            case R.id.login_screen:
+                next = new Intent( ShoppingCartActivity.this, LoginActivity.class);
+                startActivity(next);
+                finish();
+                return true;
+            case R.id.about_screen:
+                next = new Intent( ShoppingCartActivity.this, AboutActivity.class);
+                startActivity(next);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     @Override
