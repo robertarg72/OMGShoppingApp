@@ -49,6 +49,7 @@
                 android:id="@+id/product_availability_prefix"
                 style="@style/productAvailable" />
 
+
             <TextView
                 android:id="@+id/product_availability"
                 style="@style/productAvailableNumber"/>

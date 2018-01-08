@@ -47,6 +47,7 @@
             style="@style/currency">
         </TextView>
 
+
         <TextView
             android:id="@+id/order_single_product_price"
             style="@style/singleProductPrice">

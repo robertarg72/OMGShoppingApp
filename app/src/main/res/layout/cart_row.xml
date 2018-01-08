@@ -16,19 +16,7 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="25dp"
-        android:layout_marginStart="3dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="3dp"
-        android:background="#fff"
-        android:padding="1dp"
-        android:src="@mipmap/ball"
-        android:contentDescription="@string/product_image_sample_text">
-    </ImageView>
+        style="@style/productImage"/>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
@@ -40,20 +28,11 @@
 
         <TextView
             android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/product_name_sample_text"
-            android:textStyle="bold"
-            android:textSize="23sp" >
-        </TextView>
+            style="@style/productName" />
 
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/description_sample_text"
-            android:textSize="20sp" >
-        </TextView>
+            style="@style/productDescription" />
 
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -65,47 +44,23 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/currency"
+                style="@style/productCurrency" />
+            <TextView
                 android:id="@+id/price"
-                android:layout_width="110dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="@string/price_sample_text"
-                android:textColor="#E65100"
-                android:textSize="27sp" >
-            </TextView>
+                style="@style/productPrice" />
 
             <TextView
                 android:id="@+id/product_quantity_prefix"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:text="@string/quantity_prefix"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                style="@style/productAvailable"
+                android:text="@string/quantity_prefix"/>
             <TextView
                 android:id="@+id/product_quantity"
-                android:layout_width="30dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:text="@string/available_sample_text"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                style="@style/productAvailableNumber"/>
 
             <ImageButton
                 android:id="@+id/imageDelete"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginBottom="3dp"
-                android:layout_marginEnd="25dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginTop="8dp"
-                android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                android:background="#fff"
-                android:contentDescription="@string/product_image_sample_text"
-                android:src="@drawable/delete"></ImageButton>
+                style="@style/cartDeleteButton"/>
 
         </LinearLayout>
     </LinearLayout>
