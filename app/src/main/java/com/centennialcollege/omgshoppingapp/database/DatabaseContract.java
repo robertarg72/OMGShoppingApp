@@ -135,9 +135,3 @@ public final class DatabaseContract {
                         "FOREIGN KEY(" + COLUMN_ORDER_ID + ") REFERENCES customerorder(_ID))";
     }
 }
-
-
-
-
-
-

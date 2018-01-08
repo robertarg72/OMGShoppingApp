@@ -338,7 +338,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                 order.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
             }
             return order;
-        }finally {
+        } finally {
             if(cursor != null) {
                 cursor.close();
             }
@@ -467,4 +467,73 @@ public class DatabaseManager extends SQLiteOpenHelper {
         worker.insertOrders();
     }
 
+
+    public List<Product> getCustomerOrderItems(String CustID) {
+        List<Product> productsList = new ArrayList<>();
+
+        String[] params = new String[]{ CustID, ORDER_SHOPPING_CART };
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
+                DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID + " = ? AND " +
+                        DatabaseContract.OrderEntry.COLUMN_STATUS + " = ?",
+                params,
+                null, null, null);
+
+        if(cursor.getCount() == 0)
+            return productsList;
+
+        if (cursor.moveToFirst()) {
+            int orderID = cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry._ID));
+
+            Cursor cursorOrderItems = db.query(DatabaseContract.OrderItemEntry.TABLE_NAME, null,
+                    DatabaseContract.OrderItemEntry.COLUMN_ORDER_ID + " = ?",
+                    new String[] { Integer.toString(orderID) },
+                    null, null, null);
+
+            if (cursorOrderItems.moveToFirst()) {
+
+                do { // for each row
+
+                    int productID = cursorOrderItems.getInt(cursorOrderItems.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_PRODUCT_ID));
+
+                    Cursor cursorProduct = db.query(DatabaseContract.ProductEntry.TABLE_NAME, null,
+                            DatabaseContract.ProductEntry._ID + " = ?",
+                            new String[] { Integer.toString(productID) },
+                            null, null, null);
+                    cursorProduct.moveToFirst();
+
+                    Product product = new Product();
+
+                    try {
+                        Bitmap productImage = getBitmapFromPath(cursorProduct.getString(cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_IMAGE)));
+                        product.setImage(productImage);
+                    } catch (OutOfMemoryError e) {
+                        Log.d(TAG, "getProducts: OutOfMemory when loading product image");
+                        //e.printStackTrace();
+                    }
+
+                    product.setId(cursorOrderItems.getInt(cursorOrderItems.getColumnIndex(DatabaseContract.OrderItemEntry._ID)));
+
+                    int pNameColIndex = cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRODUCTNAME);
+                    String pName = cursorProduct.getString(pNameColIndex);
+                    product.setName(pName);
+                    product.setDescription(cursorProduct.getString(cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_DESCRIPTION)));
+                    product.setPrice(cursorProduct.getString(cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
+                    product.setCategory(cursorProduct.getString(cursorProduct.getColumnIndex(COLUMN_CATEGORY)));
+                    product.setQuantity(cursorOrderItems.getInt(cursorOrderItems.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_ORDER_ITEM_QUANTITY)));
+                    productsList.add(product);
+
+                    cursorProduct.close();
+                } while (cursorOrderItems.moveToNext());
+
+                cursorOrderItems.close();
+            }
+        }
+
+        cursor.close();
+
+        // return table as a list
+        return productsList;
+    }
 }
