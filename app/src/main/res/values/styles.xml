@@ -67,8 +67,6 @@
         <item name="android:layout_height">120dp</item>
         <item name="android:layout_marginLeft">3dp</item>
         <item name="android:layout_marginRight">3dp</item>
-        <item name="android:layout_marginStart">3dp</item>
-        <item name="android:layout_marginEnd">3dp</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:layout_marginBottom">3dp</item>
         <item name="android:background">#fff</item>
@@ -96,7 +94,6 @@
         <item name="android:text">@string/available_sample_text</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginStart">5dp</item>
     </style>
 
     <style name="Greeting">
@@ -106,10 +103,8 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">end</item>
         <item name="android:layout_marginRight">@dimen/large_text_margin</item>
-        <item name="android:layout_marginEnd">@dimen/large_text_margin</item>
         <item name="android:layout_marginTop">@dimen/text_margin</item>
         <item name="android:text">@string/hello_user_sample_text</item>
-        <item name="android:textAlignment">viewEnd</item>
 
     </style>
 
@@ -133,7 +128,6 @@
     <item name="android:layout_height">wrap_content</item>
     <item name="android:textStyle">bold</item>
     <item name="android:layout_marginLeft">40dp</item>
-    <item name="android:layout_marginStart">40dp</item>
     <item name="android:text">@string/product_name_sample_text</item>
     <item name="android:layout_marginTop">5dp</item>
     <item name="android:textSize">@dimen/singleProductNameTextSize</item>
@@ -148,7 +142,6 @@
         <item name="android:text">@string/category_sample_text</item>
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:layout_marginStart">40dp</item>
         <item name="android:layout_marginTop">2dp</item>
         <item name="android:textSize">@dimen/productDescriptionTextSize</item>
 
@@ -184,7 +177,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:text">@string/available_prefix</item>
         <item name="android:layout_marginTop">3dp</item>
-        <item name="android:layout_marginStart">5dp</item>
         <item name="android:layout_marginLeft">5dp</item>
 
     </style>
@@ -198,7 +190,6 @@
         <item name="android:text">@string/available_sample_text</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:layout_marginLeft">5dp</item>
-        <item name="android:layout_marginStart">5dp</item>
     </style>
 
     <style name="singleProductDescription">
@@ -209,7 +200,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">3dp</item>
         <item name="android:layout_marginLeft">40dp</item>
-        <item name="android:layout_marginStart">40dp</item>
 
     </style>
 
@@ -240,7 +230,6 @@
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">90dp</item>
-        <item name="android:layout_marginStart">90dp</item>
         <item name="android:background">@drawable/rounded_border_button</item>
         <item name="android:enabled">true</item>
         <item name="android:padding">0dp</item>
@@ -254,7 +243,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">90dp</item>
-        <item name="android:layout_marginStart">90dp</item>
         <item name="android:background">@drawable/rounded_border_button</item>
         <item name="android:enabled">true</item>
         <item name="android:padding">0dp</item>
@@ -322,22 +310,25 @@
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:height">60dp</item>
-        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:height">53dp</item>
+        <item name="android:layout_marginTop">5dp</item>
         <item name="android:background">@drawable/rounded_border_button</item>
         <item name="android:text">@string/login_button_text</item>
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">@dimen/productDescriptionTextSize</item>
 
     </style>
-
-    <style name="checkoutButton">
+    
+    <style name="registrationButton">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:height">60dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:height">40dp</item>
         <item name="android:layout_marginTop">10dp</item>
-        <item name="android:background">@drawable/rounded_border_button</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:text">Registration</item>
+        <item name="android:layout_weight">0</item>
+>>>>>>> 9649aab46ac6e93538c587f79597be24b1a542e2
         <item name="android:textSize">@dimen/productDescriptionTextSize</item>
 
     </style>
@@ -392,7 +383,6 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/productDescriptionTextSize</item>
         <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:layout_marginStart">10dp</item>
         <item name="android:text">@string/date_sample_text</item>
 
     </style>
@@ -418,10 +408,8 @@
         <item name="android:layout_width">40dp</item>
         <item name="android:layout_height">40dp</item>
         <item name="android:layout_marginBottom">3dp</item>
-        <item name="android:layout_marginEnd">25dp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">25dp</item>
-        <item name="android:layout_marginStart">3dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:scaleType">fitCenter</item>
         <item name="android:adjustViewBounds">true</item>

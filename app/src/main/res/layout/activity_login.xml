@@ -13,13 +13,23 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/presentation">
+        >
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@mipmap/presentation"
+        >
 
         <!--  Username Label -->
         <TextView
             style="@style/loginText"
-            android:layout_marginTop="310dp"
-            android:text="@string/username_label"/>
+            android:layout_marginTop="245dp"
+            android:text="@string/username_label"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
         <EditText
             android:id="@+id/editText"
@@ -28,12 +38,16 @@
         <!--  Password Label -->
         <TextView
             style="@style/loginText"
-            android:text="@string/password_label"/>
+            android:text="@string/password_label"
+            android:textColor="@color/white"
+            android:textSize="20sp"/>
 
         <EditText
             style="@style/loginEditText"
             android:id="@+id/editText2"
             android:inputType="textPassword"/>
+
+    </LinearLayout>
 
         <!--Customer or Employee radio button-->
         <RadioGroup
