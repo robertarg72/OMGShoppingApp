@@ -42,6 +42,8 @@ public class AboutActivity extends AppCompatActivity {
         {
             case R.id.shopping_cart_screen:
                 next = new Intent( AboutActivity.this, ShoppingCartActivity.class);
+                next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+
                 startActivity(next);
                 return true;
             case R.id.products_screen:

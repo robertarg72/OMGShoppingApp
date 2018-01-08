@@ -522,6 +522,7 @@ public class DatabaseManager extends SQLiteOpenHelper {
                     product.setPrice(cursorProduct.getString(cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_PRICE)));
                     product.setCategory(cursorProduct.getString(cursorProduct.getColumnIndex(COLUMN_CATEGORY)));
                     product.setQuantity(cursorOrderItems.getInt(cursorOrderItems.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_ORDER_ITEM_QUANTITY)));
+
                     productsList.add(product);
 
                     cursorProduct.close();
@@ -536,4 +537,16 @@ public class DatabaseManager extends SQLiteOpenHelper {
         // return table as a list
         return productsList;
     }
+
+
+    public boolean deleteOrderItem(int ID) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        return db.delete(DatabaseContract.OrderItemEntry.TABLE_NAME,
+                DatabaseContract.OrderItemEntry._ID + " = ?",
+                new String[] { Integer.toString(ID) }) > 0;
+
+    }
+
 }

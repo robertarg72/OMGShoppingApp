@@ -1,14 +1,20 @@
 package com.centennialcollege.omgshoppingapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.centennialcollege.omgshoppingapp.R;
+import com.centennialcollege.omgshoppingapp.ShoppingCartActivity;
+import com.centennialcollege.omgshoppingapp.SingleProductActivity;
+import com.centennialcollege.omgshoppingapp.database.DatabaseManager;
 import com.centennialcollege.omgshoppingapp.model.Product;
 
 import java.util.List;
@@ -43,6 +49,7 @@ public class CartListAdapter extends ArrayAdapter<Product> {
             view.description = rowView.findViewById(R.id.description);
             view.price = rowView.findViewById(R.id.price);
             view.quantity = rowView.findViewById(R.id.product_quantity);
+            view.imgDel = rowView.findViewById(R.id.imageDelete);
 
             rowView.setTag(view);
         } else {
@@ -50,23 +57,45 @@ public class CartListAdapter extends ArrayAdapter<Product> {
         }
 
         // Set data for each view in the row
-        Product item = list.get(position);
+        final Product item = list.get(position);
         view.name.setText(item.getName());
         view.image.setImageBitmap(item.getImage());
         view.description.setText(item.getDescription());
         view.price.setText(item.getPrice());
         view.quantity.setText(String.valueOf(item.getQuantity()));
 
+        view.imgDel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                DatabaseManager dcm = new DatabaseManager(context);
+
+                if(dcm.deleteOrderItem(item.getId())){
+                    Toast.makeText(context, "Item removed from cart successfully", Toast.LENGTH_SHORT).show();
+
+                    Intent _intent = new Intent(context, ShoppingCartActivity.class);
+                    _intent.setFlags(_intent.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    context.startActivity(_intent);
+
+                } else {
+                    Toast.makeText(context, "Error deleting item from cart", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
         return rowView;
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         public TextView name;
         public ImageView image;
         TextView description;
         TextView price;
         TextView quantity;
         public TextView category;
+        public ImageButton imgDel;
     }
     
 }

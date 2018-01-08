@@ -41,6 +41,7 @@ public class OrdersActivity extends AppCompatActivity {
         ListView lv = findViewById(R.id.orders_list);
 
         OrderListAdapter adapter = new OrderListAdapter(OrdersActivity.this, list);
+
         lv.setAdapter(adapter);
 
         lv.setOnItemClickListener(onListClick);
@@ -79,6 +80,7 @@ public class OrdersActivity extends AppCompatActivity {
         {
             case R.id.shopping_cart_screen:
                 next = new Intent( OrdersActivity.this, ShoppingCartActivity.class);
+                next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(next);
                 return true;
             case R.id.products_screen:
