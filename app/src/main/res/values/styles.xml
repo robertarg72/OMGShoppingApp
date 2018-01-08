@@ -318,7 +318,16 @@
         <item name="android:textSize">@dimen/productDescriptionTextSize</item>
 
     </style>
-    
+
+    <style name="checkoutButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:height">60dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/rounded_border_button</item>
+    </style>
+
     <style name="registrationButton">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">wrap_content</item>
