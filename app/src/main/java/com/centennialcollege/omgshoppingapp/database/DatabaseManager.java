@@ -114,7 +114,13 @@ public class DatabaseManager extends SQLiteOpenHelper {
         db.insert(tableName, null, values);
         db.close(); //close database connection
     }
+    public void addRecordUsingContentValues(ContentValues values, String tableName) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        // Insert the row
+        db.insert(tableName, null, values);
+        db.close(); //close database connection
+    }
     // Read all records
     public List getTable(String tableName) {
         List<List<String>> table = new ArrayList<>(); //to store all rows

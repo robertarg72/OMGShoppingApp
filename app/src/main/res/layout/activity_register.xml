@@ -22,8 +22,6 @@
             android:text="Please enter your information" />
         </LinearLayout>
 
-
-
         <TableRow>
             <TextView
                 android:id="@+id/firstNameTV"

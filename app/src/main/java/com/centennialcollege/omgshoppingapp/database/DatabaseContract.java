@@ -15,13 +15,13 @@ public final class DatabaseContract {
 
     public final class CustomerEntry implements BaseColumns {
         public static final String TABLE_NAME = "customer";
-        static final String COLUMN_USERNAME = "username";
-        static final String COLUMN_PASSWORD = "password";
-        static final String COLUMN_FIRSTNAME = "firstname";
-        static final String COLUMN_LASTNAME = "lastname";
-        static final String COLUMN_ADDRESS = "address";
-        static final String COLUMN_CITY = "city";
-        static final String COLUMN_POSTALCODE = "postalcode";
+        public static final String COLUMN_USERNAME = "username";
+        public static final String COLUMN_PASSWORD = "password";
+        public static final String COLUMN_FIRSTNAME = "firstname";
+        public static final String COLUMN_LASTNAME = "lastname";
+        public static final String COLUMN_ADDRESS = "address";
+        public static final String COLUMN_CITY = "city";
+        public static final String COLUMN_POSTALCODE = "postalcode";
 
         public static final String SQL_CREATE_TABLE =
                 "CREATE TABLE " + TABLE_NAME + " (" +
