@@ -503,6 +503,41 @@ public class DatabaseManager extends SQLiteOpenHelper {
         return false;
     }
 
+    public String updateOrderquantity(int order_item_id, int Qty){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursorOrderItem = db.query(DatabaseContract.OrderItemEntry.TABLE_NAME, null,
+                DatabaseContract.OrderItemEntry._ID + " = ?",
+                new String[]{Integer.toString(order_item_id)}, null, null, null);
+
+        cursorOrderItem.moveToFirst();
+
+        int pid = cursorOrderItem.getInt(cursorOrderItem.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_PRODUCT_ID));
+
+        Cursor cursorProduct = db.query(DatabaseContract.ProductEntry.TABLE_NAME, null,
+                DatabaseContract.ProductEntry._ID + " = ?",
+                new String[]{Integer.toString(pid)}, null, null, null);
+
+        cursorProduct.moveToFirst();
+
+        int availableQty = cursorProduct.getInt(cursorProduct.getColumnIndex(DatabaseContract.ProductEntry.COLUMN_QUANTITY));
+
+        if (availableQty < Qty)
+            return "Quantity cannot be greater than " + availableQty;
+
+        String[] params = new String[]{Integer.toString(order_item_id) };
+
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseContract.OrderItemEntry.COLUMN_ORDER_ITEM_QUANTITY, Qty);
+
+        db.update(DatabaseContract.OrderItemEntry.TABLE_NAME, cv,
+                DatabaseContract.OrderItemEntry._ID + " = ?",
+                params);
+
+        return "Quantity Updated";
+    }
+
     public List<Product> getCustomerOrderItems(String CustID) {
         List<Product> productsList = new ArrayList<>();
 

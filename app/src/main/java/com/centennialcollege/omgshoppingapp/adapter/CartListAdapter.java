@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -31,16 +32,16 @@ public class CartListAdapter extends ArrayAdapter<Product> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View rowView = convertView;
-        CartListAdapter.ViewHolder view;
+//        final View rowView = convertView;
+        final CartListAdapter.ViewHolder view;
 
-        if(rowView == null)
-        {
+//        if(rowView == null)
+//        {
             // Get a new instance of the row layout view
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-            rowView = inflater.inflate(R.layout.cart_row, parent, false);
+            final View rowView = inflater.inflate(R.layout.cart_row, parent, false);
 
             // Hold the view objects in an object
             view = new CartListAdapter.ViewHolder();
@@ -50,11 +51,12 @@ public class CartListAdapter extends ArrayAdapter<Product> {
             view.price = rowView.findViewById(R.id.price);
             view.quantity = rowView.findViewById(R.id.product_quantity);
             view.imgDel = rowView.findViewById(R.id.imageDelete);
+            view.imgUpdate = rowView.findViewById(R.id.imageUpdateQty);
 
             rowView.setTag(view);
-        } else {
-            view = (CartListAdapter.ViewHolder) rowView.getTag();
-        }
+//        } else {
+//            view = (CartListAdapter.ViewHolder) rowView.getTag();
+//        }
 
         // Set data for each view in the row
         final Product item = list.get(position);
@@ -85,6 +87,29 @@ public class CartListAdapter extends ArrayAdapter<Product> {
 
         });
 
+        view.imgUpdate.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                DatabaseManager dcm = new DatabaseManager(context);
+
+                EditText etQuantity = (EditText)rowView.findViewById(R.id.product_quantity);
+
+                if(etQuantity.getText().toString().length() == 0) {
+                    Toast.makeText(context, "Please enter quantity", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                
+                String qt = etQuantity.getText().toString();
+                int qty = Integer.parseInt(qt);
+                String result = dcm.updateOrderquantity(item.getId(), qty);
+
+                Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+            }
+
+        });
+
         return rowView;
     }
 
@@ -93,9 +118,10 @@ public class CartListAdapter extends ArrayAdapter<Product> {
         public ImageView image;
         TextView description;
         TextView price;
-        TextView quantity;
+        public EditText quantity;
         public TextView category;
         public ImageButton imgDel;
+        public ImageButton imgUpdate;
     }
     
 }

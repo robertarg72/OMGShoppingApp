@@ -26,9 +26,23 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/name"
-            style="@style/productName" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow>
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="150dp"
+                    style="@style/productName" />
+
+                <ImageButton
+                    android:tooltipText="Delete Item"
+                    android:id="@+id/imageDelete"
+                    style="@style/cartDeleteButton"/>
+
+            </TableRow>
+        </TableLayout>
 
         <TextView
             android:id="@+id/description"
@@ -54,13 +68,16 @@
                 android:id="@+id/product_quantity_prefix"
                 style="@style/productAvailable"
                 android:text="@string/quantity_prefix"/>
-            <TextView
+
+            <EditText
+                android:inputType="number"
                 android:id="@+id/product_quantity"
                 style="@style/productAvailableNumber"/>
 
             <ImageButton
-                android:id="@+id/imageDelete"
-                style="@style/cartDeleteButton"/>
+                android:tooltipText="Update"
+                android:id="@+id/imageUpdateQty"
+                style="@style/cartUpdateButton"/>
 
         </LinearLayout>
     </LinearLayout>
