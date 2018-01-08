@@ -55,11 +55,11 @@ public class OrdersActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
-
-        i.putExtra("order_id", String.valueOf(list.get(position).getId()));
-
-        startActivity(i);
+//        Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
+//
+//        i.putExtra("order_id", String.valueOf(list.get(position).getId()));
+//
+//        startActivity(i);
         }
     };
 
