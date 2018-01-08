@@ -2,6 +2,7 @@ package com.centennialcollege.omgshoppingapp.database;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -467,6 +468,34 @@ public class DatabaseManager extends SQLiteOpenHelper {
         worker.insertOrders();
     }
 
+    public boolean updateIfOrderItemExists(int order_id, int product_id, int Qty){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        String[] params = new String[]{Integer.toString(order_id), Integer.toString(product_id) };
+
+        Cursor cursorOrderItem = db.query(DatabaseContract.OrderItemEntry.TABLE_NAME, null,
+                DatabaseContract.OrderItemEntry.COLUMN_ORDER_ID + " = ? AND " +
+                        DatabaseContract.OrderItemEntry.COLUMN_PRODUCT_ID + " = ?",
+                params, null, null, null);
+
+        if(cursorOrderItem.moveToFirst()) {
+
+            int qty = cursorOrderItem.getInt(cursorOrderItem.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_ORDER_ITEM_QUANTITY));
+
+            ContentValues cv = new ContentValues();
+            cv.put(DatabaseContract.OrderItemEntry.COLUMN_ORDER_ITEM_QUANTITY, qty + Qty);
+
+            db.update(DatabaseContract.OrderItemEntry.TABLE_NAME, cv,
+                    DatabaseContract.OrderItemEntry.COLUMN_ORDER_ID + " = ? AND " +
+                            DatabaseContract.OrderItemEntry.COLUMN_PRODUCT_ID + " = ?",
+                    params);
+
+            return true;
+        }
+
+        return false;
+    }
 
     public List<Product> getCustomerOrderItems(String CustID) {
         List<Product> productsList = new ArrayList<>();

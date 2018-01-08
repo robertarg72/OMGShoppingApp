@@ -241,8 +241,12 @@ public class SingleProductActivity extends AppCompatActivity {
         record[4] = getCurrentDateTime();
         record[5] = status;
 
-        ContentValues values = new ContentValues();
-        dbm.addRecord(values, DatabaseContract.OrderItemEntry.TABLE_NAME, fields, record);
+        if(!(dbm.updateIfOrderItemExists(orderId, Integer.parseInt(productId), quantity))) {
+
+            ContentValues values = new ContentValues();
+            dbm.addRecord(values, DatabaseContract.OrderItemEntry.TABLE_NAME, fields, record);
+            
+        }
     }
 
 
