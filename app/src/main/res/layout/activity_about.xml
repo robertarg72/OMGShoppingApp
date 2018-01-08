@@ -9,26 +9,9 @@
 
     <TextView
         android:id="@+id/greeting"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="@dimen/large_text_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:text="@string/hello_user_sample_text"
-        android:textAlignment="viewEnd" />
-
+        style="@style/Greeting"/>
     <TextView
         android:id="@+id/about_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:gravity="center"
-        android:layout_marginTop="12dp"
-        android:textColor="@color/white"
-        android:text="@string/about_info_multiline"
-        android:textStyle="bold"
-        android:textSize="24sp"
-        android:background="@color/colorPrimary">
+        style="@style/aboutActivity">
     </TextView>
 </LinearLayout>

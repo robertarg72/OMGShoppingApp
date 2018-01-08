@@ -31,32 +31,23 @@
 
                 <TextView
                     android:id="@+id/order_id_prefix"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textStyle="bold"
-                    android:textSize="23sp"
+                    style="@style/productRow"
                     android:text="@string/order_nbr_sample_text" />
 
                 <TextView
                         android:id="@+id/order_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        style="@style/productRow"
                         android:text="@string/number_sample_text"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginStart="10dp"
-                        android:textStyle="bold"
-                        android:textSize="23sp" >
-                    </TextView>
+                        android:layout_marginStart="10dp">
+
+                </TextView>
             </LinearLayout>
 
             <TextView
                 android:id="@+id/order_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/date_sample_text"
-                android:layout_marginLeft="10dp"
-                android:layout_marginStart="10dp"
-                android:textSize="20sp" >
+                style="@style/productRowDate"
+                >
             </TextView>
 
 
@@ -64,11 +55,7 @@
 
     <TextView
         android:id="@+id/order_status"
-        android:layout_width="130dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="@string/status_sample_text"
-        android:textSize="27sp" >
+        style="@style/productRowStatus">
     </TextView>
 
 

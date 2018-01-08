@@ -10,53 +10,24 @@
 
     <TextView
         android:id="@+id/greeting"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="@dimen/large_text_margin"
-        android:layout_marginEnd="@dimen/large_text_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:text="@string/hello_user_sample_text"
-        android:textAlignment="viewEnd" />
+        style="@style/Greeting"/>
 
     <ImageView
         android:id="@+id/order_single_product_image"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_marginLeft="3dp"
-        android:layout_marginRight="3dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="3dp"
-        android:background="#fff"
-        android:padding="1dp"
-        android:src="@mipmap/ball"
-        android:contentDescription="@string/product_image_sample_text">
+        style="@style/singleProductImage">
+
     </ImageView>
 
 
     <TextView
         android:id="@+id/order_single_product_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/product_name_sample_text"
-        android:textStyle="bold"
-        android:textSize="36sp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="15dp">
+        style="@style/singleProductName">
     </TextView>
 
     <TextView
         android:id="@+id/order_single_product_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/category_sample_text"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="2dp">
+        style="@style/singleProductCategory">
+
     </TextView>
 
 
@@ -73,47 +44,24 @@
 
         <TextView
             android:id="@+id/order_single_product_price"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/price_sample_text"
-            android:layout_marginLeft="40dp"
-            android:layout_marginStart="40dp"
-            android:textColor="#E65100"
-            android:textSize="37sp" >
+            style="@style/singleProductPrice">
+
         </TextView>
 
         <TextView
             android:id="@+id/product_availability_prefix"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="25dp"
-            android:layout_marginStart="25dp"
-            android:text="@string/available_prefix"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            style="@style/singleProductAvailable"/>
+
         <TextView
             android:id="@+id/order_product_availability"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:text="@string/available_sample_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            style="@style/singleProductAvailableNumber"/>
 
     </LinearLayout>
 
 
     <TextView
         android:id="@+id/order_single_product_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/description_sample_text"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="10dp"
-        android:textSize="20sp" >
+        style="@style/singleProductDescription" >
     </TextView>
 
 
@@ -131,45 +79,19 @@
 
         <TextView
             android:id="@+id/order_single_product_quantity"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="@string/qty_short_text"
-            android:textColor="#000"
-            android:textSize="27sp" >
+            style="@style/singleProductQuantity">
         </TextView>
 
         <EditText
             android:id="@+id/order_editable_qty"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="20dip"
-            android:layout_marginTop="5dip"
-            android:height="60dp"
-            android:background="@drawable/rounded_border_edit_text"
-            android:inputType="number" />
+            style="@style/singleProductQuantityNumber"/>
 
         <Button
             android:id="@+id/btn_update_order"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="90dp"
-            android:layout_marginStart="90dp"
-            android:width="70dp"
-            android:height="30dp"
-            android:background="@drawable/rounded_border_button"
-            android:enabled="true"
-            android:onClick="onClick"
-            android:padding="0dip"
-            android:text="@string/update_order_button_text"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            style="@style/orderUpdateOrderButton" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

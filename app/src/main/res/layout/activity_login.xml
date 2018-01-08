@@ -16,34 +16,23 @@
         android:background="@mipmap/presentation">
 
         <!--  Username Label -->
-        <TextView android:layout_width="match_parent"
-
+        <TextView
+            style="@style/loginText"
             android:layout_marginTop="310dp"
-            android:layout_height="wrap_content"
-            android:textColor="#372c24"
             android:text="@string/username_label"/>
 
         <EditText
             android:id="@+id/editText"
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="20dip"
-            android:layout_marginTop="10dip"
-            android:height="60dp"
-            android:background="@drawable/rounded_border_edit_text"
+            style="@style/loginEditText"
             android:inputType="text"/>
         <!--  Password Label -->
-        <TextView android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#372c24"
+        <TextView
+            style="@style/loginText"
             android:text="@string/password_label"/>
-        <EditText android:layout_width="fill_parent"
+
+        <EditText
+            style="@style/loginEditText"
             android:id="@+id/editText2"
-            android:layout_height="45dp"
-            android:layout_marginTop="10dip"
-            android:layout_marginBottom="20dip"
-            android:background="@drawable/rounded_border_edit_text"
-            android:height="60dp"
             android:inputType="textPassword"/>
 
         <!--Customer or Employee radio button-->
@@ -57,44 +46,30 @@
 
             <RadioButton
                 android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/radioGroup"
                 android:checked="true"
-                android:text="@string/login_as_a_customer_label"
-                android:textStyle="bold" />
+                android:text="@string/login_as_a_customer_label"/>
 
             <RadioButton
                 android:id="@+id/radioButton2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="@string/login_as_a_clerk_label"
-                android:textStyle="bold" />
+                style="@style/radioGroup"/>
+
         </RadioGroup>
 
         <!-- Login button -->
         <Button
             android:id="@+id/btnLogin"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dip"
-            android:height="60dp"
-            android:background="@drawable/rounded_border_button"
             android:onClick="onClicked"
-            android:text="@string/login_button_text"
-            android:textColor="#fff"
-            android:textSize="20sp" />
-        <!-- Link to Registration Screen -->
-        <TextView android:id="@+id/link_to_register"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dip"
+            style="@style/loginButton"/>
 
-            android:text="@string/register_here_label"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:textColor="#0b84aa"/>
+
+
+        <!-- Link to Registration Screen -->
+        <Button
+            android:id="@+id/link_to_register"
+            style="@style/loginButton"
+            android:text="@string/register_here_label" />
 
     </LinearLayout>
 

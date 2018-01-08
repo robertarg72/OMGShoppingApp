@@ -6,14 +6,7 @@
 
     <TextView
         android:id="@+id/greeting"
-        style="@style/labelStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="@dimen/large_text_margin"
-        android:layout_marginTop="@dimen/text_margin"
-        android:text="Hello User"
-        android:textAlignment="viewEnd" />
+        style="@style/Greeting"/>
 
     <ListView
         android:id="@+id/orders_list"
