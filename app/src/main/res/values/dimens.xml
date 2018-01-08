@@ -9,6 +9,8 @@
 
     <dimen name="text_margin">8dp</dimen>
     <dimen name="large_text_margin">20dp</dimen>
+    <dimen name="greeting_left_margin">5dp</dimen>
+
     <dimen name="label_text_size">16dp</dimen>
 
     <dimen name="productNameTextSize">23sp</dimen>

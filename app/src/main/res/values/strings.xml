@@ -52,4 +52,35 @@
                 2018</string>
     <string name="about_menu_item_text">About</string>
     <string name="currency">$ </string>
+
+    <string name="expirydate_text">Expiration Date</string>
+    <string name="month_text">month</string>
+    <string name="year_text">year</string>
+    <string name="securitycode_text">SecurityCode</string>
+    <string name="three_digitcode_text">3-digitCode</string>
+    <string name="place_order_button_text">Place Order</string>
+    <string name="cardtype_credit">Credit</string>
+    <string name="cardtype_debit">Debit</string>
+    <string name="ok_string">OK</string>
+
+    <string name="card_required_digits">4</string>
+    <string name="card_required_security_digits">3</string>
+
+    <string name="error_message_address">Please enter an address</string>
+    <string name="error_message_city">Please enter a city</string>
+    <string name="error_message_postal_code">Please enter a postal code</string>
+    <string name="error_message_payment_method">Please select a payment type</string>
+    <string name="error_message_card_required">Please enter a card number</string>
+    <string name="error_message_card_all_numbers">Card number can only contains digits</string>
+    <string name="error_message_card_amount_digits">Card number should have 4 digits</string>
+
+    <string name="error_message_expiration_month">Expiration Month is required!</string>
+    <string name="error_message_expiration_year">Expiration Year is required!</string>
+    <string name="spinner_month_default_text">Month</string>
+    <string name="spinner_year_default_text">Year</string>
+    <string name="error_message_nameOnCard_code">Please enter a card owner</string>
+    <string name="error_message_security_code">Please enter a security code</string>
+    <string name="error_message_security_code_all_numbers">Security code should be all numbers</string>
+    <string name="error_message_security_code_amount_digits">Security code should contains 3 digits</string>
+    <string name="checkout_button_text">Checkout</string>
 </resources>

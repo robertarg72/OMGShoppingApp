@@ -7,31 +7,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.centennialcollege.omgshoppingapp.ShoppingCartActivity">
 
             <TextView
-                android:id="@+id/greeting"
-                style="@style/labelStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_marginRight="@dimen/large_text_margin"
-                android:layout_marginTop="@dimen/text_margin"
-                android:text="Hello User"
-                android:textAlignment="viewEnd" />
+            android:id="@+id/greeting"
+            style="@style/Greeting"
+            />
 
-                    <ListView
-                        android:id="@+id/order_Items_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-                    </ListView>
+            <ListView
+                android:id="@+id/order_Items_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </ListView>
 
             <Button
                 android:id="@+id/checkoutButton"
                 style="@style/checkoutButton"
-                android:text="Checkout"/>
+                android:text="@string/checkout_button_text"
+                android:onClick="onCheckoutButtonClick"/>
 
 </LinearLayout>
 

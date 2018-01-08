@@ -25,6 +25,9 @@ public class Utils {
     private static final String GREETING = "Hello, ";
     public static final String AVAILABLE_TEXT_PREFIX = "Available: ";
 
+    public static final int CARD_REQUIRED_DIGITS = 4;
+    public static final int SECURITY_CODE_REQUIRED_DIGITS = 3;
+
     // Constants to be used for Orders
     public static final String ORDER_DEFAULT_EMPLOYEE_ID = "1";
     public static final String ORDER_ID_PREFIX = "Order Nbr ";
@@ -157,12 +160,13 @@ public class Utils {
 
     }
 
-    public static void setUserGreetingTextView(Activity context, int textViewId) {
+    public static String setUserGreetingTextView(Activity context, int textViewId) {
         String username = getFromSharedPreferences(context, SHARED_PREFERENCES_USER_KEY);
         TextView loggedInUserGreeting = context.findViewById(textViewId);
         String greeting = GREETING + username;
         loggedInUserGreeting.setText(greeting);
         loggedInUserGreeting.setTypeface(Typeface.DEFAULT_BOLD);
+        return username;
     }
 
     public static String getCurrentDateTime() {

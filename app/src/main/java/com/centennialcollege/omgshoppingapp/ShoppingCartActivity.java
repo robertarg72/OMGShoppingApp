@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -61,6 +62,16 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
 
         Helper.getListViewSize(lv);
+    }
+
+
+    public void onCheckoutButtonClick(View v){
+        int id = v.getId();
+        if( id == R.id.checkoutButton) {
+            Intent next = new Intent( ShoppingCartActivity.this, PaymentActivity.class);
+            next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(next);
+        }
     }
 
     //Initialize the contents of the Activity's standard options menu
