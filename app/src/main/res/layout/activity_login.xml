@@ -69,7 +69,9 @@
         <Button
             android:id="@+id/link_to_register"
             style="@style/loginButton"
-            android:text="@string/register_here_label" />
+            android:text="@string/register_here_label"
+            android:onClick="onRegisterClicked"
+            />
 
     </LinearLayout>
 

@@ -331,6 +331,21 @@
 
     </style>
 
+
+    <style name="createAccountButton">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:height">60dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:background">@drawable/rounded_border_button</item>
+        <item name="android:text">@string/create_account_text</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+
+    </style>
+
+
     <style name="categoryImage">
         <item name="android:layout_marginTop">10dp</item>
         <item name="android:layout_width">150dp</item>
@@ -402,6 +417,28 @@
         <item name="android:background">@color/white</item>
         <item name="android:contentDescription">@string/product_image_sample_text</item>
         <item name="android:src">@drawable/delete</item>
+    </style>
+
+    <style name="registerLable">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/text_margin</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
+    <style name="registerEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/text_margin</item>
+        <item name="android:textSize">@dimen/productDescriptionTextSize</item>
+        <item name="android:textColor">@color/primary_text</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">textPersonName</item>
+
     </style>
 
 </resources>

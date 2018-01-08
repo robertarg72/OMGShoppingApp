@@ -94,6 +94,14 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void onRegisterClicked(View view) {
+
+                Intent intent = new Intent(this, RegisterActivity.class);
+                startActivity(intent);
+
+    }
+
+
     public String customerLogin( String username, String password) {
         return db.getCustomerId(username, password);
 

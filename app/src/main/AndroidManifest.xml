@@ -33,7 +33,8 @@
         <activity android:name=".OrdersManagementActivity" />
         <activity android:name=".ShoppingCartActivity" />
         <activity android:name=".CategoriesActivity" />
-        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".RegisterActivity"></activity>
     </application>
 
 </manifest>

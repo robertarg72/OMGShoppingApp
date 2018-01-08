@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.centennialcollege.omgshoppingapp.RegisterActivity">
+
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout>
+        <TextView
+            android:id="@+id/first"
+            style="@style/registerLable"
+            android:padding="@dimen/large_text_margin"
+            android:textAlignment="center"
+            android:text="Please enter your information" />
+        </LinearLayout>
+
+
+
+        <TableRow>
+            <TextView
+                android:id="@+id/firstNameTV"
+                style="@style/registerLable"
+                android:text="First Name: "
+                />
+
+            <EditText
+                android:id="@+id/firstName"
+                style="@style/registerEditText"
+                android:hint="First Name"
+                />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/lastNameTV"
+                style="@style/registerLable"
+                android:text="Last Name: "
+                />
+
+            <EditText
+                android:id="@+id/lastName"
+                style="@style/registerEditText"
+                android:hint="Last Name"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/addressTV"
+                style="@style/registerLable"
+                android:text="Address: "
+                />
+
+            <EditText
+                android:id="@+id/address"
+                style="@style/registerEditText"
+                android:hint="Address"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/cityTV"
+                style="@style/registerLable"
+                android:text="City:"
+                />
+
+            <EditText
+                android:id="@+id/city"
+                style="@style/registerEditText"
+                android:hint="City"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/postalCodeTV"
+                style="@style/registerLable"
+                android:text="Postal Code:"
+                />
+
+            <EditText
+                android:id="@+id/postalCode"
+                style="@style/registerEditText"
+                android:hint="Postal Code"
+                />
+        </TableRow>
+
+        <LinearLayout>
+            <TextView
+                android:id="@+id/pas"
+                style="@style/registerLable"
+                />
+
+        </LinearLayout>
+
+
+        <TableRow>
+            <TextView
+                android:id="@+id/userNameTV"
+                style="@style/registerLable"
+                android:text="User Name: "
+                />
+
+            <EditText
+                android:id="@+id/userName"
+                style="@style/registerEditText"
+                android:hint="User Name"
+                />
+        </TableRow>
+        <TableRow>
+            <TextView
+                android:id="@+id/passwordTV"
+                style="@style/registerLable"
+                android:text="Password: "
+                />
+
+            <EditText
+                android:id="@+id/password"
+                style="@style/registerEditText"
+                android:hint="Password"
+                android:inputType="textPassword"
+                />
+        </TableRow>
+
+<LinearLayout>
+    <TextView
+        android:id="@+id/pass"
+        style="@style/registerLable"
+        />
+
+</LinearLayout>
+
+        <LinearLayout>
+            <Button
+                android:id="@+id/btnLogin"
+                android:onClick="onCreateClicked"
+                style="@style/createAccountButton"/>
+        </LinearLayout>
+
+
+    </TableLayout>
+
+
+</LinearLayout>
