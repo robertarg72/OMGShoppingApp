@@ -83,4 +83,12 @@
     <string name="error_message_security_code_all_numbers">Security code should be all numbers</string>
     <string name="error_message_security_code_amount_digits">Security code should contains 3 digits</string>
     <string name="checkout_button_text">Checkout</string>
+    <string name="shipping_address_title_text">Shipping Address</string>
+    <string name="shipping_address_hint">Shipping Address</string>
+    <string name="shipping_city_title_text">Shipping City</string>
+    <string name="shipping_city_title">Shipping city</string>
+    <string name="postal_code_title">Postal Code</string>
+    <string name="card_information_title">Card Information</string>
+    <string name="card_number_title">Number</string>
+    <string name="card_owner_title">Owner</string>
 </resources>
