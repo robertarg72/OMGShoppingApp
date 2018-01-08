@@ -32,4 +32,10 @@
 		android:orderInCategory="4"
 		app:showAsAction="never"/>
 
+	<item
+		android:id="@+id/about_screen"
+		android:title="@string/about_menu_item_text"
+		android:orderInCategory="5"
+		app:showAsAction="never"/>
+
 </menu>

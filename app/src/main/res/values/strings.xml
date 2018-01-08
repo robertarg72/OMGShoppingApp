@@ -29,4 +29,25 @@
     <string name="show_cart_menu_item_text">Show Cart</string>
     <string name="category_name_sample_text">Example Title</string>
     <string name="add_to_cart_button_description">Add to Cart Button</string>
+    <string name="about_info_multiline">
+                OMG Shopping App\n\n
+
+                Course MAPD 711\n
+                Android Development\n\n
+
+                Professor\n
+                Vinay Vaithilingam\n\n
+
+                Developers\n
+                Fatih Inan\n
+                Irving Kaur\n
+                Kamal Singh\n
+                Robert Argume\n\n
+
+                Digital Art by\n
+                Analia Longhi\n\n
+
+                Centennial College\n
+                2018</string>
+    <string name="about_menu_item_text">About</string>
 </resources>

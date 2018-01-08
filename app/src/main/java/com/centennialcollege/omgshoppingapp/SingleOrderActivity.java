@@ -190,6 +190,10 @@ public class SingleOrderActivity extends AppCompatActivity {
                 startActivity(next);
                 finish();
                 return true;
+            case R.id.about_screen:
+                next = new Intent( SingleOrderActivity.this, AboutActivity.class);
+                startActivity(next);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

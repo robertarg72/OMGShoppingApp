@@ -55,11 +55,11 @@ public class OrdersActivity extends AppCompatActivity {
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
 
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
-
-        i.putExtra("order_id", String.valueOf(list.get(position).getId()));
-
-        startActivity(i);
+//        Intent i = new Intent( OrdersActivity.this, SingleOrderActivity.class);
+//
+//        i.putExtra("order_id", String.valueOf(list.get(position).getId()));
+//
+//        startActivity(i);
         }
     };
 
@@ -94,6 +94,10 @@ public class OrdersActivity extends AppCompatActivity {
                 next = new Intent( OrdersActivity.this, LoginActivity.class);
                 startActivity(next);
                 finish();
+                return true;
+            case R.id.about_screen:
+                next = new Intent( OrdersActivity.this, AboutActivity.class);
+                startActivity(next);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
