@@ -136,7 +136,7 @@ public class SingleProductActivity extends AppCompatActivity {
 
             // First check if shopping cart exists, otherwise create an order with status "shopping cart"
 
-            Order shoppingCart = dbm.getShoppingCartOrder();
+            Order shoppingCart = dbm.getShoppingCartOrder(customerId);
             if(shoppingCart.getId() ==  0) {
                 shoppingCart = createShoppingCart();
             }
@@ -225,7 +225,7 @@ public class SingleProductActivity extends AppCompatActivity {
         ContentValues values = new ContentValues();
         dbm.addRecord(values, DatabaseContract.OrderEntry.TABLE_NAME, fields, record);
 
-        return dbm.getShoppingCartOrder();
+        return dbm.getShoppingCartOrder(customerId);
     }
 
     private void createOrderItem(int orderId, int quantity, String status) {

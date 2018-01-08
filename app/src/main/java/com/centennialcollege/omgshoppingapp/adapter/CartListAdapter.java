@@ -100,11 +100,11 @@ public class CartListAdapter extends ArrayAdapter<Product> {
                     Toast.makeText(context, "Please enter quantity", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                
+
                 String qt = etQuantity.getText().toString();
                 int qty = Integer.parseInt(qt);
                 String result = dcm.updateOrderquantity(item.getId(), qty);
-
+                item.setQuantity(qty);
                 Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
             }
 
@@ -123,5 +123,5 @@ public class CartListAdapter extends ArrayAdapter<Product> {
         public ImageButton imgDel;
         public ImageButton imgUpdate;
     }
-    
+
 }

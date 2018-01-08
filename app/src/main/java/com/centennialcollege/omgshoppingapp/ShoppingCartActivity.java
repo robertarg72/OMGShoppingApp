@@ -1,5 +1,7 @@
 package com.centennialcollege.omgshoppingapp;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +15,11 @@ import android.widget.TextView;
 import com.centennialcollege.omgshoppingapp.adapter.CartListAdapter;
 import com.centennialcollege.omgshoppingapp.adapter.ProductListAdapter;
 import com.centennialcollege.omgshoppingapp.database.DatabaseManager;
+import com.centennialcollege.omgshoppingapp.model.Order;
+import com.centennialcollege.omgshoppingapp.model.OrderItem;
 import com.centennialcollege.omgshoppingapp.model.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.centennialcollege.omgshoppingapp.utils.Utils.CATEGORY_ALL;
@@ -36,6 +41,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
     Product product;
     TextView availableQuantityView;
     String productId;
+    String CustID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +57,7 @@ public class ShoppingCartActivity extends AppCompatActivity {
 
         // Set up list adapter for products list view, with database info
         // Get UserID
-        String CustID = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
+        CustID = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
 
         list = dbm.getCustomerOrderItems(CustID);
 
@@ -68,9 +74,45 @@ public class ShoppingCartActivity extends AppCompatActivity {
     public void onCheckoutButtonClick(View v){
         int id = v.getId();
         if( id == R.id.checkoutButton) {
-            Intent next = new Intent( ShoppingCartActivity.this, PaymentActivity.class);
-            next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(next);
+
+                double totalPrice = 0;
+                String productName ="";
+                boolean productsAvailabe = true;
+                //list = dbm.getCustomerOrderItems(CustID);
+                for (int i = 0; productsAvailabe && i < list.size(); i++) {
+                    Product item = list.get(i);
+                    int itemQty = item.getQuantity();
+                    OrderItem currentOrderitem = dbm.getSingleOrderItem(String.valueOf(item.getId()));
+
+                    String productId = String.valueOf(currentOrderitem.getProductId());
+                    Product product = dbm.getSingleProduct(productId);
+                    productName = product.getName();
+                    int availableQty = product.getQuantity();
+
+                    if( itemQty > availableQty ) {
+                        productsAvailabe = false;
+                    }
+                }
+                if (productsAvailabe) {
+                    Intent next = new Intent( ShoppingCartActivity.this, PaymentActivity.class);
+                    next.setFlags(next.getFlags() | Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(next);
+                }
+                else {
+                    AlertDialog.Builder confirmationDialog  = new AlertDialog.Builder(this);
+                    confirmationDialog.setMessage("Not enough stock for product: " + productName );
+                    confirmationDialog.setTitle(getResources().getString(R.string.app_name));
+                    confirmationDialog.setPositiveButton(getResources().getString(R.string.ok_string), null);
+                    confirmationDialog.setCancelable(false);
+
+
+                    confirmationDialog.setPositiveButton(getResources().getString(R.string.ok_string), new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+                    confirmationDialog.create().show();
+                }
         }
     }
 

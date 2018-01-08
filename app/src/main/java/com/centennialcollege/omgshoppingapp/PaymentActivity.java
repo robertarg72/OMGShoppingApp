@@ -45,7 +45,9 @@ import static com.centennialcollege.omgshoppingapp.database.DatabaseContract.Ord
 import static com.centennialcollege.omgshoppingapp.utils.Utils.CARD_REQUIRED_DIGITS;
 import static com.centennialcollege.omgshoppingapp.utils.Utils.ORDER_IN_PROCESS_TEXT;
 import static com.centennialcollege.omgshoppingapp.utils.Utils.SECURITY_CODE_REQUIRED_DIGITS;
+import static com.centennialcollege.omgshoppingapp.utils.Utils.SHARED_PREFERENCES_CUSTOMER_ID;
 import static com.centennialcollege.omgshoppingapp.utils.Utils.getCurrentDateTime;
+import static com.centennialcollege.omgshoppingapp.utils.Utils.getFromSharedPreferences;
 import static com.centennialcollege.omgshoppingapp.utils.Utils.setUserGreetingTextView;
 
 public class PaymentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -70,6 +72,7 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
     private String cardNumber;
     private String securityCode;
     private String nameOnCard;
+    private String customerId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +84,10 @@ public class PaymentActivity extends AppCompatActivity implements AdapterView.On
         // Set greeting for logged in user
         username = setUserGreetingTextView(this, R.id.greeting);
 
+        String customerId = getFromSharedPreferences(this, SHARED_PREFERENCES_CUSTOMER_ID);
+
         // Get all details from shopping cart
-        shoppingCart = dbm.getShoppingCartOrder();
+        shoppingCart = dbm.getShoppingCartOrder(customerId);
 
         //Set views with cart data
         shippingAddress = findViewById(R.id.address);

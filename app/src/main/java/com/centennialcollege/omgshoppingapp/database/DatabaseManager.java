@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 import static android.content.ContentValues.TAG;
+import static com.centennialcollege.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID;
 import static com.centennialcollege.omgshoppingapp.database.DatabaseContract.OrderEntry.COLUMN_STATUS;
 import static com.centennialcollege.omgshoppingapp.database.DatabaseContract.OrderItemEntry.COLUMN_ORDER_ID;
 import static com.centennialcollege.omgshoppingapp.database.DatabaseContract.ProductEntry.COLUMN_CATEGORY;
@@ -301,6 +302,34 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
+    public OrderItem getSingleOrderItem(String id) {
+        Cursor cursor = null;
+        OrderItem order = new OrderItem();
+        try {
+            SQLiteDatabase db = this.getReadableDatabase();
+
+            String[] params = new String[]{ id };
+            cursor = db.query(DatabaseContract.OrderItemEntry.TABLE_NAME, null,
+                    "_ID = ?", params,
+                    null, null, null);
+
+            if(cursor.getCount() > 0) {
+                cursor.moveToFirst();
+                order.setId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderItemEntry._ID)));
+                order.setProductId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderItemEntry.COLUMN_PRODUCT_ID)));
+                //order.setEmployeeId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_EMPLOYEE_ID)));
+                //order.setCustomerId(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_CUSTOMER_ID)));
+                ////order.setQuantity(cursor.getInt(cursor.getColumnIndex(DatabaseContract.OrderEntry.COLUMN_ORDER_QUANTITY)));
+                //order.setStatus(cursor.getString(cursor.getColumnIndex(COLUMN_STATUS)));
+            }
+            return order;
+        }finally {
+            if(cursor != null) {
+                cursor.close();
+            }
+        }
+    }
+
     public Order getSingleOrder(String id) {
         Cursor cursor = null;
         Order order = new Order();
@@ -329,14 +358,15 @@ public class DatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    public Order getShoppingCartOrder() {
+    public Order getShoppingCartOrder(String customerId) {
         Cursor cursor = null;
         Order order = new Order();
         try {
             SQLiteDatabase db = this.getReadableDatabase();
 
             cursor = db.query(DatabaseContract.OrderEntry.TABLE_NAME, null,
-                    COLUMN_STATUS + " = '" + ORDER_SHOPPING_CART + "'", null,
+                    COLUMN_STATUS + " = '" + ORDER_SHOPPING_CART + "' AND " +
+                            COLUMN_CUSTOMER_ID + " = '" + customerId + "'", null,
                     null, null, null);
 
             if(cursor.getCount() > 0) {
